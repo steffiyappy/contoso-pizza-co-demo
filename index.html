@@ -73,12 +73,40 @@ td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
 .lock-box{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:40px 44px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 .lock-box .blogo{width:56px;height:56px;border-radius:14px;background:var(--brand);display:grid;place-items:center;font-weight:900;font-size:18px;color:#fff;margin:0 auto 18px}
 .lock-box h2{margin:0 0 6px;font-size:22px}.lock-box p{color:var(--muted);font-size:14px;margin:0 0 22px}
-.lock-box input{width:100%;background:var(--badge-bg);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:15px;padding:12px 16px;margin-bottom:12px;outline:none;font-family:inherit}
+.pw-wrap{position:relative;margin-bottom:12px}
+.lock-box input{width:100%;background:var(--badge-bg);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:15px;padding:12px 46px 12px 16px;outline:none;font-family:inherit}
 .lock-box input:focus{border-color:var(--brand)}
+.pw-toggle{position:absolute;top:50%;right:6px;transform:translateY(-50%);background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px 10px;font-size:18px;line-height:1;border-radius:6px}
+.pw-toggle:hover{color:var(--ink);background:rgba(255,255,255,.06)}
 .lock-box button{width:100%;background:var(--brand);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;padding:13px;cursor:pointer}
 .lock-box .err{color:var(--danger);font-size:13px;margin-top:8px;min-height:18px}
 .lock-box .conf{font-size:11px;color:var(--muted);margin-top:14px}
-@media(max-width:760px){.layout{grid-template-columns:1fr}aside{position:static;height:auto}main{padding:16px 18px 60px}.hero h2{font-size:22px}}
+@media(max-width:900px){
+ .layout{grid-template-columns:1fr}
+ aside{position:static;height:auto;padding:16px;border-right:0;border-bottom:1px solid var(--border)}
+ aside nav{display:none}
+ main{padding:18px 16px 60px;max-width:100%}
+ .hero{padding:22px 18px;border-radius:14px}
+ .hero h2{font-size:22px}.hero p{font-size:14px}
+ .modulehead{gap:10px;margin:24px 0 10px}
+ .modulehead .num{width:40px;height:40px;font-size:16px}
+ .modulehead h2{font-size:18px}
+ .activity{padding:14px}
+ .card{padding:16px;border-radius:12px}
+ .card h3{font-size:16px}
+ .agenda{grid-template-columns:1fr}.agenda>div:nth-child(3n+3){text-align:left}
+ .tools-grid{grid-template-columns:1fr}
+ .prompt{font-size:12px;padding:38px 12px 12px;border-left-width:3px}
+ .prompt .copy{top:6px;right:6px}
+ table{display:block;overflow-x:auto;white-space:nowrap}
+ .lock-box{padding:28px 22px;border-radius:16px}
+ .lock-box h2{font-size:19px}
+}
+@media(max-width:480px){
+ main{padding:14px 12px 50px}
+ .hero h2{font-size:19px}
+ body{font-size:14px}
+}
 </style></head>
 <body>
 <div id="lock">
@@ -86,7 +114,10 @@ td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
  <div class="blogo">CP</div>
  <h2>Contoso Pizza · Copilot Immersion</h2>
  <p>M365 Copilot Executive Workshop<br>Enter the session password to continue.</p>
+ <div class="pw-wrap">
  <input type="password" id="pw" placeholder="Session password" autocomplete="off"/>
+ <button type="button" class="pw-toggle" id="pwToggle" aria-label="Show password" onclick="togglePw()">👁</button>
+ </div>
  <button onclick="unlock()">Enter Workshop →</button>
  <div class="err" id="err"></div>
  <div class="conf">Confidential · For executive workshop use only</div>
@@ -754,6 +785,12 @@ if(sessionStorage.getItem('unlk')==='1'||localStorage.getItem('unlk')==='1'){
  document.getElementById('main').style.display='grid';
 }
 document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+function togglePw(){
+ const i=document.getElementById('pw'),b=document.getElementById('pwToggle');
+ if(i.type==='password'){i.type='text';b.textContent='🙈';b.setAttribute('aria-label','Hide password');}
+ else{i.type='password';b.textContent='👁';b.setAttribute('aria-label','Show password');}
+ i.focus();
+}
 function cp(btn){
  const txt=btn.parentElement.textContent.replace(/Copy$/,'').replace(/Copied!$/,'').trim();
  navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});
