@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contoso Pizza Co · M365 Copilot Executive Workshop</title>
+<style>
+:root{--radius:12px;--shadow:0 2px 8px rgba(0,0,0,.12);--brand:#dc2626;--brand2:#f87171}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1020;--panel:#0e1633;--panel2:#0a1228;--ink:#e2e8f0;--muted:#94a3b8;--border:#1e2d4a;--sidebar-a:#0e1530;--sidebar-b:#0a0f24;--accent:#3b82f6;--accent2:#60a5fa;--nav-hover:#172244;--badge-bg:#0a0f24;--cp-info:#0e1c2c;--cp-warn:#2b220e;--cp-bad:#2b1414;--cp-good:#0e2418;--code:#0d1535;--good:#22c55e;--warn:#f59e0b;--danger:#ef4444;--callout-info:#0e1c2c;--callout-warn:#2b220e;--callout-bad:#2b1414;--callout-good:#0e2418}}
+@media(prefers-color-scheme:light){:root{--bg:#f0f4f8;--panel:#ffffff;--panel2:#f0f6ff;--ink:#1a202c;--muted:#64748b;--border:#d1d9e6;--sidebar-a:#1e3a5f;--sidebar-b:#0f2545;--accent:#2563eb;--accent2:#1d4ed8;--nav-hover:#dbeafe;--badge-bg:#e8f0fe;--cp-info:#eff6ff;--cp-warn:#fffbeb;--cp-bad:#fef2f2;--cp-good:#f0fdf4;--code:#1e2b55;--good:#16a34a;--warn:#d97706;--danger:#dc2626;--callout-info:#eff6ff;--callout-warn:#fffbeb;--callout-bad:#fef2f2;--callout-good:#f0fdf4}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:15px/1.55 "Inter","Segoe UI",system-ui,sans-serif}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}
+code,pre{font-family:"JetBrains Mono","Consolas",monospace;font-size:13px}
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+aside{background:linear-gradient(180deg,var(--sidebar-a),var(--sidebar-b));border-right:1px solid var(--border);padding:24px 18px;position:sticky;top:0;height:100vh;overflow-y:auto;color:#e2e8f0}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.brand .logo{width:36px;height:36px;border-radius:9px;background:var(--brand);display:grid;place-items:center;font-weight:900;color:#fff;font-size:12px;letter-spacing:-.5px}
+.brand h1{font-size:15px;margin:0;letter-spacing:.2px;color:#fff}
+.tag{font-size:11px;color:#94a3b8;margin-bottom:18px}
+nav h3{font-size:10px;letter-spacing:1.2px;color:#94a3b8;text-transform:uppercase;margin:18px 0 8px}
+nav a{display:block;color:#e2e8f0;padding:8px 10px;border-radius:9px;font-size:14px;margin-bottom:2px;border:1px solid transparent}
+nav a:hover{background:rgba(255,255,255,.12);text-decoration:none;border-color:rgba(255,255,255,.2);color:#fff}
+main{padding:28px 40px 80px;max-width:1080px}
+.hero{background:radial-gradient(800px 320px at 0% 0%,rgba(0,48,135,.35),transparent 60%),radial-gradient(700px 280px at 100% 0%,rgba(0,100,200,.2),transparent 60%),var(--panel);border:1px solid var(--border);border-radius:18px;padding:30px;margin-bottom:24px}
+.hero .pill{display:inline-block;background:var(--badge-bg);border:1px solid var(--border);color:var(--accent2);font-size:11px;letter-spacing:1.2px;padding:4px 10px;border-radius:999px;margin-bottom:12px}
+.hero h2{font-size:30px;margin:0 0 8px;line-height:1.2}
+.hero p{color:var(--muted);margin:0;max-width:780px}
+.meta-row{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;color:var(--muted);font-size:13px}
+.meta-row span b{color:var(--ink)}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 6px;font-size:18px}.card .lead{color:var(--muted);margin:0 0 14px}
+.card h4{margin:18px 0 6px;font-size:15px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;font-weight:700}
+ul{padding-left:20px;margin:8px 0}li{margin:4px 0}
+.modulehead{display:flex;align-items:center;gap:14px;margin:32px 0 12px}
+.modulehead .num{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;font-weight:800;font-size:20px;color:#fff}
+.modulehead h2{margin:0;font-size:22px}.modulehead small{display:block;color:var(--muted);font-size:12px;letter-spacing:1px;text-transform:uppercase}
+.activity{border:1px solid var(--border);border-radius:12px;padding:18px;margin:14px 0;background:var(--panel)}
+.activity .head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+.activity .num{background:var(--accent);color:#fff;font-weight:800;font-size:12px;padding:3px 9px;border-radius:6px}
+.activity .time{color:var(--muted);font-size:12px}
+.activity .file{font-size:12px;color:var(--accent2);background:var(--badge-bg);border:1px solid var(--border);padding:3px 9px;border-radius:6px}
+.activity h4{margin:0;font-size:16px;color:var(--ink);font-weight:600}
+.activity p{margin:6px 0;color:var(--muted);font-size:14px}
+.activity.bonus{border-left:4px solid var(--brand)}
+.task-step{background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:8px;padding:12px 14px;margin:10px 0}
+.task-step .step-label{font-size:11px;letter-spacing:1px;color:var(--accent2);text-transform:uppercase;font-weight:700;margin-bottom:4px}
+.prompt{position:relative;background:var(--code);border:1px solid var(--border);border-left:4px solid var(--brand);border-radius:10px;padding:14px 44px 14px 16px;margin:10px 0;font-family:"JetBrains Mono","Consolas",monospace;font-size:13px;color:#c9d6ff;white-space:pre-wrap;line-height:1.6}
+.prompt .copy{position:absolute;top:8px;right:8px;background:#1a2552;color:#e2e8f0;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:inherit;transition:all .2s}
+.prompt .copy:hover{background:var(--brand);color:#fff}.prompt .copy.copied{background:var(--good);color:#0a0f24}
+.callout{border-left:4px solid var(--accent2);background:var(--callout-info);padding:12px 16px;margin:12px 0;border-radius:8px;color:var(--ink);font-size:14px}
+.callout.warn{border-color:var(--warn);background:var(--callout-warn)}
+.callout.good{border-color:var(--good);background:var(--callout-good)}.callout b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+th{color:var(--accent2);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
+.agenda{display:grid;grid-template-columns:90px 1fr 100px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.agenda>div{padding:10px 14px;border-bottom:1px solid var(--border)}
+.agenda>div:nth-child(3n+1){color:var(--accent2);font-weight:700;background:var(--panel)}
+.agenda>div:nth-child(3n+3){color:var(--muted);text-align:right}
+.agenda>div:nth-last-child(-n+3){border-bottom:0}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:14px}
+.tool-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px}
+.tool-card .icon{font-size:22px;margin-bottom:6px}
+.tool-card h5{margin:0 0 4px;font-size:14px;color:var(--ink)}
+.tool-card p{margin:0;font-size:12px;color:var(--muted);line-height:1.5}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;letter-spacing:.5px}
+.badge.blue{background:rgba(0,100,200,.2);color:var(--accent2);border:1px solid var(--accent)}
+.badge.green{background:rgba(34,197,94,.15);color:var(--good);border:1px solid var(--good)}
+.badge.yellow{background:rgba(245,158,11,.15);color:var(--warn);border:1px solid var(--warn)}
+#lock{position:fixed;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(0,48,135,.5),transparent 60%),#0b1020;z-index:9999;display:flex;align-items:center;justify-content:center}
+.lock-box{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:40px 44px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.lock-box .blogo{width:56px;height:56px;border-radius:14px;background:var(--brand);display:grid;place-items:center;font-weight:900;font-size:18px;color:#fff;margin:0 auto 18px}
+.lock-box h2{margin:0 0 6px;font-size:22px}.lock-box p{color:var(--muted);font-size:14px;margin:0 0 22px}
+.lock-box input{width:100%;background:var(--badge-bg);border:1px solid var(--border);border-radius:10px;color:var(--ink);font-size:15px;padding:12px 16px;margin-bottom:12px;outline:none;font-family:inherit}
+.lock-box input:focus{border-color:var(--brand)}
+.lock-box button{width:100%;background:var(--brand);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;padding:13px;cursor:pointer}
+.lock-box .err{color:var(--danger);font-size:13px;margin-top:8px;min-height:18px}
+.lock-box .conf{font-size:11px;color:var(--muted);margin-top:14px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}aside{position:static;height:auto}main{padding:16px 18px 60px}.hero h2{font-size:22px}}
+</style></head>
+<body>
+<div id="lock">
+  <div class="lock-box">
+    <div class="blogo">CP</div>
+    <h2>Contoso Pizza · Copilot Immersion</h2>
+    <p>05 June 2026 · M365 Copilot Executive Workshop<br>Enter the session password to continue.</p>
+    <input type="password" id="pw" placeholder="Session password" autocomplete="off"/>
+    <button onclick="unlock()">Enter Workshop →</button>
+    <div class="err" id="err"></div>
+    <div class="conf">Confidential · For executive workshop use only</div>
+  </div>
+</div>
+
+<div class="layout" id="main" style="display:none">
+<aside>
+  <div class="brand"><div class="logo">CP</div><h1>M365 Copilot<br>GM Immersion</h1></div>
+  <div class="tag">05 June 2026 · Executive Immersion</div>
+  <nav>
+    <h3>Overview</h3>
+    <a href="#overview">About this session</a>
+    <a href="#agenda">Agenda</a>
+    <a href="#story">The Story</a>
+    <a href="#tools">Tools used today</a>
+    <h3>Get Started</h3>
+    <a href="#getstarted">🔑 Log in</a>
+    <h3>Exercises</h3>
+    <a href="#ex1">1 · Researcher</a>
+    <a href="#ex2">2 · Branded Infographic (Copilot Create)</a>
+    <a href="#ex3">3 · PowerPoint Draft &amp; Digest</a>
+    <a href="#ex4">4 · Excel Power Hour</a>
+    <a href="#ex5">5 · Outlook + 5-Min Exec Moments</a>
+    <a href="#ex6">6 · Cowork Finale → Dashboard</a>
+    <h3>Resources</h3>
+    <a href="#files">Sample files</a>
+    <a href="#tips">Prompt tips</a>
+  </nav>
+</aside>
+
+<main>
+<section id="overview">
+<div class="hero">
+  <span class="pill">GM IMMERSION · ≤ 2 HOURS</span>
+  <h2>Contoso Pizza Co · M365 Copilot Executive Workshop</h2>
+  <p>QSR pizza chain — dine-in, delivery, take-away across Indonesia. A hands-on, GM-level immersion: from market scan to a live HTML dashboard, all inside Microsoft 365 Copilot.</p>
+  <div class="meta-row">
+    <span><b>Date</b> 05 June 2026</span>
+    <span><b>Audience</b> GM &amp; direct reports</span>
+    <span><b>Format</b> Demo + guided hands-on</span>
+    <span><b>Tool</b> Microsoft 365 Copilot</span>
+  </div>
+</div>
+
+<div class="card">
+  <h3>About this workshop</h3>
+  <p class="lead">A practical, GM-level immersion designed specifically for Contoso Pizza Co. Six Copilot moments across one workday — every exercise lands a deliverable a GM can use.</p>
+  <h4>What you will leave with</h4>
+  <ul>
+    <li>A market-intelligence brief on quick-service restaurant — drafted and self-critiqued by Researcher</li>
+    <li>A branded HTML infographic GMs can share (the "beat ChatGPT" answer)</li>
+    <li>An 8-slide McKinsey/BCG-style strategy deck — action titles, one message per slide — and a 60-second pre-read of any incoming deck</li>
+    <li>An "Excel Power Hour": Insights · Edit · Plan · Analyst Agent for what-if scenarios</li>
+    <li>The 5-minute executive moves: Outlook thread catch-up, executive reply drafting, Teams meeting recap, Word doc Q&amp;A, deck pre-read</li>
+    <li>14 individually-tuned GM letters drafted by Cowork (not classic Mail Merge), 12-CV shortlist from SharePoint, plus a live HTML KPI dashboard — your finale</li>
+  </ul>
+  <h4>What this workshop is not</h4>
+  <ul>
+    <li>It is <b>not</b> a feature walkthrough — every tool is demonstrated against Contoso Pizza Co's context</li>
+    <li>It is <b>not</b> connected to live Contoso Pizza Co systems — every data point is fictional / Contoso</li>
+    <li>It is <b>not</b> license-blocked — every exercise has a Basic-seat fallback marked clearly</li>
+  </ul>
+</div>
+</section>
+
+<section id="agenda">
+<div class="modulehead"><div class="num">📋</div><h2>Agenda<small>05 June 2026 · ≤ 2 hours</small></h2></div>
+<div class="card">
+<div class="agenda">
+  <div>5 min</div><div><b>Welcome &amp; Frontier / Copilot pitch</b></div><div>Talk</div>
+  <div>10 min</div><div><b>Exercise 1 · Researcher — market brief</b></div><div>Premium ⭐</div>
+  <div>10 min</div><div><b>Exercise 2 · Branded infographic with Copilot Create (vs ChatGPT)</b></div><div>Basic</div>
+  <div>15 min</div><div><b>Exercise 3 · PowerPoint — draft &amp; digest</b></div><div>Basic</div>
+  <div>20 min</div><div><b>Exercise 4 · Excel Power Hour (Insights · Edit · Plan · Analyst)</b></div><div>Basic + ⭐</div>
+  <div>15 min</div><div><b>Exercise 5 · Outlook + 5-Minute Executive Moments (Outlook · Teams · Word · PPT)</b></div><div>Basic</div>
+  <div>25 min</div><div><b>Exercise 6 · Cowork Finale — mail merge · CV screen · live HTML dashboard</b></div><div>Premium ⭐</div>
+  <div>5 min</div><div><b>Q&amp;A</b></div><div>Talk</div>
+</div>
+<div class="callout" style="margin-top:14px"><b>Total:</b> ≈ 100 minutes. Designed for a GM audience with mixed M365 Copilot Basic + Premium seats. Premium-only items are marked ⭐ and every one has a Basic fallback.</div>
+</div>
+</section>
+
+<section id="tools">
+<div class="modulehead"><div class="num">🛠</div><h2>Tools used today<small>M365 Copilot surfaces</small></h2></div>
+<div class="card">
+<div class="tools-grid">
+  <div class="tool-card"><div class="icon">🔍</div><h5>Researcher (Critique) ⭐</h5><p>Dual-model deep research with auto source-review. Keep model picker on <b>Auto</b>.</p></div>
+  <div class="tool-card"><div class="icon">💬</div><h5>Copilot Chat</h5><p>Grounded chat across web + your tenant + files. Reference files with <code>/</code>.</p></div>
+  <div class="tool-card"><div class="icon">🎨</div><h5>PowerPoint Copilot</h5><p>Strategy deck drafting with action titles. Grounds on Word + Excel via <code>/</code>.</p></div>
+  <div class="tool-card"><div class="icon">📝</div><h5>Word Copilot</h5><p>1-page memos, GM letters, board briefs — grounded on uploaded files.</p></div>
+  <div class="tool-card"><div class="icon">📊</div><h5>Excel Copilot · Edit & Plan</h5><p>New: precise single-cell <b>Edit</b> and multi-step <b>Plan</b> mode with preview-before-run.</p></div>
+  <div class="tool-card"><div class="icon">🖼️</div><h5>Copilot Image &amp; HTML</h5><p>Branded infographics + image generation, inside the tenant — no DALL·E quota.</p></div>
+  <div class="tool-card"><div class="icon">📁</div><h5>SharePoint Folder Grounding ⭐</h5><p>Reference an entire SharePoint library in one prompt — no 5-file cap.</p></div>
+  <div class="tool-card"><div class="icon">🤖</div><h5>Agent Builder ⭐</h5><p>Wrap a useful prompt into a reusable agent for HR / Finance / Operations.</p></div>
+  <div class="tool-card"><div class="icon">👥</div><h5>Cowork ⭐</h5><p>Multi-step delegation with plan-preview and human-in-the-loop approval.</p></div>
+</div>
+<div class="callout warn" style="margin-top:16px"><b>Data privacy reminder:</b> do not paste real customer, employee, or financial data during this session. Use the Contoso sample files. M365 Copilot keeps prompts and data inside your tenant — not used to train AI models.</div>
+</div>
+</section>
+
+<section id="story">
+<div class="modulehead" style="margin-top:8px">
+  <div class="num" style="background:linear-gradient(135deg,var(--brand),var(--accent));font-size:14px">▶</div>
+  <h2>The Story<small>One GM workday · five Copilot moments · ends with a live dashboard</small></h2>
+</div>
+
+<div style="display:grid;grid-template-columns:220px 1fr;gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:24px">
+  <div style="background:linear-gradient(180deg,var(--sidebar-a),var(--sidebar-b));padding:24px 18px;display:flex;flex-direction:column;gap:11px">
+    <p style="margin:0;font-size:8px;letter-spacing:2px;font-weight:700;color:var(--brand);text-transform:uppercase">Copilot in M365</p>
+    <h3 style="margin:0;font-size:19px;font-weight:800;color:#fff;line-height:1.2">AI Assistant<br>to AI Doer</h3>
+    <div style="margin-top:4px">
+      <p style="margin:0 0 3px;font-size:7.5px;letter-spacing:1.5px;font-weight:700;color:var(--brand);text-transform:uppercase">Persona</p>
+      <p style="margin:0;font-size:12.5px;font-weight:700;color:#fff">Bu Lisa Hartono</p>
+      <p style="margin:2px 0 0;font-size:10.5px;color:#94a3b8">General Manager · Operations & Marketing<br>Contoso Pizza Co</p>
+    </div>
+    <div style="margin-top:4px">
+      <p style="margin:0 0 3px;font-size:7.5px;letter-spacing:1.5px;font-weight:700;color:var(--brand);text-transform:uppercase">The Mission</p>
+      <p style="margin:0;font-size:10.5px;color:#cbd5e1;line-height:1.6">Pre-Lebaran promo review: outlet sales, delivery mix, food cost and a campaign brief — to the Ops Director by Friday.</p>
+    </div>
+    <div style="margin-top:4px;padding:10px;background:rgba(255,255,255,.06);border-radius:8px;border:1px solid rgba(255,255,255,.1)">
+      <p style="margin:0 0 3px;font-size:7.5px;letter-spacing:1.5px;font-weight:700;color:var(--brand);text-transform:uppercase">The Punchline</p>
+      <p style="margin:0;font-size:11.5px;font-weight:700;font-style:italic;color:#fff;line-height:1.4">One workday. Five tools.<br>From insight to live dashboard.</p>
+    </div>
+  </div>
+  <div style="background:var(--panel);padding:20px 18px 14px">
+    <h3 style="margin:0 0 14px;font-size:16px;font-weight:700;color:var(--ink)">Five Copilot moments across one workday</h3>
+    <div style="border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:8px">
+      <div style="background:#0e7490;padding:4px 8px;display:flex;align-items:center;gap:5px">
+        <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">01</span>
+        <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Researcher · Premium ⭐</span>
+      </div>
+      <div style="padding:8px;background:var(--panel2)">
+        <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Market brief in 3 minutes</p>
+        <p style="margin:0 0 5px;font-size:9px;font-style:italic;color:var(--brand)">Premium · 10 min</p>
+        <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Researcher (Critique) drafts a peer & market scan and self-reviews sources before delivering one polished report.</p>
+      </div>
+    </div><div style="border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:8px">
+      <div style="background:#8B2635;padding:4px 8px;display:flex;align-items:center;gap:5px">
+        <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">02</span>
+        <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Infographic · Copilot Create</span>
+      </div>
+      <div style="padding:8px;background:var(--panel2)">
+        <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Beat-ChatGPT visual one-pager</p>
+        <p style="margin:0 0 5px;font-size:9px;font-style:italic;color:var(--brand)">Basic · 10 min</p>
+        <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Copilot Create (Designer) generates a brand-aligned visual infographic — no HTML, no design tool, just a prompt.</p>
+      </div>
+    </div><div style="border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:8px">
+      <div style="background:#1e3a5f;padding:4px 8px;display:flex;align-items:center;gap:5px">
+        <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">03</span>
+        <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">PowerPoint · BCG-style</span>
+      </div>
+      <div style="padding:8px;background:var(--panel2)">
+        <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Draft + summarise incoming decks</p>
+        <p style="margin:0 0 5px;font-size:9px;font-style:italic;color:var(--brand)">Basic · 15 min</p>
+        <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Copilot in PowerPoint drafts an 8-slide McKinsey-style deck and digests any deck the GM is handed.</p>
+      </div>
+    </div><div style="border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:8px">
+      <div style="background:#14532d;padding:4px 8px;display:flex;align-items:center;gap:5px">
+        <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">04</span>
+        <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Excel Power Hour</span>
+      </div>
+      <div style="padding:8px;background:var(--panel2)">
+        <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Insights · Edit · Plan · Analyst</p>
+        <p style="margin:0 0 5px;font-size:9px;font-style:italic;color:var(--brand)">Basic + Premium ⭐ · 20 min</p>
+        <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Copilot in Excel: insights from KPIs, surgical Edit, multi-step Plan, and Analyst Agent for what-if modelling.</p>
+      </div>
+    </div><div style="border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:8px">
+      <div style="background:#0a5268;padding:4px 8px;display:flex;align-items:center;gap:5px">
+        <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">05</span>
+        <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Outlook + 5-Min Exec Moments</span>
+      </div>
+      <div style="padding:8px;background:var(--panel2)">
+        <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Outlook · Teams · Word · PPT</p>
+        <p style="margin:0 0 5px;font-size:9px;font-style:italic;color:var(--brand)">Basic · 15 min</p>
+        <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">Lightning round in your real inbox: catch up on a 47-email thread, draft the reply, recap a missed meeting.</p>
+      </div>
+    </div><div style="border:1px solid var(--border);border-radius:7px;overflow:hidden;margin-bottom:8px">
+      <div style="background:#4c1d95;padding:4px 8px;display:flex;align-items:center;gap:5px">
+        <span style="font-size:9.5px;font-weight:800;color:rgba(255,255,255,.55)">06</span>
+        <span style="font-size:7.5px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.3px">Cowork Finale → Dashboard</span>
+      </div>
+      <div style="padding:8px;background:var(--panel2)">
+        <p style="margin:0 0 2px;font-size:11px;font-weight:700;color:var(--ink)">Personalised mail merge · CV screen · HTML dashboard</p>
+        <p style="margin:0 0 5px;font-size:9px;font-style:italic;color:var(--brand)">Premium ⭐ · 25 min</p>
+        <p style="margin:0;font-size:9.5px;color:var(--muted);line-height:1.5">One Cowork prompt: 14 personalised GM letters, 12-CV shortlist from SharePoint, then a live HTML KPI dashboard.</p>
+      </div>
+    </div>
+    <div style="background:#fef9c3;border:1px solid #fbbf24;border-left:4px solid #f59e0b;border-radius:8px;padding:9px 14px;font-size:11.5px;color:#78350f">
+      <b>THE VALUE:</b> One GM. One workday. Research, infographic, deck, mail merge, CV screen, and a live HTML dashboard — without leaving Microsoft 365.
+    </div>
+  </div>
+</div>
+
+</section>
+
+<section id="getstarted">
+<div class="modulehead"><div class="num">📁</div><h2>Before you start<small>Sample files → OneDrive → start exercising</small></h2></div>
+<div class="card">
+<h4>Step 1 — Get the sample files</h4>
+<p>Download every file from the <a href="#files"><b>Sample Files</b></a> section below, then upload them to your OneDrive (and the CVs folder to a SharePoint document library for Exercise 4).</p>
+<ol>
+  <li>Scroll to the <a href="#files">Sample Files</a> section and download each one.</li>
+  <li>Upload <b>01–05</b> to your OneDrive — M365 Copilot can only access files in OneDrive / SharePoint.</li>
+  <li>Upload the <b>CVs/</b> folder to a SharePoint document library (any library you can browse from Office.com).</li>
+  <li>Wait 2 minutes after upload — Microsoft Graph needs time to index.</li>
+</ol>
+<div class="callout warn"><b>Why OneDrive / SharePoint?</b> M365 Copilot can only analyse files stored in OneDrive or SharePoint. Files on your local Desktop are invisible to Copilot.</div>
+</div>
+</section>
+
+
+<section id="ex1">
+<div class="modulehead"><div class="num">1</div><h2>Exercise 1 · Market Intelligence<small>10 min · Researcher · Premium ⭐</small></h2></div>
+<div class="callout good"><b>When to do this:</b> Right after the pitch. Open M365 Copilot at <a href="https://copilot.microsoft.com" target="_blank">copilot.microsoft.com</a> and click <b>Researcher</b>.</div>
+
+<div class="card">
+<p class="lead">Use <b>Researcher</b> (Critique mode — the default) to scan quick-service restaurant in Indonesia, benchmark peers, and surface the moves a GM cannot afford to miss this quarter.</p>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 1.1</span><span class="time">5 min</span><span class="file">🔍 Researcher · Auto (Critique)</span></div>
+  <h4>Scan the Quick-Service Restaurant landscape in Indonesia</h4>
+  <p>In M365 Copilot, open <b>Researcher</b>. Keep the model picker on <b>Auto</b> (this is Critique — dual-model with self-review). Paste this prompt:</p>
+  <div class="prompt">Research the Quick-Service Restaurant sector in Indonesia. Benchmark these companies: Pizza Hut Indonesia, Domino's Pizza ID, Pizza Marzano, McDonald's ID, KFC Indonesia, Burger King ID. For each, compare market share, revenue growth FY25, EBITDA margin, strategic focus, digital maturity, and recent material moves (M&amp;A, capex, new contracts, regulatory). Include market sizing 2024–2028 with the top three growth drivers. Cite every source. Flag where evidence is thin.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout">Notice the <b>citations</b> and the <b>"reviewed by"</b> stamp — Critique enforces source grounding before the report is shown.</div>
+</div>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 1.2</span><span class="time">5 min</span><span class="file">📝 Word Copilot · 1-page brief</span></div>
+  <h4>Turn the research into a 1-page GM brief</h4>
+  <p>In the Researcher report, click <b>Export</b> → <b>Convert to Word</b>. Open the file from OneDrive. In the Word Copilot pane, paste:</p>
+  <div class="prompt">Based on the content in this document, draft a 1-page GM brief for the General Manager · Operations & Marketing at Contoso Pizza Co.
+
+Structure:
+- Market headline (2 sentences, 1 number)
+- Top 3 competitive moves we must watch
+- Top 3 implications for Contoso Pizza Co in the next 90 days
+- 1 question to put to the Executive Committee
+
+Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anything not confirmed in the research. End with assumptions + open questions.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+
+<div class="callout warn"><b>Basic-license fallback:</b> if you do not have Researcher, use M365 Copilot Chat (Web grounding ON) with the same prompt. You will get a competent brief — just without the second-model critique pass.</div>
+</div>
+</section>
+
+
+<section id="ex2">
+<div class="modulehead"><div class="num">2</div><h2>Exercise 2 · Branded Infographic with Copilot Create<small>10 min · Copilot Create (Designer) · Basic</small></h2></div>
+<div class="callout good"><b>The ask:</b> a GM showed us a ChatGPT infographic last week and said: "Not impressed." Today we fix that — using <b>Copilot Create</b> (the Designer feature inside M365 Copilot Chat) to generate a brand-aligned visual infographic in 60 seconds.</div>
+
+<div class="card">
+<p class="lead">Open <b>M365 Copilot Chat</b> at <a href="https://copilot.microsoft.com" target="_blank">copilot.microsoft.com</a> → click <b>Create</b> in the left sidebar (or type <code>/create</code> in the chat). Copilot Create will produce an image-based infographic — perfect for a board pre-read or LinkedIn post.</p>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 2.1</span><span class="time">5 min</span><span class="file">🎨 Copilot Create · image output</span></div>
+  <h4>Design a one-page visual infographic</h4>
+  <p><b>Hands-on:</b> in Copilot Create, paste this prompt and click <b>Create</b>. You'll get 4 design variants — pick one and click <b>Edit</b> to fine-tune any panel.</p>
+  <div class="prompt">Design a one-page executive infographic on "the future of QSR & delivery economics in Indonesia (2026–2028)" for Contoso Pizza Co (Quick-Service Restaurant).
+
+Audience: General Manager · Operations & Marketing and direct reports.
+
+Visual style:
+- Brand palette: primary #dc2626, secondary #f87171, plus white space
+- Clean editorial / Bloomberg-Businessweek look — no clip-art, no stock photos
+- Big numbers, generous whitespace, sans-serif typography
+- Portrait orientation, A4 print-ready
+
+Layout (top to bottom):
+1. Hero band — title, sub-title, today's date
+2. "Market in numbers" — 4 big-number stat tiles
+3. "Three forces shaping our market" — 3 cards, each with icon + 1-line headline
+4. "What this means for us" — 3 implications, one GM action each
+5. "90-day moves" — horizontal timeline with 3 milestones
+6. Footer with sources line
+
+Use [PLACEHOLDER] for any number not anchored to a source. No invented statistics.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>How to share:</b> in Copilot Create, click <b>Download</b> (PNG or PDF) → drop into Outlook, Teams, or your GM weekly note. No HTML, no code, no design tool.</div>
+</div>
+
+<div class="activity bonus">
+  <div class="head"><span class="num">⭐ Bonus</span><span class="time">3 min</span><span class="file">🖼️ Copilot Create · regenerate</span></div>
+  <h4>Refine without starting over</h4>
+  <p>In the Create canvas, click <b>Edit</b> on any panel and try one of:</p>
+  <div class="prompt">Make the hero band more confident — bigger headline, smaller sub-title, brand-colour background.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="prompt">Replace the icons in section 3 with simple geometric shapes in #dc2626, no emoji.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+
+<div class="callout warn"><b>Why this beats ChatGPT:</b> Copilot Create runs inside Microsoft 365 with Enterprise Data Protection — your prompt and the resulting design stay in your tenant. Output is a polished, brand-aligned image you can drop straight into Outlook, Teams, or PowerPoint.</div>
+</div>
+</section>
+
+
+<section id="ex3">
+<div class="modulehead"><div class="num">3</div><h2>Exercise 3 · PowerPoint — Draft &amp; Digest<small>15 min · PowerPoint Copilot · Basic</small></h2></div>
+<div class="callout good"><b>When to do this:</b> Open a blank <b>PowerPoint</b> (powerpoint.com or desktop). Make sure <code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code> are in your OneDrive.</div>
+
+<!-- ─── 3.1 Draft ─── -->
+<div class="card">
+<h3>3.1 · Draft a BCG/McKinsey-style strategy deck</h3>
+<p class="lead">Copilot in PowerPoint will draft a deck in the "one message per slide" style consulting firms use — grounded on your memo and KPI workbook.</p>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 3.1a</span><span class="time">7 min</span><span class="file">🎨 PowerPoint Copilot</span></div>
+  <h4>Draft an 8-slide GM strategy deck</h4>
+  <p>In the blank deck, open the <b>Copilot pane</b>. Type <code>/</code> to reference your two files (<code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code>), then paste:</p>
+  <div class="prompt">Create an 8-slide FY26 Outlet Performance & Lebaran Campaign Strategy deck for Contoso Pizza Co, audience: General Manager · Operations & Marketing and Operating Committee. Ground every slide on /05 Contoso_Strategic_Memo.docx and the KPI tables in /02 Contoso_KPI_Dashboard.xlsx.
+
+Use a "one message per slide" McKinsey/BCG style: every slide has (a) a complete-sentence action title that IS the conclusion, (b) supporting evidence in 3 bullets or a small table, (c) one source caption at the bottom.
+
+Slide structure:
+1. Title — Contoso Pizza Co · FY26 Outlet Performance & Lebaran Campaign Strategy
+2. Executive snapshot — headline + 3-number callout + RAG status
+3. "Where we are today" — KPI scoreboard table (Same-Store Sales Growth %, Avg Ticket (IDR k), Delivery Mix %, Food Cost %)
+4. "What's changing" — top 3 market forces
+5. "Three priorities for FY26 H2" — one bullet each, with owner
+6. "Where to invest first" — 90-day moves with cost / benefit
+7. "Risks &amp; mitigations" — table: risk, owner, status
+8. "The ask" — one-page decision summary for the Operating Committee
+
+Tone: direct, evidence-led, no adjectives. Use [PLACEHOLDER] for any number not in the source files.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 3.1b</span><span class="time">3 min</span><span class="file">🎨 Self-critique</span></div>
+  <h4>Tighten the deck — McKinsey-style critique pass</h4>
+  <div class="prompt">Act as a McKinsey engagement manager reviewing this deck. For each slide, suggest a sharper action-title (a complete sentence that IS the conclusion). Flag any slide where the title and body do not agree. Suggest one slide we can remove. Reply as a 1-page review note, then apply your edits to the deck.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+<div class="callout"><b>Why action titles matter:</b> in a BCG/McKinsey deck the slide title is the conclusion ("Same-store sales drag is concentrated in mid-tier department stores"), not the topic ("Same-store sales"). The body just proves it.</div>
+</div>
+
+<!-- ─── 3.2 Digest ─── -->
+<div class="card">
+<h3>3.2 · Digest a deck someone just sent the GM</h3>
+<p class="lead">A 60-slide deck lands in your inbox 20 minutes before the meeting. Copilot reads it for you.</p>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 3.2</span><span class="time">5 min</span><span class="file">🎨 PowerPoint Copilot</span></div>
+  <h4>Summarise &amp; interrogate an incoming deck</h4>
+  <p>Open <b>any</b> presentation you've received recently (or use the deck you just drafted). In the Copilot pane:</p>
+  <div class="prompt">Summarise this presentation in 5 bullet points. What is the single key decision being asked of the audience? What are the 3 numbers I should remember? Identify any action items, owners, and dates. List the top 3 questions a General Manager · Operations & Marketing should ask in the meeting.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout good"><b>Direct from Microsoft's "Copilot for Business Leaders" page</b> — this is the #1 PowerPoint use case for executives: turning incoming decks into a 60-second pre-read.</div>
+</div>
+</div>
+</section>
+
+
+<section id="ex4">
+<div class="modulehead"><div class="num">4</div><h2>Exercise 4 · Excel Power Hour<small>20 min · Copilot in Excel · Basic + Premium ⭐</small></h2></div>
+<div class="callout good"><b>The most-asked GM question:</b> "Show me what's actually happening in the data — without me writing a formula." Excel Copilot now does this in four flavours. We will run all four on <code>02 Contoso_KPI_Dashboard.xlsx</code>.</div>
+
+<!-- 4.1 Insights -->
+<div class="card">
+<h3>4.1 · Get the insights — one prompt</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 4.1</span><span class="time">5 min</span><span class="file">📊 Excel Copilot · Chat</span></div>
+  <h4>Ask Copilot to find what matters in 12 months of KPIs</h4>
+  <p>Open <code>02 Contoso_KPI_Dashboard.xlsx</code> from OneDrive. Open the <b>Copilot pane</b> (Home → Copilot). On the <code>Monthly_KPIs</code> tab, paste:</p>
+  <div class="prompt">Analyse the Monthly_KPIs tab. For each KPI (Same-Store Sales Growth %, Avg Ticket (IDR k), Delivery Mix %, Food Cost %):
+- Identify the best- and worst-performing location
+- Spot any sustained downward trend (2+ months)
+- Flag any single-month outliers worth a phone call
+
+Then compare against Targets_vs_Actual. Which KPI has the largest gap to FY26 target, and which location is dragging it the most?
+
+Show results as a 2-line executive summary, then a RAG status table by location.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+</div>
+
+<!-- 4.2 Edit -->
+<div class="card">
+<h3>4.2 · "Edit" — surgical, formula-safe changes</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 4.2</span><span class="time">3 min</span><span class="file">✏️ Excel Copilot · Edit (NEW)</span></div>
+  <h4>Make a precise change without rewriting the workbook</h4>
+  <p>In the Copilot pane, switch to <b>Edit</b> mode. Highlight the <code>Status</code> column on the <code>Targets_vs_Actual</code> tab and ask:</p>
+  <div class="prompt">In this column, replace the emoji status with a plain-text 1-word status (Green / Amber / Red) and add conditional formatting matching the colours. Do not change any other cell. Show me the diff before applying.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>Why GMs love Edit:</b> they trust it. Edit shows a per-cell diff before applying — no surprise rewrites of working formulas.</div>
+</div>
+</div>
+
+<!-- 4.3 Plan -->
+<div class="card">
+<h3>4.3 · "Plan" — multi-step transformations with preview</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 4.3</span><span class="time">5 min</span><span class="file">📋 Excel Copilot · Plan (NEW)</span></div>
+  <h4>Build an executive view in three steps Copilot proposes first</h4>
+  <p>Switch the Copilot pane to <b>Plan</b>. Paste:</p>
+  <div class="prompt">Plan: on a new sheet called "Exec_View", produce a pivoted summary — one row per location, one column per KPI — showing the FY26 H2 average. Add a "Trend" column showing ▲ / ▬ / ▼ vs the FY26 H1 average. Highlight the worst quartile per KPI in red. Add a 2-sentence executive read-out at the top.
+
+Show me the plan first. Let me approve. Then run it.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout good"><b>The "Plan" win:</b> Copilot writes its own work order, you tick / un-tick steps, and only then does it touch the workbook.</div>
+</div>
+</div>
+
+<!-- 4.4 Analyst Agent -->
+<div class="card">
+<h3>4.4 · Analyst Agent — what-if &amp; scenario modelling ⭐</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 4.4</span><span class="time">7 min</span><span class="file">🤖 Analyst Agent · Premium</span></div>
+  <h4>Treat the workbook like a junior analyst</h4>
+  <p>Open <a href="https://copilot.microsoft.com" target="_blank">copilot.microsoft.com</a> → <b>Agents</b> → built-in <b>Analyst</b>. Upload <code>02 Contoso_KPI_Dashboard.xlsx</code>. Try:</p>
+  <div class="prompt">You are the General Manager · Operations & Marketing's data analyst. Using the Monthly_KPIs sheet, model a scenario: what would full-year performance look like if the bottom-quartile locations on each KPI improved to the median by Q4? Show the year-end position vs FY26 target for each KPI before and after the uplift. Then identify the 3 highest-leverage actions: where a small move improves the group most.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>Why Analyst Agent matters:</b> it runs Python-grade analysis in natural language — regression, forecasting, scenario simulation — without anyone touching code. It is the closest thing to a junior analyst on call 24/7.</div>
+</div>
+</div>
+
+<div class="callout warn"><b>Basic-license fallback:</b> 4.1, 4.2 and 4.3 work on Basic seats. 4.4 needs Premium — the Basic alternative is the same scenario prompt in Excel Copilot Chat (less interactive, but still gets you there).</div>
+</section>
+
+
+<section id="ex5">
+<div class="modulehead"><div class="num">5</div><h2>Exercise 5 · The Outlook Hour &amp; Executive 5-Minute Moments<small>15 min · Outlook · Teams · Word · Basic</small></h2></div>
+<div class="callout good"><b>The lightning round — using your <u>real</u> inbox and meetings.</b> Five things every GM does before lunch, each one is now a single Copilot prompt. We start in <b>Outlook</b> because that is where every executive's day actually starts. <i>Sourced from Microsoft's "Copilot for Business Leaders" page.</i></div>
+
+<!-- 5.1 Outlook catch-up -->
+<div class="card">
+<h3>5.1 · Outlook — catch up on a long thread (use your real inbox)</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 5.1</span><span class="time">3 min</span><span class="file">📧 Outlook Copilot</span></div>
+  <h4>"I just got back from a flight — what did I miss on this thread?"</h4>
+  <p><b>Hands-on:</b> open Outlook on the web (<a href="https://outlook.office.com" target="_blank">outlook.office.com</a>) or desktop. Find the longest email thread in your inbox from this week. Open it. Click <b>Summary by Copilot</b> at the top of the thread. Then in the Copilot pane on the right, paste:</p>
+  <div class="prompt">Summarise this email thread in 5 bullets. Who is asking what of whom? What decision is the thread converging on? List any open action items, owners and due dates. Flag where I have been mentioned by name and what is being asked of me.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>What success looks like:</b> in 30 seconds you know who needs what from you and what to act on first — without scrolling through 40 replies.</div>
+</div>
+</div>
+
+<!-- 5.2 Outlook draft reply -->
+<div class="card">
+<h3>5.2 · Outlook — draft a reply with the right tone</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 5.2</span><span class="time">3 min</span><span class="file">📧 Outlook Copilot</span></div>
+  <h4>Draft an executive reply — short, on-brand, signed off</h4>
+  <p><b>Hands-on:</b> still in the same thread, click <b>Reply</b> → in the body, click the <b>Copilot</b> icon → <b>Draft with Copilot</b>. Paste:</p>
+  <div class="prompt">Draft a reply to this thread on behalf of the General Manager · Operations & Marketing of Contoso Pizza Co. Confirm we are on track on the headline ask, push back gently on the unrealistic deadline, and propose a 30-minute call this week. Tone: warm, direct, hormat. 4 short paragraphs maximum, no jargon. Sign off as Bu Lisa Hartono.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>Try the tone slider:</b> after Copilot drafts, click <b>Adjust</b> → set tone to <i>Direct</i> or <i>Formal</i> and length to <i>Short</i>. Compare. Pick the version you'd actually send.</div>
+</div>
+</div>
+
+<!-- 5.3 Teams recap -->
+<div class="card">
+<h3>5.3 · Teams — recap the meeting you missed</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 5.3</span><span class="time">3 min</span><span class="file">💬 Teams Copilot · Intelligent Recap</span></div>
+  <h4>"What did the Operating Committee actually decide yesterday?"</h4>
+  <p><b>Hands-on:</b> open Teams → <b>Calendar</b> → click any past meeting that was recorded or transcribed → <b>Recap</b> tab. In the Copilot box at the top of the recap, paste:</p>
+  <div class="prompt">Summarise this meeting for someone who could not attend. Produce: (1) the 3 decisions taken, (2) the 5 open action items with owner + due date, (3) the topic that took most airtime and why, (4) anyone who pushed back strongly and on what, (5) what was promised to me by name.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>Why GMs love this:</b> they reclaim the meetings they skip — they get the decisions, the politics, and the asks of them, in 60 seconds.</div>
+</div>
+</div>
+
+<!-- 5.4 Word doc Q&A -->
+<div class="card">
+<h3>5.4 · Word — interrogate a long document</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 5.4</span><span class="time">3 min</span><span class="file">📝 Word Copilot</span></div>
+  <h4>"Find me the risk in this 80-page board pack"</h4>
+  <p><b>Hands-on:</b> open <code>05 Contoso_Strategic_Memo.docx</code> from your OneDrive. Click the <b>Copilot</b> icon in the ribbon. In the Copilot pane, paste:</p>
+  <div class="prompt">Read this document end-to-end. Identify: (1) the 3 critical risks, (2) anything inconsistent or contradicted across sections, (3) anything I would expect a General Manager · Operations & Marketing memo to cover that is missing, (4) the 3 questions I should put back to the author. Quote the exact sentence each finding is anchored to.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+</div>
+
+<!-- 5.5 PPT summarise -->
+<div class="card">
+<h3>5.5 · PowerPoint — pre-read in 60 seconds</h3>
+<div class="activity">
+  <div class="head"><span class="num">Task 5.5</span><span class="time">3 min</span><span class="file">🎨 PowerPoint Copilot</span></div>
+  <h4>"What is this 60-slide deck actually asking of me?"</h4>
+  <p><b>Hands-on:</b> open the deck you generated in Exercise 3 — or any deck a colleague sent you. Open the Copilot pane. Paste:</p>
+  <div class="prompt">Summarise this presentation in 5 bullets. What is the single decision being asked of the audience? What 3 numbers should I remember? List action items with owners. Then list the top 3 questions a General Manager · Operations & Marketing should ask in the room.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+</div>
+
+<div class="callout"><b>The pattern across all five:</b> the GM does not learn a feature — they learn a single sentence: "Copilot, summarise / draft / interrogate this." Every Microsoft 365 surface answers to it.</div>
+</section>
+
+
+<section id="ex6">
+<div class="modulehead"><div class="num">6</div><h2>Exercise 6 · Cowork Finale<small>25 min · Personalised mail merge · CV screen · live HTML dashboard · Premium ⭐</small></h2></div>
+<div class="callout good"><b>The finale — three GM pains, one Cowork prompt each.</b><br>· 6.1 — personalised letters to 14 Area & Outlet Managers (Cowork-driven mail merge, not Word Mailings).<br>· 6.2 — screen 12 CVs from a SharePoint folder (vs ChatGPT's 5-file cap).<br>· 6.3 — wrap the day with a live HTML KPI dashboard.</div>
+
+<!-- 6.1 Cowork mail merge -->
+<div class="card">
+<h3>6.1 · Cowork-driven personalised GM communications</h3>
+<p class="lead">Forget Word's <i>Mailings</i> ribbon — let Cowork do the merge, draft each letter <b>uniquely tuned</b> to that person's performance band, and queue them as Outlook drafts for the GM to review and send.</p>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 6.1</span><span class="time">7 min</span><span class="file">👥 Cowork · multi-step</span></div>
+  <h4>One prompt → 14 individually-tuned letters → 14 Outlook drafts</h4>
+  <p>In M365 Copilot, open <b>Cowork</b>. Reference both files with <code>/</code>. Paste:</p>
+  <div class="prompt">Cowork — run a personalised quarterly outreach for the General Manager · Operations & Marketing of Contoso Pizza Co.
+
+Sources:
+- Recipient list: /03 Contoso_Mail_Merge_Recipients.xlsx (14 rows: First Name, Full Name, Location, Role, Email, Performance Band, Key Highlight)
+- Brand &amp; tone: /04 Contoso_Brand_Guidelines.docx (use the "Approved GM Communications Template" exactly)
+
+For each row in the recipient list:
+1. Write a 180-word personal letter using the approved template. Tune the body to the recipient's Performance Band:
+   - "Top Quartile" → recognition-led, ask them to mentor a neighbouring site.
+   - "On Track" → acknowledge + push on one specific stretch goal relevant to General Manager · Operations & Marketing.
+   - "Watch" → direct, supportive, name one specific 30-day fix.
+2. Reference the recipient's Key Highlight verbatim, in the second paragraph.
+3. Sign off as Bu Lisa Hartono, General Manager · Operations & Marketing, Contoso Pizza Co.
+4. Create the email in Outlook as a DRAFT (do not send) addressed to the recipient's Email column. Subject: "[First Name], a quick note on this quarter at [Location]".
+
+After all 14 drafts are queued, give me a summary table: Recipient · Location · Band · Subject preview · Draft link. Pause and confirm before sending any of them.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>Why Cowork beats classic Mail Merge:</b> classic merge inserts the same body with field substitutions. Cowork writes <i>a different body for each recipient</i> — and stops at "Drafts" so the GM signs off before anything is sent.</div>
+</div>
+</div>
+
+<!-- 6.2 CV screening via Cowork -->
+<div class="card">
+<h3>6.2 · CV screening at scale (vs ChatGPT's 5-file cap)</h3>
+<p class="lead">The HR team complained that ChatGPT only lets them attach 5 CVs. We point Cowork at the <b>SharePoint folder</b> — no file cap, fully grounded.</p>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 6.2a</span><span class="time">3 min</span><span class="file">📁 SharePoint setup · one-off</span></div>
+  <h4>Prep — drop the CVs in SharePoint</h4>
+  <ol>
+    <li>Open <code>samples/CVs/</code> (12 CV_*.docx files).</li>
+    <li>Upload them to a SharePoint document library — e.g. <i>HR / Recruitment / Contoso Pizza Co QSR Area Operations Manager (10+ outlets) – Apr 2026</i>.</li>
+    <li>Wait ~2 minutes for Microsoft Graph to index them.</li>
+  </ol>
+</div>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 6.2b</span><span class="time">5 min</span><span class="file">👥 Cowork · folder grounding</span></div>
+  <h4>Cowork: shortlist + interview pack + offer-letter draft for #1</h4>
+  <div class="prompt">Cowork — handle CV screening for the open QSR Area Operations Manager (10+ outlets) role at Contoso Pizza Co.
+
+Source: SharePoint folder /HR/Recruitment/Contoso Pizza Co QSR Area Operations Manager (10+ outlets) (12 CVs).
+
+Do all of the following:
+
+1. Review every CV in the folder. Score each candidate 1-5 against: multi-outlet P&L, food-cost control, labour scheduling, GoFood/GrabFood mix, ServSafe HACCP.
+
+2. Produce a ranked shortlist (top 5) with: name · current employer · 3 evidence bullets quoted from the CV · risks/gaps to test in interview.
+
+3. Produce a "second look" list (next 3) and a reject list (with one-line reasoning each).
+
+4. For each top-5 candidate, draft a personalised interview-prep brief for the hiring manager — the 3 questions to ask, and what answer would unlock a yes.
+
+5. Draft (do NOT send) the introductory email to the #1 candidate inviting them to a screening call. Save as Outlook draft.
+
+Mark anything unclear in a CV as [VERIFY]. Do not invent qualifications. Pause and confirm before sending any email.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout good"><b>The win:</b> ChatGPT free → 5 file uploads. M365 Copilot Cowork → entire SharePoint folder, fully grounded, scales 12 → 1,200 CVs with the same prompt.</div>
+</div>
+</div>
+
+<!-- 6.3 Cowork dashboard finale -->
+<div class="card">
+<h3>6.3 · Wrap the day with a live HTML dashboard</h3>
+<p class="lead">One Cowork prompt: analyse → Word doc → email draft → meeting invite → and the GM's headline artefact, a self-contained HTML dashboard.</p>
+
+<div class="activity">
+  <div class="head"><span class="num">Task 6.3</span><span class="time">10 min</span><span class="file">👥 Cowork · multi-step</span></div>
+  <h4>Five outputs. One HTML dashboard.</h4>
+  <p>Reference <code>02 Contoso_KPI_Dashboard.xlsx</code> with <code>/</code>. Paste:</p>
+  <div class="prompt">Cowork — wrap up the quarter for the General Manager · Operations & Marketing at Contoso Pizza Co. Use /02 Contoso_KPI_Dashboard.xlsx as the source of truth.
+
+Do all of the following, in order:
+
+1. Analyse the Monthly_KPIs and Targets_vs_Actual tabs. For each KPI, identify the best-performing location, the worst, and the variance vs FY26 target. Flag any 🔴 location.
+
+2. Draft a 1-page Word doc "Contoso Pizza Q-End GM Summary" — top 3 wins, top 3 issues, 90-day action plan with owners. Save to OneDrive.
+
+3. Draft an executive email from the GM to the Operating Committee with the headline + a link to the Word doc.
+
+4. Schedule a 30-minute Operating Committee review for next Wednesday at 10:00.
+
+5. Generate a self-contained HTML KPI dashboard "Outlet Performance & Delivery Mix Dashboard":
+   - Header band in brand colour #dc2626
+   - 5 KPI scorecards across the top (one per KPI in Targets_vs_Actual, with RAG icon)
+   - Inline mini-table per location showing last 3 months trend
+   - "Top issue" callout box and "Top action" callout box at the bottom
+   - All inline CSS, no JavaScript, mobile-friendly
+   - Save as Dashboard.html to OneDrive
+
+Pause and confirm before sending the email or the meeting invite.<button class="copy" onclick="cp(this)">Copy</button></div>
+  <div class="callout"><b>Closing line for the audience:</b> "Cowork showed its plan first. You edited it. It paused before any external action. It returned five artefacts you own — including the dashboard you can put on a screen tomorrow morning."</div>
+</div>
+</div>
+
+<div class="callout warn"><b>Basic-license fallback:</b> if Cowork is not available, run each step as a standalone prompt in Copilot Chat. Same artefacts — you orchestrate instead of Copilot.</div>
+</section>
+
+
+<section id="files">
+<div class="modulehead"><div class="num">📁</div><h2>Sample files<small>Download for the hands-on</small></h2></div>
+<div class="card">
+<p class="lead">All data is fictional and labelled <b>Contoso</b>. Do not use for any operational decision. Upload to OneDrive / SharePoint to make them visible to Copilot.</p>
+<table>
+  <tr><th>#</th><th>File</th><th>Type</th><th>Used in</th><th>What it contains</th></tr>
+  <tr><td>01</td><td><a href="samples/01 Contoso_Market_Brief.xlsx">01 Contoso_Market_Brief.xlsx</a></td><td><span class="badge blue">Excel</span></td><td>Ex 1 (optional)</td><td>Peer benchmark, market sizing 2024-28, SWOT</td></tr>
+  <tr><td>02</td><td><a href="samples/02 Contoso_KPI_Dashboard.xlsx">02 Contoso_KPI_Dashboard.xlsx</a></td><td><span class="badge blue">Excel</span></td><td>Ex 3, Ex 4, Ex 6</td><td>12 months of KPIs across PHD Kemang, PHD Kelapa Gading, PHR Tunjungan and more, targets vs actual, open issues</td></tr>
+  <tr><td>03</td><td><a href="samples/03 Contoso_Mail_Merge_Recipients.xlsx">03 Contoso_Mail_Merge_Recipients.xlsx</a></td><td><span class="badge blue">Excel</span></td><td>Ex 6.1</td><td>14 Area & Outlet Managers for Cowork-driven personalised letters (name, location, role, email, performance band, key highlight)</td></tr>
+  <tr><td>04</td><td><a href="samples/04 Contoso_Brand_Guidelines.docx">04 Contoso_Brand_Guidelines.docx</a></td><td><span class="badge yellow">Word</span></td><td>Ex 5.2, Ex 6.1</td><td>Brand tone, GM communications template, press release structure</td></tr>
+  <tr><td>05</td><td><a href="samples/05 Contoso_Strategic_Memo.docx">05 Contoso_Strategic_Memo.docx</a></td><td><span class="badge yellow">Word</span></td><td>Ex 3, Ex 5.4</td><td>Strategic memo used to ground the PowerPoint draft + Word doc Q&amp;A demo</td></tr>
+  <tr><td>06</td><td><a href="samples/CVs/">samples/CVs/ (12 files)</a></td><td><span class="badge yellow">Word ×12</span></td><td>Ex 6.2</td><td>12 candidate CVs for the QSR Area Operations Manager (10+ outlets) role — upload as a SharePoint folder</td></tr>
+</table>
+</div>
+</section>
+
+
+<section id="tips">
+<div class="modulehead"><div class="num">💡</div><h2>Prompt tips — for every Copilot surface</h2></div>
+<div class="card">
+<h4>The GCSE prompt framework</h4>
+<div class="prompt"><b>G</b>oal — what I want at the end (a brief, a deck, a dashboard)
+<b>C</b>ontext — who it's for, the situation, constraints
+<b>S</b>ource — the file or data I'm pointing to (use <code>/</code> to reference)
+<b>E</b>xpectations — format, length, what to include, what NOT to include
+
+Two lines to add to every prompt:
+"Do not invent data. Use [PLACEHOLDER] for anything not in the source."
+"End with assumptions made and open questions."<button class="copy" onclick="cp(this)">Copy</button></div>
+
+<h4>Contoso Pizza-ready reusable prompts</h4>
+<div class="task-step">
+  <div class="step-label">Researcher · Sector scan</div>
+  <div class="prompt">Research [topic] in the quick-service restaurant sector in Indonesia. Compare [3-4 peers]. Cite all sources. Flag where evidence is thin.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+<div class="task-step">
+  <div class="step-label">Excel · KPI table</div>
+  <div class="prompt">Analyse [tab name] in this workbook. For each location calculate [metric]. Flag the bottom quartile in red. Add a 2-sentence executive read-out at the top.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+<div class="task-step">
+  <div class="step-label">Word · GM brief</div>
+  <div class="prompt">Draft a 1-page brief for the General Manager · Operations & Marketing. Cover: headline, three findings, three actions, ask of the committee. Max 350 words. Do not invent data.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+<div class="task-step">
+  <div class="step-label">PowerPoint · BCG-style</div>
+  <div class="prompt">Draft an 8-slide strategy deck on [topic]. One message per slide. Action titles (complete sentences). Body proves the title in 3 bullets. Source caption at the bottom of every slide.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+<div class="task-step">
+  <div class="step-label">Cowork · delegation</div>
+  <div class="prompt">Cowork — analyse [source file], draft [Word output], draft [email], schedule [meeting], generate [HTML deliverable]. Pause and confirm before sending anything external.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+</div>
+</section>
+
+
+<div style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center">
+  Contoso Pizza Co · M365 Copilot GM Immersion · 05 June 2026 · Session ID 112e253a-7fd6-48b4-80b3-e89c7d7914fd
+</div>
+</main>
+</div>
+
+<script>
+const HASH='557a4bb1a6b488f3484b5e7a7bc9542054af037f5b2d8d2e5c5cc564f61aa5d2';
+async function sha256(s){const b=new TextEncoder().encode(s);const d=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(d)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function unlock(){
+  const v=document.getElementById('pw').value;
+  const h=await sha256(v);
+  if(h===HASH){
+    document.getElementById('lock').style.display='none';
+    document.getElementById('main').style.display='grid';
+    sessionStorage.setItem('unlk','1');localStorage.setItem('unlk','1');
+  }else{
+    const e=document.getElementById('err');e.textContent='Incorrect password. Please try again.';
+    setTimeout(()=>e.textContent='',3000);document.getElementById('pw').value='';
+  }
+}
+if(sessionStorage.getItem('unlk')==='1'||localStorage.getItem('unlk')==='1'){
+  document.getElementById('lock').style.display='none';
+  document.getElementById('main').style.display='grid';
+}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+function cp(btn){
+  const txt=btn.parentElement.textContent.replace(/Copy$/,'').replace(/Copied!$/,'').trim();
+  navigator.clipboard.writeText(txt).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});
+}
+</script>
+</body></html>
