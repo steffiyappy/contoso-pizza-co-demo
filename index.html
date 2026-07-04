@@ -121,13 +121,12 @@ td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
  body{font-size:13.5px}
  .modulehead h2{font-size:16px}
 }
-</style>
-<style id="bcard-css">
-.bonus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:14px}
+</style><style id="bcard-css">
+.bonus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:14px}
 .bcard{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;cursor:pointer;transition:all .18s;box-shadow:0 1px 3px rgba(0,0,0,.04);text-align:left;font-family:inherit;color:#111827;width:100%}
 .bcard:hover{transform:translateY(-2px);border-color:#0f766e;box-shadow:0 6px 18px rgba(15,118,110,.15)}
 .bcard .ico{font-size:22px;margin-bottom:6px;display:block}
-.bcard h4{margin:0 0 4px;font-size:15px;color:#111827}
+.bcard h4{margin:0 0 4px;font-size:15px;color:#111827;line-height:1.3}
 .bcard p{margin:0;font-size:12.5px;color:#4b5563;line-height:1.4}
 .modal-overlay{position:fixed;inset:0;background:rgba(8,12,28,.78);z-index:8000;display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 20px}
 .modal-overlay.open{display:flex}
@@ -135,8 +134,7 @@ td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
 .modal-close{position:absolute;top:12px;right:16px;font-size:28px;background:transparent;border:none;cursor:pointer;color:#6b7280;line-height:1}
 .modal-close:hover{color:#111827}
 .modal h3{margin:0 0 12px;font-size:22px;color:#0f172a}
-</style>
-<style id="ihh-override">
+</style><style id="ihh-override">
 /* ========== IHH-STYLE OVERRIDES ========== */
 .layout { grid-template-columns: 1fr !important; }
 aside { display:none !important; }
@@ -896,12 +894,14 @@ If any answer is wrong or missing a citation, edit the instructions and try agai
 </div>
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex5">← Create a Visual Infographic</button><button data-go="extras">Next: Extras →</button></div></div><div class="view-ihh" id="view-extras"><section id="extras">
-<div class="modulehead"><div class="num">B</div><h2>Bonus - Extra Exercises &amp; Prompt Tips<small>Everything else from the ten-move playbook, plus GM prompt tips</small></h2></div>
-<div class="callout good"><b>Use these when there is extra time</b>, or to tailor the session to a specific GM concern (mail merge, CV screening, Teams recaps, Excel Power Hour, analyst agent). The prompt tips card at the bottom applies to every Copilot surface.</div>
-<div class="bonus-grid"><button class="bcard" onclick="openModal('ex-7eb02b02')"><span class="ico">💡</span><h4>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style PowerPoint Copilot</h4><p>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style PowerPoint Copilot When to do this: Open a blank PowerPoint (powe...</p></button><button class="bcard" onclick="openModal('ex-4bae3529')"><span class="ico">🧩</span><h4>4.1 · Draft a BCG/McKinsey-style strategy deck</h4><p>Copilot in PowerPoint drafts a deck in the "one message per slide" style consulting firms use — grounded on your memo an...</p></button><button class="bcard" onclick="openModal('ex-729f679b')"><span class="ico">📊</span><h4>4.2 · Digest a deck someone just sent the GM</h4><p>A 60-slide deck lands in your inbox 20 minutes before the meeting. Copilot reads it for you. Task 5.2 🎨 PowerPoint Copilot Summari...</p></button></div></section><div class="lab-nav-ihh"><button class="secondary" data-go="ex6">← Exercise 6 - Build…</button><button data-go="intro">Back to start ↺</button></div></div></div><div class="modal-overlay" id="modal-ex-7eb02b02"><div class="modal"><button class="modal-close" onclick="closeModal('ex-7eb02b02')">×</button><h3>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style PowerPoint Copilot</h3>
-<section id="ex5">
-<h2>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style<small>PowerPoint Copilot</small></h2></section></div>
-<div class="callout good"><b>When to do this:</b> Open a blank <b>PowerPoint</b> (powerpoint.com or desktop). If you have a corporate template (.potx), open it first so Copilot inherits your brand. Make sure <code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code> are in your OneDrive.</div></div><div class="modal-overlay" id="modal-ex-4bae3529"><div class="modal"><button class="modal-close" onclick="closeModal('ex-4bae3529')">×</button><h3>4.1 · Draft a BCG/McKinsey-style strategy deck</h3>
+<div class="modulehead"><div class="num">B</div><h2>Bonus - Extra Exercises &amp; Prompt Tips<small>Everything else from the playbook, plus GM prompt tips - click any card</small></h2></div>
+<div class="callout good"><b>Use these when there is extra time</b>, or to tailor the session to a specific GM concern. Click a card to open the full walkthrough.</div>
+<div class="bonus-grid"><button class="bcard" onclick="openModal('bx-4321b14a')"><span class="ico">💡</span><h4>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style</h4><p>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style PowerPoint Copilot When to do this: Open a blank PowerPoint (powerpoint.com...</p></button><button class="bcard" onclick="openModal('bx-ee770ada')"><span class="ico">🧩</span><h4>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes</h4><p>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes Teams Copilot · Word Copilot The scenario: the GM just stepped out of a 60-minute &amp;q...</p></button><button class="bcard" onclick="openModal('bx-687f3b38')"><span class="ico">📊</span><h4>Exercise 8 · Excel Power Hour</h4><p>Exercise 8 · Excel Power Hour Copilot in Excel · Chat · Edit · Plan The most-asked GM question: "Show me what's actually happening ...</p></button><button class="bcard" onclick="openModal('bx-2a96c85f')"><span class="ico">📧</span><h4>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h4><p>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data Microsoft 365 Copilot · built-in Analyst agent Treat the workbook like a...</p></button><button class="bcard" onclick="openModal('bx-7e97271b')"><span class="ico">📄</span><h4>Exercise 10 · Personalised Mail Merge (Cowork)</h4><p>Exercise 10 · Personalised Mail Merge (Cowork) Microsoft 365 Copilot · Cowork · Outlook drafts The play: forget Word's Mailings ribbon. ...</p></button><button class="bcard" onclick="openModal('bx-65026605')"><span class="ico">🎨</span><h4>Exercise 11 · CV Screening from a SharePoint Folder</h4><p>Exercise 11 · CV Screening from a SharePoint Folder Microsoft 365 Copilot · Cowork · SharePoint grounding The scenario: the HR team is cappe...</p></button><button class="bcard" onclick="openModal('bx-1257371f')"><span class="ico">🧪</span><h4>Extra A · Outlook — catch up on a long thread (use your real inbox)</h4><p>Extra A · Outlook — catch up on a long thread (use your real inbox) Extra A 📧 Outlook Copilot "I just got back from a flight — what did...</p></button><button class="bcard" onclick="openModal('bx-59d804f3')"><span class="ico">📅</span><h4>Extra B · Outlook — draft an executive reply with the right tone</h4><p>Extra B · Outlook — draft an executive reply with the right tone Extra B 📧 Outlook Copilot Draft an executive reply — short, on-brand, signe...</p></button><button class="bcard" onclick="openModal('bx-22a873d3')"><span class="ico">🤝</span><h4>Extra C · Word — interrogate a long document</h4><p>Extra C · Word — interrogate a long document Extra C 📝 Word Copilot "Find me the risk in this 80-page board pack" Open 05 Contoso_...</p></button><button class="bcard" onclick="openModal('bx-9ea8fd40')"><span class="ico">📈</span><h4>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move</h4><p>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move Scenario: Marketing has 4 weeks until Lebaran. The GM wants...</p></button><button class="bcard" onclick="openModal('bx-6c105361')"><span class="ico">🗂️</span><h4>Prompt tips for every Copilot surface</h4><p>Prompt Tips — for every Copilot surface The GCSE prompt framework G oal — what I want at the end (brief, deck, dashboard) C ontext — for who...</p></button></div>
+</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex6">← Exercise 6 - Build…</button><button data-go="intro">Back to start ↺</button></div></div></div><div class="modal-overlay" id="modal-bx-4321b14a"><div class="modal"><button class="modal-close" onclick="closeModal('bx-4321b14a')">×</button><h3>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style</h3>
+<h2>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style<small>PowerPoint Copilot</small></h2></div>
+<div class="callout good"><b>When to do this:</b> Open a blank <b>PowerPoint</b> (powerpoint.com or desktop). If you have a corporate template (.potx), open it first so Copilot inherits your brand. Make sure <code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code> are in your OneDrive.</div>
+<div class="card">
+<h3>4.1 · Draft a BCG/McKinsey-style strategy deck</h3>
 <p class="lead">Copilot in PowerPoint drafts a deck in the "one message per slide" style consulting firms use — grounded on your memo and KPI workbook, and laid out on your corporate template.</p>
 <div class="activity">
 <div class="head"><span class="num">Task 4.1a</span><span class="file">🎨 PowerPoint Copilot</span></div>
@@ -938,7 +938,9 @@ Tone: direct, evidence-based, no adjectives, no "leverage / synergy / unlock" la
 Return a 1-page review note: slide-by-slide table, plus the single slide to cut, plus the single missing slide we should add. Then apply all the edits.<button class="copy" onclick="cp(this)">Copy</button></div>
 <div class="callout"><b>The BCG/McKinsey check:</b> read only the action titles top-to-bottom. If they tell the complete story without opening any body, the deck is consulting-grade.</div>
 </div>
-</div></div><div class="modal-overlay" id="modal-ex-729f679b"><div class="modal"><button class="modal-close" onclick="closeModal('ex-729f679b')">×</button><h3>4.2 · Digest a deck someone just sent the GM</h3>
+</div>
+<div class="card">
+<h3>4.2 · Digest a deck someone just sent the GM</h3>
 <p class="lead">A 60-slide deck lands in your inbox 20 minutes before the meeting. Copilot reads it for you.</p>
 <div class="activity">
 <div class="head"><span class="num">Task 5.2</span><span class="file">🎨 PowerPoint Copilot</span></div>
@@ -946,11 +948,11 @@ Return a 1-page review note: slide-by-slide table, plus the single slide to cut,
 <p>Open any deck you've received recently (or use the deck you just drafted). In the Copilot pane:</p>
 <div class="prompt">Summarise this presentation in 5 bullets. What is the single decision being asked of the audience? What are the 3 numbers I must remember? List the action items with owners and dates. Then list the top 3 questions General Manager · Operations &amp; Marketing should ask in the room.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
-</div></div><!--IHH-INJECT-END-->
-</main></div><div class="card">
-<h3>Bonus - Exercise 7 · Teams Meeting Recap → Word Meeting Minutes Teams Copilot · Word Copilot</h3>
-<section id="ex7">
-<h2>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes<small>Teams Copilot · Word Copilot</small></h2></section></div>
+</div>
+</div><!--IHH-INJECT-END-->
+</main></div>
+<div class="modal-overlay" id="modal-bx-ee770ada"><div class="modal"><button class="modal-close" onclick="closeModal('bx-ee770ada')">×</button><h3>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes</h3>
+<h2>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes<small>Teams Copilot · Word Copilot</small></h2></div>
 <div class="callout good"><b>The scenario:</b> the GM just stepped out of a 60-minute "Potential Merger" discussion. They need a clean recap, a structured meeting-minutes template the company can reuse, and the minutes filled in — all in 5 minutes.</div>
 <div class="card">
 <h3>6.1 · Teams — audio recap of the Potential Merger meeting</h3>
@@ -1014,11 +1016,9 @@ Rules:
 <div class="callout good"><b>The win:</b> what used to take a minute-taker 90 minutes after a strategic meeting now takes Copilot 30 seconds — and the minutes are grounded on the actual transcript, not the minute-taker's memory.</div>
 </div>
 </div>
-
-<div class="card">
-<h3>Bonus - Exercise 8 · Excel Power Hour Copilot in Excel · Chat · Edit · Plan</h3>
-<section id="ex8">
-<h2>Exercise 8 · Excel Power Hour<small>Copilot in Excel · Chat · Edit · Plan</small></h2></section></div>
+</div>
+<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>Exercise 8 · Excel Power Hour</h3>
+<h2>Exercise 8 · Excel Power Hour<small>Copilot in Excel · Chat · Edit · Plan</small></h2></div>
 <div class="callout good"><b>The most-asked GM question:</b> "Show me what's actually happening in the data — without me writing a formula." Excel Copilot now does this in three modes. We will run all three on <code>02 Contoso_KPI_Dashboard.xlsx</code>.</div>
 <div class="card">
 <h3>7.1 · Get the insights — one prompt</h3>
@@ -1058,11 +1058,9 @@ Show me the plan first. I will approve. Then execute.<button class="copy" onclic
 <div class="callout good"><b>The "Plan" win:</b> Copilot writes its own work order, you tick / untick steps, and only then does it touch the workbook.</div>
 </div>
 </div>
-
-<div class="card">
-<h3>Bonus - Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data Microsoft 365 Copilot · built-in Analyst agent</h3>
-<section id="ex9">
-<h2>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data<small>Microsoft 365 Copilot · built-in Analyst agent</small></h2></section></div>
+</div>
+<div class="modal-overlay" id="modal-bx-2a96c85f"><div class="modal"><button class="modal-close" onclick="closeModal('bx-2a96c85f')">×</button><h3>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h3>
+<h2>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data<small>Microsoft 365 Copilot · built-in Analyst agent</small></h2></div>
 <div class="callout good"><b>Treat the workbook like a junior analyst on call 24/7.</b> The Analyst Agent runs Python-grade analysis in natural language — regression, forecasting, scenario simulation — without anyone touching code. Run the same raw data through three different perspectives.</div>
 <div class="card">
 <p class="lead">Open <a href="https://copilot.microsoft.com" target="_blank">copilot.microsoft.com</a> → <b>Agents</b> → built-in <b>Analyst</b>. Upload <code>02 Contoso_KPI_Dashboard.xlsx</code>. Then run the three perspectives below — same raw data, three completely different lenses.</p>
@@ -1083,11 +1081,9 @@ Show me the plan first. I will approve. Then execute.<button class="copy" onclic
 <div class="callout"><b>Why three perspectives matter:</b> the same workbook hides three completely different stories — strategic (GM), financial (CFO), operational (COO). Analyst Agent lets one person hold all three at once, in 5 minutes, without a single line of Python.</div>
 </div>
 </div>
-
-<div class="card">
-<h3>Bonus - Exercise 10 · Personalised Mail Merge (Cowork) Microsoft 365 Copilot · Cowork · Outlook drafts</h3>
-<section id="ex10">
-<h2>Exercise 10 · Personalised Mail Merge (Cowork)<small>Microsoft 365 Copilot · Cowork · Outlook drafts</small></h2></section></div>
+</div>
+<div class="modal-overlay" id="modal-bx-7e97271b"><div class="modal"><button class="modal-close" onclick="closeModal('bx-7e97271b')">×</button><h3>Exercise 10 · Personalised Mail Merge (Cowork)</h3>
+<h2>Exercise 10 · Personalised Mail Merge (Cowork)<small>Microsoft 365 Copilot · Cowork · Outlook drafts</small></h2></div>
 <div class="callout good"><b>The play:</b> forget Word's <i>Mailings</i> ribbon. Let <b>Cowork</b> do the merge — drafting each campaign cascade letter, tuned to each outlet's delivery-mix and CSAT <b>uniquely tuned</b> to that recipient, and queueing them as Outlook drafts for the GM to review and send.</div>
 <div class="card">
 <h3>9.1 · One prompt → 14 individually-tuned letters → 14 Outlook drafts</h3>
@@ -1114,11 +1110,9 @@ When all 14 drafts are ready, give me a summary table: Recipient · Location · 
 <div class="callout"><b>Why Cowork beats classic Mail Merge:</b> classic merge inserts the same body with field substitutions. Cowork writes <i>a different body for each recipient</i> — and stops at "Drafts" so the GM signs off before anything is sent.</div>
 </div>
 </div>
-
-<div class="card">
-<h3>Bonus - Exercise 11 · CV Screening from a SharePoint Folder Microsoft 365 Copilot · Cowork · SharePoint grounding</h3>
-<section id="ex11">
-<h2>Exercise 11 · CV Screening from a SharePoint Folder<small>Microsoft 365 Copilot · Cowork · SharePoint grounding</small></h2></section></div>
+</div>
+<div class="modal-overlay" id="modal-bx-65026605"><div class="modal"><button class="modal-close" onclick="closeModal('bx-65026605')">×</button><h3>Exercise 11 · CV Screening from a SharePoint Folder</h3>
+<h2>Exercise 11 · CV Screening from a SharePoint Folder<small>Microsoft 365 Copilot · Cowork · SharePoint grounding</small></h2></div>
 <div class="callout good"><b>The scenario:</b> the HR team is capped at attaching only a handful of CVs into most chatbots. Point Cowork at a <b>SharePoint folder</b> and there is no file cap — scale from 12 to 1,200 CVs with the same prompt, fully grounded.</div>
 <div class="card">
 <h3>10.1 · Prep — drop the CVs into SharePoint</h3>
@@ -1152,11 +1146,8 @@ Flag anything unclear with [VERIFY]. Do not fabricate qualifications. Stop and c
 <div class="callout good"><b>The win:</b> Cowork grounds on an entire SharePoint folder — the same prompt scales from 12 to 1,200 CVs, with full traceability back to each source CV.</div>
 </div>
 </div>
-
-
-<div class="modulehead"><div class="num">＋</div><h2>Extras<small>Use these when there is extra time, or to tailor the session to a specific GM concern</small></h2></div>
-<div class="callout"><b>Why these are extras:</b> they were in the original 8-exercise flow but the GM asked for a tighter agenda. Each one stands on its own — paste &amp; demo any of them on request.</div>
-<div class="card">
+</div>
+<div class="modal-overlay" id="modal-bx-1257371f"><div class="modal"><button class="modal-close" onclick="closeModal('bx-1257371f')">×</button><h3>Extra A · Outlook — catch up on a long thread (use your real inbox)</h3>
 <h3>Extra A · Outlook — catch up on a long thread (use your real inbox)</h3>
 <div class="activity">
 <div class="head"><span class="num">Extra A</span><span class="file">📧 Outlook Copilot</span></div>
@@ -1164,8 +1155,8 @@ Flag anything unclear with [VERIFY]. Do not fabricate qualifications. Stop and c
 <p>Open Outlook on the web or desktop. Find the longest email thread in your inbox from this week. Click <b>Summary by Copilot</b> at the top of the thread. Then in the Copilot pane, paste:</p>
 <div class="prompt">Summarise this email thread in 5 bullets. Who is asking what of whom? What decision is being narrowed in this thread? List the open action items with owner and due date. Flag the parts where I am specifically mentioned and what is being asked of me.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
-</div>
-<div class="card">
+</div></div>
+<div class="modal-overlay" id="modal-bx-59d804f3"><div class="modal"><button class="modal-close" onclick="closeModal('bx-59d804f3')">×</button><h3>Extra B · Outlook — draft an executive reply with the right tone</h3>
 <h3>Extra B · Outlook — draft an executive reply with the right tone</h3>
 <div class="activity">
 <div class="head"><span class="num">Extra B</span><span class="file">📧 Outlook Copilot</span></div>
@@ -1173,8 +1164,8 @@ Flag anything unclear with [VERIFY]. Do not fabricate qualifications. Stop and c
 <p>In the same thread, click <b>Reply</b> → click the <b>Copilot</b> icon → <b>Draft with Copilot</b>. Paste:</p>
 <div class="prompt">Draft a reply to this thread on behalf of General Manager · Operations &amp; Marketing at Contoso Pizza Co. Confirm we are on track on the main request, politely push back on the unrealistic deadline, and propose a 30-minute call this week. Tone: warm, direct, respectful. Maximum 4 short paragraphs, no jargon. Sign off as Bu Lisa Hartono.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
-</div>
-<div class="card">
+</div></div>
+<div class="modal-overlay" id="modal-bx-22a873d3"><div class="modal"><button class="modal-close" onclick="closeModal('bx-22a873d3')">×</button><h3>Extra C · Word — interrogate a long document</h3>
 <h3>Extra C · Word — interrogate a long document</h3>
 <div class="activity">
 <div class="head"><span class="num">Extra C</span><span class="file">📝 Word Copilot</span></div>
@@ -1182,8 +1173,8 @@ Flag anything unclear with [VERIFY]. Do not fabricate qualifications. Stop and c
 <p>Open <code>05 Contoso_Strategic_Memo.docx</code> from your OneDrive. Click the <b>Copilot</b> icon → in the Copilot pane, paste:</p>
 <div class="prompt">Read this document end to end. Identify: (1) the 3 critical risks, (2) anything inconsistent or contradictory between sections, (3) anything that should be in a memo for General Manager · Operations &amp; Marketing but is missing, (4) 3 questions I should put back to the author. Quote the exact sentence anchoring each finding.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
-</div>
-<div class="card">
+</div></div>
+<div class="modal-overlay" id="modal-bx-9ea8fd40"><div class="modal"><button class="modal-close" onclick="closeModal('bx-9ea8fd40')">×</button><h3>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move</h3>
 <h3>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move</h3>
 <div class="callout"><b>Scenario:</b> Marketing has 4 weeks until Lebaran. The GM wants a launch-ready promo design — menu, price ladder, aggregator copy, outlet briefing pack — by tomorrow morning.</div>
 <div class="activity">
@@ -1197,10 +1188,9 @@ Lebaran 2026 is 4 weeks away. Use /02 Contoso_KPI_Dashboard.xlsx and /05 Contoso
 Generate a launch-ready promo pack: promo design (3 bundles), channel copy (GoFood, GrabFood, Instagram, push), outlet briefing pack, cannibalisation forecast, and a 7-day launch scorecard. Flag every assumption [ASSUMPTION:...]. Tone: confident, food-first, respectful of an Indonesian Muslim audience.<button class="copy" onclick="cp(this)">Copy</button></div>
 <div class="callout warn"><b>For the GM in the room:</b> this is the use case worth piloting first. It maps 1:1 to the most expensive analyst hours your team spends every month — and Copilot does it in minutes, grounded on your own files.</div>
 </div>
-</div>
-<div class="card">
-<h3>Bonus - Prompt tips for every Copilot surface</h3>
-<div class="modulehead"><div class="num">💡</div><h2>Prompt Tips — for every Copilot surface</h2></div>
+</div></div>
+<div class="modal-overlay" id="modal-bx-6c105361"><div class="modal"><button class="modal-close" onclick="closeModal('bx-6c105361')">×</button><h3>Prompt tips for every Copilot surface</h3>
+<h2>Prompt Tips — for every Copilot surface</h2></div>
 <div class="card">
 <h4>The GCSE prompt framework</h4>
 <div class="prompt"><b>G</b>oal — what I want at the end (brief, deck, dashboard)
@@ -1234,7 +1224,6 @@ Two sentences to add to every prompt:
 </div>
 </div>
 </div>
-
 <div style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center">
  Contoso Pizza Co · M365 Copilot GM Immersion · Session ID 112e253a-7fd6-48b4-80b3-e89c7d7914fd
 </div>
@@ -1280,7 +1269,6 @@ function closeModal(id){var el=document.getElementById('modal-'+id);if(el){el.cl
 document.addEventListener('click',function(e){if(e.target.classList&&e.target.classList.contains('modal-overlay'))e.target.classList.remove('open');});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(function(m){m.classList.remove('open');document.body.style.overflow='';});});
 </script>
-
 <script>
 (function(){
   var tabs = document.querySelectorAll('nav.tabs-ihh .tab');
