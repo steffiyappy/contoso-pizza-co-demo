@@ -308,12 +308,12 @@ body.ihh-active .view-ihh > section .modulehead { margin-top:8px !important; }
 <div class="hero-meta-ihh">
 <div>Workshop Edition · 2026</div>
 <div style="margin-top:6px">
-<span class="pill">11 Exercises</span>
+<span class="pill">6 Exercises</span>
 </div>
 </div>
 </div>
 <div class="hero-title-ihh">
-<h3>One workday, one GM, eleven Copilot moments</h3>
+<h3>One workday, one GM, six Copilot moments</h3>
 <p>A hands-on immersion for Contoso Pizza Co executives. Work through each tab at your own pace. Every prompt is copy-and-paste ready.</p>
 </div>
 </header>
@@ -322,14 +322,9 @@ body.ihh-active .view-ihh > section .modulehead { margin-top:8px !important; }
 <button class="tab" data-view="ex1"><span class="tab-num">1</span> Daily Briefing</button>
 <button class="tab" data-view="ex2"><span class="tab-num">2</span> Prepare for Quarter Closing</button>
 <button class="tab" data-view="ex3"><span class="tab-num">3</span> Market Intelligence — Critique…</button>
-<button class="tab" data-view="ex4"><span class="tab-num">4</span> Menu Rationalisation &amp; Waste Optimisation</button>
-<button class="tab" data-view="ex5"><span class="tab-num">5</span> PowerPoint — Corporate Template,…</button>
-<button class="tab" data-view="ex6"><span class="tab-num">6</span> Create a Visual Infographic</button>
-<button class="tab" data-view="ex7"><span class="tab-num">7</span> Teams Meeting Recap →…</button>
-<button class="tab" data-view="ex8"><span class="tab-num">8</span> Excel Power Hour</button>
-<button class="tab" data-view="ex9"><span class="tab-num">9</span> Analyst Agent — Multiple…</button>
-<button class="tab" data-view="ex10"><span class="tab-num">10</span> Personalised Mail Merge (Cowork)</button>
-<button class="tab" data-view="ex11"><span class="tab-num">11</span> CV Screening from a…</button>
+<button class="tab" data-view="ex4"><span class="tab-num">4</span> Exercise 4 - Menu…</button>
+<button class="tab" data-view="ex5"><span class="tab-num">5</span> Create a Visual Infographic</button>
+<button class="tab" data-view="ex6"><span class="tab-num">6</span> Exercise 6 - Build…</button>
 <button class="tab" data-view="extras"><span class="tab-num">＋</span> Extras</button>
 </div></nav><div class="ihh-main"><div class="view-ihh active" id="view-intro"><section id="overview">
 <div class="hero">
@@ -602,6 +597,32 @@ Stop and confirm before sending the email or scheduling the meeting.<button clas
 <div class="callout"><b>Closing line for the audience:</b> "Cowork showed its plan first. You edited it. It paused before any external action. It returned five artefacts you own — including the dashboard you can put on a screen tomorrow morning."</div>
 </div>
 </div>
+<div class="card">
+<h3>2.B - Turn the memo into a board-ready deck (BCG / McKinsey style)</h3>
+<p class="lead">Same cowork session. Once the Word summary is signed off, open <b>PowerPoint</b> for the web, start from your corporate template (.potx) so brand fonts and colours are inherited, then open the Copilot pane.</p>
+<div class="activity">
+<div class="head"><span class="num">Task 2.B</span><span class="file">PowerPoint Copilot - Draft from your memo</span></div>
+<h4>One prompt. Eight slides. Consulting-firm style.</h4>
+<div class="prompt">Draft an 8-slide FY26 quarter-close deck in a BCG / McKinsey "one message per slide" style, for the General Manager - Operations at Contoso Pizza Co. Ground everything on /05 Contoso_Strategic_Memo.docx and /02 Contoso_KPI_Dashboard.xlsx.
+
+Structure:
+1. Cover - "Contoso Pizza Co - Quarter Close Review"
+2. Executive summary - three headline messages, one line each
+3. Where we are - top KPIs vs FY26 target (use a simple table)
+4. What is working - two proof points with numbers
+5. What is not working - two risks with numbers and root cause
+6. What we will do - three actions, each with owner and by-when
+7. Ask of the board - one clear ask
+8. Appendix - data sources
+
+Rules: one message per slide, action-title headlines (not topic titles), no more than 25 words per slide body, keep it black and white with our brand accent for emphasis only.</div>
+</div>
+<div class="activity">
+<div class="head"><span class="num">Task 2.C</span><span class="file">Edit with Copilot in PowerPoint - Add a waterfall</span></div>
+<h4>Polish the KPI slide with a chart Copilot builds for you</h4>
+<div class="prompt">On the "Where we are" slide, add a waterfall chart that explains the variance between FY26 plan and FY26 actual for our headline KPI. Start with "Plan", show each driver as a positive or negative step, and end at "Actual". Use our brand accent for positive steps, dark slate for negative steps, and neutral grey for the totals. Add data labels in absolute numbers. Then write a one-line takeaway underneath starting with "So what:".</div>
+</div>
+</div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex1">← Daily Briefing</button><button data-go="ex3">Next: Market Intelligence — Critique… →</button></div></div><div class="view-ihh" id="view-ex3"><section id="ex3">
 <div class="modulehead"><div class="num">3</div><h2>Exercise 3 · Market Intelligence — Critique &amp; Model Council<small>Researcher</small></h2></div>
 <div class="callout good"><b>When to do this:</b> Right after the daily briefing, when the GM needs deep market intelligence. Open Microsoft 365 Copilot → <b>Researcher</b>.</div>
@@ -642,120 +663,63 @@ Structure:
 Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anything not confirmed in the research. End with assumptions made and one open question.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex2">← Prepare for Quarter Closing</button><button data-go="ex4">Next: Menu Rationalisation &amp; Waste Optimisation →</button></div></div><div class="view-ihh" id="view-ex4"><section id="ex4">
-<div class="modulehead"><div class="num">4</div><h2>Exercise 4 · Menu Rationalisation &amp; Waste Optimisation<small>Copilot in Excel · Analyst Agent</small></h2></div>
-<div class="callout good"><b>How a GM decides what to stop selling.</b> Open <b>08 Contoso_Product_Sales_Q1.xlsx</b> in Excel for the web. Click the <b>Copilot</b> button in the ribbon. All three tasks run inside the same file — no upload, no export.</div>
-<p class="lead">Ops team asked the GM: "Which products should we discontinue?" Reason: ingredients only stay fresh for 2 days, so slow-moving SKUs quietly generate food waste and tie up prep resources. This exercise turns Q1 sales, the SRM recipe book and sub-recipe usage into one grounded shortlist — plus a second opinion from three business functions.</p>
-<div class="task">
-<div class="head"><span class="num">Task 4.1</span><span class="file">📊 Copilot in Excel · Chat</span></div>
-<p>In Excel Copilot chat, paste:</p>
-<pre>Act as a QSR revenue &amp; menu analyst for Contoso Pizza Co.
-
-Using the sheets in this workbook:
-- <b>Sales</b> — Q1 2026 product sales summary (Jan 1 – Mar 31)
-- <b>Sales Mix</b> — per-product sales by channel (Dine-in, Delivery, Aggregator). Rows 10-116 are hot promo items where recipe naming may differ.
-- <b>SRM</b> — ingredients per product with cost per ingredient
-- <b>Sub Recipe</b> — total ingredients consumed Q1
-
-Do three things and return one table:
-1. Rank all products by total Q1 revenue and total Q1 units.
-2. Flag the <b>bottom quartile</b> by revenue AND units as "discontinue candidates".
-3. For each candidate, list the top 3 ingredients from SRM whose consumption is largely driven by that product — these are the ingredients most exposed to food waste (2-day shelf life).
-
-Output a single table with: Product, Channel mix (%), Q1 revenue, Q1 units, Revenue rank, Unit rank, Flag, Top waste-risk ingredients, One-line rationale.
-
-Rules: cite the sheet name for every number. If a product name in Sales Mix does not match SRM (likely for hot promos rows 10-116), flag "recipe mapping unclear" instead of guessing.</pre>
-</div>
-<div class="task">
-<div class="head"><span class="num">Task 4.2</span><span class="file">✏️ Copilot in Excel · Edit</span></div>
-<p>Ask Copilot to make the shortlist actionable — inside the file:</p>
-<pre>In a new sheet called <b>Shortlist</b>, insert the "discontinue candidates" table from Task 4.1.
-
-Add three computed columns:
-- <b>Q1 revenue share (%)</b> — this product's revenue / total Q1 revenue
-- <b>Estimated ingredient cost saved (Rp / month)</b> — using SRM cost per ingredient × Sub Recipe monthly usage attributable to the product
-- <b>Waste risk score</b> — High / Medium / Low based on how many top-3 ingredients are shared with fast-moving products (shared = lower risk because they get used up before spoilage)
-
-Sort by Estimated ingredient cost saved, descending. Bold the top 5 rows. Add a header row "Menu Rationalisation — Q1 2026, GM Review Pack".</pre>
-</div>
-<div class="task">
-<div class="head"><span class="num">Task 4.3</span><span class="file">🧠 Analyst Agent · three functional lenses</span></div>
-<p>Open Microsoft 365 Copilot Chat. Attach <b>08 Contoso_Product_Sales_Q1.xlsx</b>. Select the <b>Analyst</b> agent. Paste:</p>
-<pre>Read the whole workbook. I need three separate opinions on the same question:
-"Which products should Contoso Pizza Co discontinue based on Q1 sales and 2-day ingredient shelf life?"
-
-Give me three sections, each 5-7 bullets, in this order:
-1. <b>Ops Director view</b> — food waste, prep time, ingredient shelf-life risk, kitchen complexity
-2. <b>CFO view</b> — revenue at risk if discontinued, ingredient cost saved, contribution margin, channel cannibalisation
-3. <b>Marketing view</b> — promo halo effect, category coverage, customer perception, LTV of discontinued-product buyers
-
-End with a "Where the three views disagree" section — 3 bullets max — and a recommended final shortlist of products to discontinue with one-line reasoning per product.
-
-Rules: cite the sheet name and row range for every quantitative claim. Do not invent products that are not in the workbook.</pre>
-</div>
-<div class="task">
-<div class="head"><span class="num">Bonus</span><span class="file">💬 Follow-up in Excel Copilot</span></div>
-<p>Ask a "what-if" without leaving Excel:</p>
-<pre>If we cut the top 5 discontinue candidates from the menu tomorrow:
-- What is the estimated monthly ingredient cost saved (Rp)?
-- Which 3 fast-moving products absorb the freed prep capacity best?
-- What is the risk that discontinued-product buyers stop visiting entirely? Ground this in channel mix from Sales Mix.</pre>
-</div>
-<div class="callout warn"><b>Why this matters for the GM:</b> the shortlist and the CFO/Ops/Marketing views are the exact artefacts you would take into an Ops Committee. Every number is traceable back to a sheet and row — no black-box AI opinion.</div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex3">← Market Intelligence — Critique…</button><button data-go="ex5">Next: PowerPoint — Corporate Template,… →</button></div></div><div class="view-ihh" id="view-ex5"><section id="ex5">
-<div class="modulehead"><div class="num">5</div><h2>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style<small>PowerPoint Copilot</small></h2></div>
-<div class="callout good"><b>When to do this:</b> Open a blank <b>PowerPoint</b> (powerpoint.com or desktop). If you have a corporate template (.potx), open it first so Copilot inherits your brand. Make sure <code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code> are in your OneDrive.</div>
+</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex2">← Prepare for Quarter Closing</button><button data-go="ex4">Next: Exercise 4 - Menu… →</button></div></div><div class="view-ihh" id="view-ex4"><section id="ex4">
+<div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel - Edit only</small></h2></div>
+<div class="callout good"><b>The operations question.</b> Which products should we stop selling so we cut food waste and free up prep time? Each ingredient only lasts two days. We answer it end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent, just formulas, tables and charts Copilot writes for you.</div>
 <div class="card">
-<h3>4.1 · Draft a BCG/McKinsey-style strategy deck</h3>
-<p class="lead">Copilot in PowerPoint drafts a deck in the "one message per slide" style consulting firms use — grounded on your memo and KPI workbook, and laid out on your corporate template.</p>
+<h3>4.1 - Rank products by sales - one prompt</h3>
+<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Go to the <b>sales</b> sheet. Open the Copilot pane and switch to <b>Edit</b>.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.1a</span><span class="file">🎨 PowerPoint Copilot</span></div>
-<h4>Draft an 8-slide GM strategy deck</h4>
-<p>Open the Copilot pane in PowerPoint. Type <code>/</code> to reference your two source files (<code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code>), then paste:</p>
-<div class="prompt">Create an 8-slide FY26 Outlet Performance &amp; Lebaran Campaign Strategy deck for Contoso Pizza Co. Audience: General Manager · Operations &amp; Marketing and the Operating Committee. Ground every slide on /05 Contoso_Strategic_Memo.docx and the KPI tables in /02 Contoso_KPI_Dashboard.xlsx. Use the corporate template that is currently applied to this file — do not change fonts, colours, or master layouts.
-
-Apply the strict "one message per slide" consulting style (BCG / McKinsey best practice):
-(a) Every slide title is an ACTION TITLE — a full sentence that IS the conclusion (e.g. "Same-store sales drag is concentrated in mid-tier department stores"), not a topic ("Same-store sales").
-(b) The body proves the title with exactly 3 supporting bullets OR one small evidence table — nothing else.
-(c) Every slide has a source caption in 8pt grey at the bottom referencing the file and tab/page used.
-(d) No more than 30 words of body text per slide. No decorative imagery.
-
-Slide structure:
-1. Title slide — Contoso Pizza Co · FY26 Outlet Performance &amp; Lebaran Campaign Strategy · date
-2. Executive snapshot — single headline + 3-number callout + RAG status
-3. "Where we stand today" — KPI scoreboard (Same-Store Sales Growth %, Avg Ticket (IDR k), Delivery Mix %, Food Cost %)
-4. "What is changing" — top 3 market forces
-5. "Our three FY26 H2 priorities" — one priority per bullet, with named owner
-6. "Where we invest first" — 90-day moves with cost &amp; expected benefit
-7. "Risks &amp; mitigations" — table: risk, owner, status
-8. "The ask" — 1-page decision summary for the Operating Committee
-
-Tone: direct, evidence-based, no adjectives, no "leverage / synergy / unlock" language. Use [PLACEHOLDER] for any number not in the source files.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-<div class="activity">
-<div class="head"><span class="num">Task 4.1b</span><span class="file">🎨 Self-critique pass</span></div>
-<h4>Tighten the deck — McKinsey-style review</h4>
-<div class="prompt">Act as a McKinsey engagement manager reviewing this deck against consulting best practice. For each slide:
-1. Score the action title 1–5. If it's less than 5, rewrite it so it IS the conclusion (full sentence).
-2. Check that the body proves the title — flag any slide where title and body don't match.
-3. Check the "so-what": if the slide doesn't change a decision, mark it for deletion.
-
-Return a 1-page review note: slide-by-slide table, plus the single slide to cut, plus the single missing slide we should add. Then apply all the edits.<button class="copy" onclick="cp(this)">Copy</button></div>
-<div class="callout"><b>The BCG/McKinsey check:</b> read only the action titles top-to-bottom. If they tell the complete story without opening any body, the deck is consulting-grade.</div>
+<div class="head"><span class="num">Task 4.1</span><span class="file">Edit with Copilot in Excel - sales sheet</span></div>
+<h4>Add a ranking column and highlight the bottom 20 percent</h4>
+<div class="prompt">On the sales sheet, do all of the following:
+1. Add a column called "Total Units Q1" that sums Jan, Feb and March unit sales per product.
+2. Add a column called "Rank" using RANK on Total Units Q1, largest first.
+3. Add a column called "Bottom 20 percent?" that returns YES for products in the bottom quintile, NO otherwise.
+4. Apply conditional formatting to the Rank column: red fill for the bottom 20 percent products.
+5. Sort the table by Total Units Q1 ascending so the weakest sellers sit at the top.</div>
 </div>
 </div>
 <div class="card">
-<h3>4.2 · Digest a deck someone just sent the GM</h3>
-<p class="lead">A 60-slide deck lands in your inbox 20 minutes before the meeting. Copilot reads it for you.</p>
+<h3>4.2 - Split channel performance - a new sheet</h3>
+<p class="lead">Switch to the <b>sales mix</b> sheet (lines 10 to 116 are hot promos - Copilot handles them separately).</p>
 <div class="activity">
-<div class="head"><span class="num">Task 5.2</span><span class="file">🎨 PowerPoint Copilot</span></div>
-<h4>Summarise and interrogate an incoming deck</h4>
-<p>Open any deck you've received recently (or use the deck you just drafted). In the Copilot pane:</p>
-<div class="prompt">Summarise this presentation in 5 bullets. What is the single decision being asked of the audience? What are the 3 numbers I must remember? List the action items with owners and dates. Then list the top 3 questions General Manager · Operations &amp; Marketing should ask in the room.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="head"><span class="num">Task 4.2</span><span class="file">Edit with Copilot in Excel - sales mix sheet</span></div>
+<h4>Create a channel view on a new tab</h4>
+<div class="prompt">Create a new sheet called "Channel View". On it, build a pivot table from the sales mix sheet grouped by product, with columns for Takeaway, Delivery and Aggregator units. Add a total column and a "% Delivery" column. Apply a data bar to the total column. Sort ascending so weakest products come first. Add a note on row 1: "Rows 10 to 116 are hot promos - treated separately in Sheet Hot Promos".
+
+Then create another sheet called "Hot Promos" with the pivot restricted to rows 10 to 116 only, same layout.</div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex4">← Menu Rationalisation &amp; Waste Optimisation</button><button data-go="ex6">Next: Create a Visual Infographic →</button></div></div><div class="view-ihh" id="view-ex6"><section id="ex6">
-<div class="modulehead"><div class="num">6</div><h2>Exercise 6 · Create a Visual Infographic<small>Microsoft 365 Copilot Chat · Create (Designer)</small></h2></div>
+<div class="card">
+<h3>4.3 - Cost per product and waste risk - another new sheet</h3>
+<p class="lead">Use the <b>SRM</b> sheet (ingredients per product, cost per ingredient) and the <b>sub recipe</b> sheet (total ingredients used Q1). Two-day shelf life assumption per ingredient.</p>
+<div class="activity">
+<div class="head"><span class="num">Task 4.3</span><span class="file">Edit with Copilot in Excel - new "Waste Risk" sheet</span></div>
+<h4>Build the recommendation view Copilot will fill for you</h4>
+<div class="prompt">Create a new sheet called "Waste Risk". Build a table with one row per product and the following columns:
+- Product
+- Total Units Q1 (from the sales sheet)
+- Rank (from the sales sheet)
+- Cost per Unit (calculated from SRM: sum of ingredient qty times ingredient cost per unit of product)
+- Ingredient Count (count of distinct ingredients per product from SRM)
+- Shared Ingredients Score (how many of this product’s ingredients are also used by top-selling products in the sub recipe sheet - higher means less waste if we drop it)
+- Waste Risk (HIGH if Rank in bottom 20 percent AND Shared Ingredients Score is low, MEDIUM if only one of the two, LOW otherwise)
+- Recommendation (DISCONTINUE, REVIEW, KEEP based on Waste Risk plus Cost per Unit above the median)
+
+Apply conditional formatting: red fill for DISCONTINUE, amber for REVIEW, green for KEEP. Sort by Waste Risk descending then Rank ascending.</div>
+</div>
+</div>
+<div class="card">
+<h3>4.4 - The final chart the GM will show the ops team</h3>
+<div class="activity">
+<div class="head"><span class="num">Task 4.4</span><span class="file">Edit with Copilot in Excel - Waste Risk sheet</span></div>
+<h4>One chart, one takeaway line</h4>
+<div class="prompt">On the Waste Risk sheet, insert a scatter chart with Rank on X-axis and Cost per Unit on Y-axis, coloured by Recommendation (red, amber, green). Label the top 10 discontinue candidates by product name. Above the chart, add a one-line takeaway starting with "So what:" that names how many products we recommend discontinuing and the estimated ingredient cost saving per week if we do.</div>
+</div>
+</div>
+</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex3">← Market Intelligence — Critique…</button><button data-go="ex5">Next: Create a Visual Infographic →</button></div></div><div class="view-ihh" id="view-ex5"><section id="ex5">
+<div class="modulehead"><div class="num">5</div><h2>Exercise 5 · Create a Visual Infographic<small>Microsoft 365 Copilot Chat · Create (Designer)</small></h2></div>
 <div class="callout good"><b>The play:</b> use <b>Copilot Create</b> (the Designer feature inside Microsoft 365 Copilot Chat) to generate a polished, brand-aligned one-page infographic in 60 seconds. The prompts below are written in plain language — the way a normal business user would describe what they want.</div>
 <div class="card">
 <p class="lead">Open <b>Microsoft 365 Copilot Chat</b> at <a href="https://copilot.microsoft.com" target="_blank">copilot.microsoft.com</a> → click <b>Create</b> in the left sidebar (or type <code>/create</code>). Paste the prompt and click <b>Create</b>. You will get 4 design variants — pick one and click <b>Edit</b> to adjust any section.</p>
@@ -857,8 +821,112 @@ Style: warm flat illustrations (pizza box, scooter, smiley, slice), bold friendl
 </div>
 <div class="callout warn"><b>Why this matters:</b> Copilot Create runs inside Microsoft 365 with Enterprise Data Protection — your prompt and the resulting design stay in your tenant. The output is a polished, brand-aligned image you can drop straight into Outlook, Teams, or PowerPoint.</div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex5">← PowerPoint — Corporate Template,…</button><button data-go="ex7">Next: Teams Meeting Recap →… →</button></div></div><div class="view-ihh" id="view-ex7"><section id="ex7">
-<div class="modulehead"><div class="num">7</div><h2>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes<small>Teams Copilot · Word Copilot</small></h2></div>
+</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex4">← Exercise 4 - Menu…</button><button data-go="ex6">Next: Exercise 6 - Build… →</button></div></div><div class="view-ihh" id="view-ex6"><section id="ex6">
+<div class="modulehead"><div class="num">6</div><h2>Exercise 6 - Build your own agent<small>Microsoft 365 Copilot - Agent Builder (no code)</small></h2></div>
+<div class="callout good"><b>Ten minutes, one agent, whole team benefits.</b> You describe what you want, point it at a SharePoint folder, test it, and share. Every colleague with a Microsoft 365 Copilot licence can use it in the same Copilot pane.</div>
+<div class="card">
+<h3>6.1 - Describe the agent in plain English</h3>
+<p class="lead">Open <b>Microsoft 365 Copilot Chat</b> (m365.cloud.microsoft). Click <b>Create agent</b> in the right pane. In the description box, paste:</p>
+<div class="activity">
+<div class="head"><span class="num">Task 6.1</span><span class="file">Agent Builder - Describe</span></div>
+<h4>Let Copilot draft the agent from your description</h4>
+<div class="prompt">Create a "Store Manager Briefing Agent" for the General Manager - Operations team at Contoso Pizza Co.
+
+Purpose: give any restaurant manager a 30-second answer on sales mix, waste and shift plans.
+
+Tone: friendly, direct, one-paragraph answers with numbers when possible. Always end with the source document and page number.
+
+Ask a clarifying question if the user’s question is vague. Never invent data. If the answer is not in the knowledge sources, say so and suggest who to ask.</div>
+</div>
+</div>
+<div class="card">
+<h3>6.2 - Add a knowledge source (SharePoint folder)</h3>
+<p class="lead">Agent Builder asks you what the agent should know. Point it at the SharePoint site that holds your team’s reference documents.</p>
+<div class="activity">
+<div class="head"><span class="num">Task 6.2</span><span class="file">Agent Builder - Knowledge</span></div>
+<h4>Ground the agent so answers are traceable</h4>
+<div class="prompt">Add the following as knowledge sources:
+- The SharePoint folder "GM Briefings" (all PDF and Word files)
+- The Excel file /02 Contoso_KPI_Dashboard.xlsx
+- The Word file /05 Contoso_Strategic_Memo.docx
+
+Rule: only answer from these sources. When you quote a number, add the file name and sheet or page in brackets.</div>
+</div>
+</div>
+<div class="card">
+<h3>6.3 - Test with three questions, then publish</h3>
+<div class="activity">
+<div class="head"><span class="num">Task 6.3</span><span class="file">Agent Builder - Test pane</span></div>
+<h4>Three quick tests before you share</h4>
+<div class="prompt">Test 1: "What is our worst KPI this month and by how much?"
+Test 2: "Give me three talking points for tomorrow’s ops call, one paragraph each."
+Test 3: "Draft a two-line WhatsApp update I can send to the leadership team right now."
+
+If any answer is wrong or missing a citation, edit the instructions and try again. Once all three pass, click Publish and share with the "General Manager - Operations team" security group.</div>
+</div>
+</div>
+</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex5">← Create a Visual Infographic</button><button data-go="extras">Next: Extras →</button></div></div><div class="view-ihh" id="view-extras"><section id="extras">
+<div class="modulehead"><div class="num">B</div><h2>Bonus - Extra Exercises &amp; Prompt Tips<small>Everything else from the ten-move playbook, plus GM prompt tips</small></h2></div>
+<div class="callout good"><b>Use these when there is extra time</b>, or to tailor the session to a specific GM concern (mail merge, CV screening, Teams recaps, Excel Power Hour, analyst agent). The prompt tips card at the bottom applies to every Copilot surface.</div>
+<div class="card">
+<h3>Bonus - Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style PowerPoint Copilot</h3>
+<section id="ex5">
+<h2>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style<small>PowerPoint Copilot</small></h2></section></div>
+<div class="callout good"><b>When to do this:</b> Open a blank <b>PowerPoint</b> (powerpoint.com or desktop). If you have a corporate template (.potx), open it first so Copilot inherits your brand. Make sure <code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code> are in your OneDrive.</div>
+<div class="card">
+<h3>4.1 · Draft a BCG/McKinsey-style strategy deck</h3>
+<p class="lead">Copilot in PowerPoint drafts a deck in the "one message per slide" style consulting firms use — grounded on your memo and KPI workbook, and laid out on your corporate template.</p>
+<div class="activity">
+<div class="head"><span class="num">Task 4.1a</span><span class="file">🎨 PowerPoint Copilot</span></div>
+<h4>Draft an 8-slide GM strategy deck</h4>
+<p>Open the Copilot pane in PowerPoint. Type <code>/</code> to reference your two source files (<code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code>), then paste:</p>
+<div class="prompt">Create an 8-slide FY26 Outlet Performance &amp; Lebaran Campaign Strategy deck for Contoso Pizza Co. Audience: General Manager · Operations &amp; Marketing and the Operating Committee. Ground every slide on /05 Contoso_Strategic_Memo.docx and the KPI tables in /02 Contoso_KPI_Dashboard.xlsx. Use the corporate template that is currently applied to this file — do not change fonts, colours, or master layouts.
+
+Apply the strict "one message per slide" consulting style (BCG / McKinsey best practice):
+(a) Every slide title is an ACTION TITLE — a full sentence that IS the conclusion (e.g. "Same-store sales drag is concentrated in mid-tier department stores"), not a topic ("Same-store sales").
+(b) The body proves the title with exactly 3 supporting bullets OR one small evidence table — nothing else.
+(c) Every slide has a source caption in 8pt grey at the bottom referencing the file and tab/page used.
+(d) No more than 30 words of body text per slide. No decorative imagery.
+
+Slide structure:
+1. Title slide — Contoso Pizza Co · FY26 Outlet Performance &amp; Lebaran Campaign Strategy · date
+2. Executive snapshot — single headline + 3-number callout + RAG status
+3. "Where we stand today" — KPI scoreboard (Same-Store Sales Growth %, Avg Ticket (IDR k), Delivery Mix %, Food Cost %)
+4. "What is changing" — top 3 market forces
+5. "Our three FY26 H2 priorities" — one priority per bullet, with named owner
+6. "Where we invest first" — 90-day moves with cost &amp; expected benefit
+7. "Risks &amp; mitigations" — table: risk, owner, status
+8. "The ask" — 1-page decision summary for the Operating Committee
+
+Tone: direct, evidence-based, no adjectives, no "leverage / synergy / unlock" language. Use [PLACEHOLDER] for any number not in the source files.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+<div class="activity">
+<div class="head"><span class="num">Task 4.1b</span><span class="file">🎨 Self-critique pass</span></div>
+<h4>Tighten the deck — McKinsey-style review</h4>
+<div class="prompt">Act as a McKinsey engagement manager reviewing this deck against consulting best practice. For each slide:
+1. Score the action title 1–5. If it's less than 5, rewrite it so it IS the conclusion (full sentence).
+2. Check that the body proves the title — flag any slide where title and body don't match.
+3. Check the "so-what": if the slide doesn't change a decision, mark it for deletion.
+
+Return a 1-page review note: slide-by-slide table, plus the single slide to cut, plus the single missing slide we should add. Then apply all the edits.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>The BCG/McKinsey check:</b> read only the action titles top-to-bottom. If they tell the complete story without opening any body, the deck is consulting-grade.</div>
+</div>
+</div>
+<div class="card">
+<h3>4.2 · Digest a deck someone just sent the GM</h3>
+<p class="lead">A 60-slide deck lands in your inbox 20 minutes before the meeting. Copilot reads it for you.</p>
+<div class="activity">
+<div class="head"><span class="num">Task 5.2</span><span class="file">🎨 PowerPoint Copilot</span></div>
+<h4>Summarise and interrogate an incoming deck</h4>
+<p>Open any deck you've received recently (or use the deck you just drafted). In the Copilot pane:</p>
+<div class="prompt">Summarise this presentation in 5 bullets. What is the single decision being asked of the audience? What are the 3 numbers I must remember? List the action items with owners and dates. Then list the top 3 questions General Manager · Operations &amp; Marketing should ask in the room.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+</div>
+</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex6">← Exercise 6 - Build…</button><button data-go="intro">Back to start ↺</button></div></div></div><!--IHH-INJECT-END-->
+</main></div><div class="card">
+<h3>Bonus - Exercise 7 · Teams Meeting Recap → Word Meeting Minutes Teams Copilot · Word Copilot</h3>
+<section id="ex7">
+<h2>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes<small>Teams Copilot · Word Copilot</small></h2></section></div>
 <div class="callout good"><b>The scenario:</b> the GM just stepped out of a 60-minute "Potential Merger" discussion. They need a clean recap, a structured meeting-minutes template the company can reuse, and the minutes filled in — all in 5 minutes.</div>
 <div class="card">
 <h3>6.1 · Teams — audio recap of the Potential Merger meeting</h3>
@@ -922,8 +990,11 @@ Rules:
 <div class="callout good"><b>The win:</b> what used to take a minute-taker 90 minutes after a strategic meeting now takes Copilot 30 seconds — and the minutes are grounded on the actual transcript, not the minute-taker's memory.</div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex6">← Create a Visual Infographic</button><button data-go="ex8">Next: Excel Power Hour →</button></div></div><div class="view-ihh" id="view-ex8"><section id="ex8">
-<div class="modulehead"><div class="num">8</div><h2>Exercise 8 · Excel Power Hour<small>Copilot in Excel · Chat · Edit · Plan</small></h2></div>
+
+<div class="card">
+<h3>Bonus - Exercise 8 · Excel Power Hour Copilot in Excel · Chat · Edit · Plan</h3>
+<section id="ex8">
+<h2>Exercise 8 · Excel Power Hour<small>Copilot in Excel · Chat · Edit · Plan</small></h2></section></div>
 <div class="callout good"><b>The most-asked GM question:</b> "Show me what's actually happening in the data — without me writing a formula." Excel Copilot now does this in three modes. We will run all three on <code>02 Contoso_KPI_Dashboard.xlsx</code>.</div>
 <div class="card">
 <h3>7.1 · Get the insights — one prompt</h3>
@@ -963,8 +1034,11 @@ Show me the plan first. I will approve. Then execute.<button class="copy" onclic
 <div class="callout good"><b>The "Plan" win:</b> Copilot writes its own work order, you tick / untick steps, and only then does it touch the workbook.</div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex7">← Teams Meeting Recap →…</button><button data-go="ex9">Next: Analyst Agent — Multiple… →</button></div></div><div class="view-ihh" id="view-ex9"><section id="ex9">
-<div class="modulehead"><div class="num">9</div><h2>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data<small>Microsoft 365 Copilot · built-in Analyst agent</small></h2></div>
+
+<div class="card">
+<h3>Bonus - Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data Microsoft 365 Copilot · built-in Analyst agent</h3>
+<section id="ex9">
+<h2>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data<small>Microsoft 365 Copilot · built-in Analyst agent</small></h2></section></div>
 <div class="callout good"><b>Treat the workbook like a junior analyst on call 24/7.</b> The Analyst Agent runs Python-grade analysis in natural language — regression, forecasting, scenario simulation — without anyone touching code. Run the same raw data through three different perspectives.</div>
 <div class="card">
 <p class="lead">Open <a href="https://copilot.microsoft.com" target="_blank">copilot.microsoft.com</a> → <b>Agents</b> → built-in <b>Analyst</b>. Upload <code>02 Contoso_KPI_Dashboard.xlsx</code>. Then run the three perspectives below — same raw data, three completely different lenses.</p>
@@ -985,8 +1059,11 @@ Show me the plan first. I will approve. Then execute.<button class="copy" onclic
 <div class="callout"><b>Why three perspectives matter:</b> the same workbook hides three completely different stories — strategic (GM), financial (CFO), operational (COO). Analyst Agent lets one person hold all three at once, in 5 minutes, without a single line of Python.</div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex8">← Excel Power Hour</button><button data-go="ex10">Next: Personalised Mail Merge (Cowork) →</button></div></div><div class="view-ihh" id="view-ex10"><section id="ex10">
-<div class="modulehead"><div class="num">10</div><h2>Exercise 10 · Personalised Mail Merge (Cowork)<small>Microsoft 365 Copilot · Cowork · Outlook drafts</small></h2></div>
+
+<div class="card">
+<h3>Bonus - Exercise 10 · Personalised Mail Merge (Cowork) Microsoft 365 Copilot · Cowork · Outlook drafts</h3>
+<section id="ex10">
+<h2>Exercise 10 · Personalised Mail Merge (Cowork)<small>Microsoft 365 Copilot · Cowork · Outlook drafts</small></h2></section></div>
 <div class="callout good"><b>The play:</b> forget Word's <i>Mailings</i> ribbon. Let <b>Cowork</b> do the merge — drafting each campaign cascade letter, tuned to each outlet's delivery-mix and CSAT <b>uniquely tuned</b> to that recipient, and queueing them as Outlook drafts for the GM to review and send.</div>
 <div class="card">
 <h3>9.1 · One prompt → 14 individually-tuned letters → 14 Outlook drafts</h3>
@@ -1013,8 +1090,11 @@ When all 14 drafts are ready, give me a summary table: Recipient · Location · 
 <div class="callout"><b>Why Cowork beats classic Mail Merge:</b> classic merge inserts the same body with field substitutions. Cowork writes <i>a different body for each recipient</i> — and stops at "Drafts" so the GM signs off before anything is sent.</div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex9">← Analyst Agent — Multiple…</button><button data-go="ex11">Next: CV Screening from a… →</button></div></div><div class="view-ihh" id="view-ex11"><section id="ex11">
-<div class="modulehead"><div class="num">11</div><h2>Exercise 11 · CV Screening from a SharePoint Folder<small>Microsoft 365 Copilot · Cowork · SharePoint grounding</small></h2></div>
+
+<div class="card">
+<h3>Bonus - Exercise 11 · CV Screening from a SharePoint Folder Microsoft 365 Copilot · Cowork · SharePoint grounding</h3>
+<section id="ex11">
+<h2>Exercise 11 · CV Screening from a SharePoint Folder<small>Microsoft 365 Copilot · Cowork · SharePoint grounding</small></h2></section></div>
 <div class="callout good"><b>The scenario:</b> the HR team is capped at attaching only a handful of CVs into most chatbots. Point Cowork at a <b>SharePoint folder</b> and there is no file cap — scale from 12 to 1,200 CVs with the same prompt, fully grounded.</div>
 <div class="card">
 <h3>10.1 · Prep — drop the CVs into SharePoint</h3>
@@ -1048,7 +1128,8 @@ Flag anything unclear with [VERIFY]. Do not fabricate qualifications. Stop and c
 <div class="callout good"><b>The win:</b> Cowork grounds on an entire SharePoint folder — the same prompt scales from 12 to 1,200 CVs, with full traceability back to each source CV.</div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex10">← Personalised Mail Merge (Cowork)</button><button data-go="extras">Next: Extras →</button></div></div><div class="view-ihh" id="view-extras"><section id="extras">
+
+
 <div class="modulehead"><div class="num">＋</div><h2>Extras<small>Use these when there is extra time, or to tailor the session to a specific GM concern</small></h2></div>
 <div class="callout"><b>Why these are extras:</b> they were in the original 8-exercise flow but the GM asked for a tighter agenda. Each one stands on its own — paste &amp; demo any of them on request.</div>
 <div class="card">
@@ -1093,7 +1174,8 @@ Generate a launch-ready promo pack: promo design (3 bundles), channel copy (GoFo
 <div class="callout warn"><b>For the GM in the room:</b> this is the use case worth piloting first. It maps 1:1 to the most expensive analyst hours your team spends every month — and Copilot does it in minutes, grounded on your own files.</div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex11">← CV Screening from a…</button><button data-go="intro">Back to start ↺</button></div></div><div style="margin-top:40px"><section id="tips">
+<div class="card">
+<h3>Bonus - Prompt tips for every Copilot surface</h3>
 <div class="modulehead"><div class="num">💡</div><h2>Prompt Tips — for every Copilot surface</h2></div>
 <div class="card">
 <h4>The GCSE prompt framework</h4>
@@ -1127,11 +1209,13 @@ Two sentences to add to every prompt:
 <div class="prompt">Cowork — analyse [source file], draft [Word output], draft [email], schedule [meeting], generate [HTML deliverable]. Stop and confirm before sending anything externally.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
 </div>
-</section></div></div><div style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center">
- Contoso Pizza Co · M365 Copilot GM Immersion · Session ID 112e253a-7fd6-48b4-80b3-e89c7d7914fd
-</div><!--IHH-INJECT-END-->
-</main>
 </div>
+
+<div style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center">
+ Contoso Pizza Co · M365 Copilot GM Immersion · Session ID 112e253a-7fd6-48b4-80b3-e89c7d7914fd
+</div>
+
+
 <script>
 try{localStorage.removeItem('unlk');}catch(e){}
 const HASH='557a4bb1a6b488f3484b5e7a7bc9542054af037f5b2d8d2e5c5cc564f61aa5d2';
