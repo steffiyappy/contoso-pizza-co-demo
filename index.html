@@ -125,7 +125,7 @@ td a{color:var(--ink);font-weight:600}td a:hover{color:var(--accent2)}
 /* ========== IHH-STYLE OVERRIDES ========== */
 .layout { grid-template-columns: 1fr !important; }
 aside { display:none !important; }
-main { max-width:1280px !important; margin:0 auto !important; padding:0 !important; }
+main { max-width:100% !important; margin:0 !important; padding:0 !important; }
 
 /* Kill original hero + files inline (they now live inside tabs) */
 main > .modulehead,
@@ -148,7 +148,8 @@ body.ihh-active .hero-ihh::after {
   width:200px; height:200px; background:rgba(255,255,255,0.04); border-radius:50%;
 }
 body.ihh-active .hero-ihh-inner {
-  max-width:1280px; margin:0 auto; position:relative; z-index:2;
+  max-width:1600px; margin:0 auto; position:relative; z-index:2;
+  padding:0 40px;
   display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;
 }
 body.ihh-active .hero-brand-ihh { display:flex; align-items:center; gap:18px; }
@@ -174,8 +175,8 @@ body.ihh-active .hero-meta-ihh .pill {
   border-radius:12px; margin-left:8px; font-weight:600;
 }
 body.ihh-active .hero-title-ihh {
-  max-width:1280px; margin:32px auto 0; position:relative; z-index:2;
-  padding:0 32px;
+  max-width:1600px; margin:32px auto 0; position:relative; z-index:2;
+  padding:0 40px;
 }
 body.ihh-active .hero-title-ihh h3 { margin:0 0 10px; font-size:38px; font-weight:700; line-height:1.2; color:#fff; }
 body.ihh-active .hero-title-ihh p { margin:0; font-size:17px; opacity:0.92; max-width:800px; color:#fff; }
@@ -188,7 +189,7 @@ body.ihh-active nav.tabs-ihh {
   overflow-x:auto;
 }
 body.ihh-active nav.tabs-ihh .tabs-inner {
-  max-width:1280px; margin:0 auto; padding:0 32px;
+  max-width:1600px; margin:0 auto; padding:0 40px;
   display:flex; gap:4px; border-bottom:2px solid #fecaca;
 }
 body.ihh-active nav.tabs-ihh .tab {
@@ -212,7 +213,7 @@ body.ihh-active nav.tabs-ihh .tab .tab-num {
 body.ihh-active nav.tabs-ihh .tab.active .tab-num { background:#eab308; color:#fff; }
 
 /* Main container after tabs */
-body.ihh-active .ihh-main { max-width:1280px; margin:0 auto; padding:32px; }
+body.ihh-active .ihh-main { max-width:1600px; margin:0 auto; padding:32px 40px; }
 
 /* Views */
 body.ihh-active .view-ihh { display:none; animation:fadeInIhh 0.4s ease; }
@@ -1121,8 +1122,10 @@ Two sentences to add to every prompt:
 <div class="prompt">Cowork — analyse [source file], draft [Word output], draft [email], schedule [meeting], generate [HTML deliverable]. Stop and confirm before sending anything externally.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
 </div>
-</section></div><!--IHH-INJECT-END-->
-</div></main>
+</section></div></div><div style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;text-align:center">
+ Contoso Pizza Co · M365 Copilot GM Immersion · Session ID 112e253a-7fd6-48b4-80b3-e89c7d7914fd
+</div><!--IHH-INJECT-END-->
+</main>
 </div>
 <script>
 try{localStorage.removeItem('unlk');}catch(e){}
