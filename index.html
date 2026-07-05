@@ -199,14 +199,14 @@ body.ihh-active nav.tabs-ihh {
   background:#fff; border-bottom:1px solid #fecaca;
   padding:0; position:sticky; top:0; z-index:50;
   box-shadow:0 2px 8px rgba(0,0,0,0.04);
-  overflow-x:auto;
 }
+body.ihh-active nav.tabs-ihh::-webkit-scrollbar { display:none; }
 body.ihh-active nav.tabs-ihh .tabs-inner {
   max-width:1600px; margin:0 auto; padding:0 40px;
-  display:flex; gap:4px; border-bottom:2px solid #fecaca;
+  display:flex; flex-wrap:wrap; gap:4px; border-bottom:2px solid #fecaca;
 }
 body.ihh-active nav.tabs-ihh .tab {
-  padding:16px 18px; background:transparent; border:none;
+  padding:14px 14px; background:transparent; border:none;
   color:#5e7480; cursor:pointer; font-size:13px; font-weight:600;
   border-bottom:3px solid transparent; margin-bottom:-2px;
   display:flex; align-items:center; gap:8px; white-space:nowrap;
