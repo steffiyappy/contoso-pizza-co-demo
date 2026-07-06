@@ -1033,66 +1033,55 @@ Rules:
 </div>
 </div>
 </div>
-<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>📈 Excel Power Hour · Analyse the whole workbook, then build a Power-BI-style GM dashboard</h3>
-<p class="sub">Excel for the web · Copilot Chat (Analyse) → Copilot Edit + Plan (Build)</p>
-<p><b>How to run it:</b> open <code>02 Contoso_KPI_Dashboard.xlsx</code> in Excel for the web. Open the <b>Copilot pane</b> (Home → Copilot). Paste the whole prompt below. Copilot will first read every tab and return the insights, then build the dashboard using those insights, not made-up numbers.</p>
-<div class="prompt">You are Copilot in Excel. Ground everything on every tab of this workbook (Monthly_KPIs, Targets_vs_Actual, Restaurant_Roster, Delivery_Ops, Food_Cost - whichever tabs exist). Brand: Contoso Pizza Co. Accent colour red (#DC2626) on a dark burgundy background (#1F0808) with card surfaces in #2F1010. Do the work in two clear steps and show your plan before executing.
+<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>📈 GM Weekly Briefing Pack in Excel · one prompt, one printable page</h3>
+<p class="sub">Excel for the web · Copilot Chat (analyse) → Copilot Edit + Plan (build) · McKinsey narrative + what-if scenario + printable A3 dashboard</p>
+<p><b>How to run it:</b> open <code>02 Contoso_KPI_Dashboard.xlsx</code> in Excel for the web. Open the <b>Copilot pane</b> (Home → Copilot). Paste the whole prompt below. Copilot will read every tab, write the narrative, run the what-if, and build the printable briefing pack - all on one Excel sheet.</p>
+<div class="prompt">You are Copilot in Excel. Ground everything on every tab of this workbook. Brand: Contoso Pizza Co. Accent colour red (#DC2626) on a dark burgundy background (#1F0808) with card surfaces in #2F1010. The goal is a printable one-page "GM Weekly Briefing Pack" - a single Excel sheet that fits on one A3 landscape page, with a McKinsey-style narrative, a what-if scenario, KPI tiles, a restaurant heatmap and a top-5 action list. Show your plan first, then execute in three steps.
 
-STEP A - ANALYSE THE ENTIRE WORKBOOK FIRST (Chat mode)
-Return a 6-line executive read-out. Do not touch the workbook yet.
-1. The single biggest KPI gap to FY26 target - which KPI, how big, and which restaurant is dragging it down the most
-2. The best-performing restaurant this quarter, with the one KPI it is winning on
-3. The worst-performing restaurant this quarter, with the two KPIs it is losing on
-4. One trend Copilot spotted that a human would miss (a 3-month drift, a Friday-versus-weekend pattern, a delivery-mix cliff, anything the eye would skip)
-5. One "phone call today" outlier - a single week or single store that is off enough to warrant an immediate call
-6. The three KPIs that matter most for the GM's next weekly review, ranked
-Pause here so I can confirm the findings before you build anything.
+STEP A - ANALYSE THE WHOLE WORKBOOK (Chat mode, no writes yet)
+Return a 6-line executive read-out and pause for confirmation:
+1. Biggest KPI gap to FY26 target - which KPI, how big in numbers, and which restaurant is dragging it down the most.
+2. Best restaurant this quarter - name it and the ONE KPI it is winning on.
+3. Worst restaurant this quarter - name it and the TWO KPIs it is losing on.
+4. Peer benchmark - worst restaurant versus the best on the biggest-gap KPI, quantify the gap in IDR or points.
+5. Period comparison - this month vs last month on the biggest-gap KPI, is the trend improving or worsening.
+6. One trend a human would miss (a Friday-vs-weekend pattern, a 3-month drift, a delivery-mix cliff, or a food-cost creep).
 
-STEP B - BUILD THE DASHBOARD USING THOSE FINDINGS (Edit + Plan mode)
+STEP B - RUN THE WHAT-IF SCENARIO (still in Chat, no writes yet)
+Model: "What happens if we cut Food Cost by 2 percentage points across the bottom-quartile restaurants only?" For each of those restaurants, compute:
+- Current monthly food cost value in IDR
+- Projected monthly saving in IDR
+- Projected EBITDA uplift in IDR
+- Payback period in weeks assuming a one-off IDR 15 million investment per restaurant in staff training and portion-control tools
+Return this as a compact table. Also flag: which restaurants would MOVE OUT of the bottom quartile if the scenario worked, and which would still stay stuck.
 
-1. On the source data tab, add a calculated column "Variance vs Target %" per row. Format as percentage, 1 decimal.
+STEP C - BUILD THE PRINTABLE BRIEFING PACK ON ONE SHEET (Edit + Plan mode)
 
-2. Convert the source range to an Excel Table so filter drop-downs appear on every column header - the GM slices by Restaurant / Region / Month.
+C.1 On the source tab, add calculated column "Variance vs Target %" (percentage, 1 decimal). Convert the source range to an Excel Table so column filter drop-downs work.
 
-3. Create a new blank sheet called "GM Dashboard - Restaurant Performance". Transform it into a dark executive dashboard:
+C.2 Create a new sheet called "GM Weekly Briefing Pack". Set page layout to A3 landscape, fit-to-1-page-wide-by-1-page-tall, narrow margins. Then build the pack top-to-bottom:
 
-   CANVAS
-   - Fill the entire visible area (columns A to N, rows 1 to 42) with dark burgundy (#1F0808) as the sheet background fill
-   - Remove gridlines on this sheet (View > Gridlines off)
-   - Set default font to Segoe UI, white (#FFFFFF) text
+   CANVAS - fill visible area (columns A to S, rows 1 to 60) with dark burgundy (#1F0808), gridlines off, default font Segoe UI, white text.
 
-   HEADER BAND (rows 1-3)
-   - Merge A1:N2, dark burgundy fill, white text, 22pt bold: "Contoso Pizza Co - Executive KPI Dashboard"
-   - Row 3 right-aligned in smaller red text: "Reporting period: <latest month from source> | Last refreshed: <TODAY()>"
+   1. HEADER BAND (rows 1-3) - merge A1:S2, 22pt bold white: "Contoso Pizza Co - GM Weekly Briefing Pack". Row 3 right-aligned red 10pt: reporting period from latest month + "Last refreshed: <TODAY()>".
 
-   INSIGHTS STRIP (rows 4-6) - grounded on STEP A
-   - Merge A4:N6, card-surface fill (#2F1010), 2pt red top border, white 11pt
-   - Line 1 bold white: "So what today:" then in one sentence, the biggest gap and the restaurant dragging it (from STEP A finding 1)
-   - Line 2 red text: "Watch out:" then in one sentence, the trend a human would miss (from STEP A finding 4)
-   - Line 3 white text: "Phone call today:" then the single outlier (from STEP A finding 5)
+   2. NARRATIVE MEMO (rows 4-11) - merge A4:S11, card surface #2F1010, 2pt red top border, white 11pt. Write a McKinsey-style 5-sentence exec memo grounded on STEP A findings. Structure: "So what:" sentence 1 (headline finding), sentence 2 (evidence in numbers), sentence 3 (peer benchmark from finding 4), sentence 4 (trend from finding 5 or 6), sentence 5 (the ask). Bold the numbers.
 
-   KPI TILES (rows 8-14, one row of 5 tiles across) - pick the FIVE KPIs based on STEP A (the three ranked most important, plus Same-Store Sales Growth and Food Cost by default)
-   - Five equal-width card blocks with card-surface fill (#2F1010), 1pt red border on the bottom edge only
-   - Each tile: 10pt white label at top (KPI name), 28pt bold white big number in the middle (actual value from formula), 10pt below (target from formula), and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off)
+   3. KPI TILES (rows 13-20) - one row of 5 cards, each card fill #2F1010 with 1pt red bottom border. Use the top-5 KPIs Copilot picked in STEP A (default: Same-Store Sales Growth, Avg Ticket, Delivery Mix, Food Cost, Order Accuracy). Each tile: 10pt white label at top, 32pt bold big number in the middle, 10pt "Target X" below, coloured variance chip (green better than target, red within 3%, dark red worse than 3%), and a 3-month sparkline drawn as a mini line chart inside the card.
 
-   INSIGHT CHART (rows 16-30, spans full width)
-   - One horizontal bar chart titled with the biggest gap KPI from STEP A - for example "Same-Store Sales Growth by Restaurant (Actual vs Target)"
-   - Two series per Restaurant: Actual (solid red #DC2626) and Target (thin dark-grey outline, no fill)
-   - Sort bars worst-to-best on variance so the GM's eye goes to the problem restaurant first
-   - No chart border, no gridlines, no legend box (small manual legend in the top-right using two coloured squares + labels)
-   - Chart plot area fill: #2F1010. Chart area fill: #1F0808. Axis labels white 10pt. Title white 14pt bold left-aligned.
+   4. RESTAURANT HEATMAP (rows 22-38) - a conditional-formatted grid: rows = restaurant names, columns = the 5 KPIs. Cell colour = performance vs target (deep red = far below, orange = slightly below, dark surface = on target, green = above). Include an average column at the far right. Sort rows worst to best on the biggest-gap KPI so the eye lands on the problem first. Above the heatmap, 12pt bold white title: "Restaurant Heatmap - who is on target, who is not".
 
-   ACTION STRIP (rows 32-36, full width)
-   - Merge A32:N36, card-surface fill (#2F1010), 2pt red top border
-   - White 12pt bold: "Next 7 days:" followed by three concrete actions Copilot recommends, each with an owner and a deadline, pulled from STEP A findings 1, 3 and 4
+   5. WHAT-IF SCENARIO CARD (rows 40-49) - merge A40:S40, 14pt bold red title: "What if we cut Food Cost by 2pp in bottom-quartile restaurants?". Below, an embedded 6-column table from STEP B: Restaurant · Current Food Cost IDR · Projected Saving IDR · EBITDA Uplift IDR · Payback (weeks) · Moves out of bottom quartile Y/N. Format IDR values with thousands separators, right-aligned, bold the totals row. Below the table, a 10pt white "So what:" summary line.
 
-4. Freeze rows 1-6 so the header and insights strip stay visible.
+   6. TOP 5 ACTIONS FOR THE WEEK (rows 51-58) - card surface #2F1010, 2pt red top border, 12pt bold white title. Then 5 rows, each with columns: Action · Owner · By when · Expected impact. Pull the actions from STEP A findings and STEP B scenario. Actions must be concrete, specific to named restaurants, and tied to numbers.
 
-5. On the dashboard, add a small text link bottom-right (row 42) in red 9pt: "Open source data - use column filters to slice by Restaurant / Region / Month".
+   7. FOOTER (row 60) - red 9pt right-aligned: "Open source data - use column filters to slice by Restaurant / Region / Month".
 
-When done, list every change as a numbered summary and re-state the top three findings from STEP A so the GM can review before saving. Do not ask any other clarifying questions.<button class="copy" onclick="cp(this)">Copy</button></div>
-<p style="margin-top:12px"><b>Why this feels different:</b> the numbers on the dashboard come from Copilot reading every tab first, not from a template. The So-What, Watch-Out and Phone-Call-Today lines are the human sentences the GM would actually say - Copilot is doing the analyst work, then styling it.</p>
-<p style="margin-top:12px"><b>Reality check on Copilot in Excel today:</b> calculated columns, table filters, conditional formatting, cell fills and simple bar/column charts are reliable. Copilot may not get the sheet-wide dark fill perfect in one shot - if the background comes back white, follow up with: <i>"Fill the entire dashboard sheet area A1:N42 with dark burgundy #1F0808 and set the sheet gridlines off."</i> If the KPI tiles look plain, follow up with: <i>"Restyle the 5 KPI tiles: dark surface fill #2F1010, 1pt red bottom border, 28pt bold white numbers, 10pt white labels."</i></p>
+C.3 Freeze rows 1-3. Set print area = A1:S60. Add a print header with the Contoso Pizza logo placeholder and page number.
+
+When done: (a) re-state the top three findings from STEP A, (b) re-state the top three what-if outcomes from STEP B, (c) list every change made in STEP C as a numbered summary so the GM can review before saving. Do not ask any other clarifying questions - proceed.<button class="copy" onclick="cp(this)">Copy</button></div>
+<p style="margin-top:12px"><b>Why this is the wow moment:</b> one paste, the GM gets the story (STEP A), the scenario (STEP B) and the printable one-page briefing pack (STEP C). The narrative is not a template - Copilot wrote it after reading every tab. The what-if actually maths the IDR uplift per restaurant. The heatmap makes 20 restaurants readable in one glance. The action list names names.</p>
+<p style="margin-top:12px"><b>Reality check on Copilot in Excel today:</b> calculated columns, table filters, conditional formatting, cell fills, sparklines and simple bar/column charts are reliable. Copilot may not get the sheet-wide dark fill perfect in one shot - if the background comes back white, follow up with: <i>"Fill the entire briefing pack sheet A1:S60 with dark burgundy #1F0808 and set the sheet gridlines off."</i> If the heatmap looks pale, follow up with: <i>"Restyle the restaurant heatmap with a 4-stop colour scale: deep red #7F1D1D for far below target, orange #F97316 for slightly below, dark surface #2F1010 for on target, green #16A34A for above target."</i></p>
 </div>
 </div>
 <div class="modal-overlay" id="modal-bx-2a96c85f"><div class="modal"><button class="modal-close" onclick="closeModal('bx-2a96c85f')">×</button><h3>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h3>
