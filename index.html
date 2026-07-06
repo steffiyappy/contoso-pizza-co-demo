@@ -445,9 +445,9 @@ body.ihh-active .view-ihh > section .modulehead { margin-top:8px !important; }
 <span style="font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;line-height:1.2">Menu Rationalisation</span>
 </div>
 <div style="padding:14px;display:flex;flex-direction:column;gap:6px;flex:1 1 auto">
-<p style="margin:0;font-size:16px;font-weight:700;color:var(--ink);line-height:1.3">One in-place Excel edit</p>
-<p style="margin:0;font-size:12px;font-style:italic;color:var(--brand);font-weight:600">Copilot in Excel - Edit</p>
-<p style="margin:0;font-size:13px;color:var(--muted);line-height:1.45">Rank products, split channel performance, score waste risk, and recommend which to discontinue - purely in Edit with Copilot in Excel.</p>
+<p style="margin:0;font-size:16px;font-weight:700;color:var(--ink);line-height:1.3">One source, three formats</p>
+<p style="margin:0;font-size:12px;font-style:italic;color:var(--brand);font-weight:600">Copilot in Excel · then PowerPoint · then Word</p>
+<p style="margin:0;font-size:13px;color:var(--muted);line-height:1.45">Edit with Copilot builds the GM dashboard on new sheets (raw data untouched), then PowerPoint drafts a 5-slide board deck from the workbook, then Word drafts a 1-page ops memo from that deck - so the numbers on paper match the slides exactly.</p>
 </div>
 </div><div style="min-height:230px;border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;background:var(--panel2)">
 <div style="background:#b91c1c;padding:10px 14px;display:flex;align-items:center;gap:8px;flex:0 0 auto">
@@ -637,7 +637,7 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
 </div>
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex2">← Prepare for Quarter Closing</button><button data-go="ex4">Next: Menu Rationalisation with Copilot… →</button></div></div><div class="view-ihh" id="view-ex4"><section id="ex4">
-<div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel · Plan + Edit · then Create presentation from file · Draft from file in Word</small></h2></div>
+<div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel · Plan + Edit · then Create presentation from file · then Draft memo from the deck in Word</small></h2></div>
 <div class="callout good"><b>The operations question.</b> The ops team wants to know which products to stop selling so they can cut food waste and free up prep time - each ingredient only lasts two days. Four sheets are already in the workbook: <b>sales</b> (weekly units per product, Jan 1 to Mar 31 2026), <b>sales mix</b> (channel split - takeaway, delivery, aggregator, plus hot-promo rows 10 to 116), <b>SRM</b> (ingredients per product with cost per ingredient), and <b>sub recipe</b> (total ingredients used Q1). We answer it end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent - and we do it without touching a single cell of the raw data.</div>
 <div class="card">
 <h3>4.1 - GM Menu Rationalisation Dashboard - one prompt</h3>
@@ -728,37 +728,37 @@ When done, list every slide with its action-title headline in the chat so the GM
 </div>
 </div>
 <div class="card">
-<h3>4.3 - Excel to Word: draft a 1-page ops memo from the workbook</h3>
-<p class="lead">Open a blank <b>Word</b> document (or your corporate memo template). Click <b>Copilot -&gt; Draft with Copilot</b>, click the paperclip / <b>Reference a file</b>, and pick the same product performance workbook. Paste the prompt below.</p>
+<h3>4.3 - PowerPoint to Word: draft a 1-page ops memo from the deck you just built</h3>
+<p class="lead">Save and close the 5-slide deck from 4.2 so Copilot can index it. Open a blank <b>Word</b> document (or your corporate memo template). Click <b>Copilot -&gt; Draft with Copilot</b>, click the paperclip / <b>Reference a file</b>, and pick the 5-slide ops deck you just created (not the Excel workbook). Paste the prompt below. Copilot summarises the deck (which is already curated - action titles, scorecard, channel view, waste risk, recommendation) and lands a one-page memo the GM can send.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.3</span><span class="file">Copilot in Word · Draft from file</span></div>
-<h4>One prompt · a 1-page memo the ops team can actually use tomorrow</h4>
-<div class="prompt">You are Copilot in Word. Ground everything on the product performance workbook I have referenced (Ranked Sales, Channel Performance and Waste Risk sheets). Use our Contoso Pizza Co brand feel (red + charcoal). Show your plan first, then draft a 1-page ops memo, in this exact order and with real numbers pulled from the workbook:
+<div class="head"><span class="num">Task 4.3</span><span class="file">Copilot in Word · Draft from the 4.2 deck</span></div>
+<h4>One prompt · a 1-page memo built off the deck, not the raw workbook</h4>
+<div class="prompt">You are Copilot in Word. Ground everything on the 5-slide ops deck I have referenced (the one built in exercise 4.2 - Sales scorecard, Channel view, Waste risk, Recommendation). Use our Contoso Pizza Co brand feel (red + charcoal). Show your plan first, then draft a 1-page ops memo, in this exact order, pulling every number from the slides (not from raw data):
 
 MEMO TITLE: "Product Performance Q3 - What we are keeping, cutting and doubling down on"
 FROM: General Manager · Operations
 TO: Director of Operations · Ops Board
 DATE: [today]
 
-1. HEADLINE - one sentence stating the recommendation and the weekly saving.
+1. HEADLINE - one sentence stating the recommendation and the weekly saving, taken verbatim from the Recommendation slide.
 
-2. "WHAT WE ARE KEEPING" - top 5 products by sales and margin, each as a one-line bullet naming the product, weekly units, margin per unit, and the reason we keep it.
+2. "WHAT WE ARE KEEPING" - top 5 products from the Sales scorecard slide, each as a one-line bullet naming the product, weekly units, margin per unit, and the reason we keep it.
 
-3. "WHAT WE ARE CUTTING" - the discontinue-recommended products from the Waste Risk sheet, each as a one-line bullet naming the product, rank, waste-risk score, and estimated weekly ingredient saving.
+3. "WHAT WE ARE CUTTING" - the discontinue-recommended products from the Waste risk slide, each as a one-line bullet naming the product, rank, waste-risk score, and estimated weekly ingredient saving.
 
-4. "WHAT WE ARE DOUBLING DOWN ON" - two products showing the strongest delivery-channel growth, with the growth number and the marketing action we recommend.
+4. "WHAT WE ARE DOUBLING DOWN ON" - two products showing the strongest delivery-channel growth from the Channel view slide, with the growth number and the marketing action we recommend.
 
 5. INSERT a small 3-column summary table right under the headline: Metric · Value · So what. Populate with: Products to keep · [n] · Protects [X]% of margin; Products to cut · [n] · Saves Rp [Y] million per week; Delivery growth · [Z]% · Reinvest in delivery bundle marketing.
 
-6. INSERT a pull-quote callout in red under the summary table with a 1-sentence "So what" line.
+6. INSERT a pull-quote callout in red under the summary table with the 1-sentence "So what" line from the Recommendation slide.
 
 7. FOOTER: red 3-pt accent stripe, "Contoso Pizza Co · GM Office" on the left, "Page 1 of 1" on the right.
 
-8. Add a hyperlink block at the bottom labelled "Open source workbook" pointing to the same workbook, and "Open the 5-slide deck" pointing to the presentation from 4.2.
+8. Add a hyperlink block at the bottom labelled "Open the 5-slide deck" pointing to the presentation from 4.2, and a second link "Open source workbook" pointing to Data Contoh.xlsx.
 
-Keep it to ONE page. Plain business English, no jargon. When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
-<div class="callout"><b>Closing line for the audience:</b> "Same workbook. Now a 5-slide deck AND a 1-page ops memo. The GM opens Word, references the file, one prompt, done - with the deck and workbook linked at the bottom so the ops team can drill in."</div>
-<div class="callout warn"><b>Reality check on Draft-from-file in Word:</b> Copilot summarises the workbook rather than reading every row, so cross-check the numbers before sending. If the numbers look wrong, follow up with: <i>"Rebuild the memo using exact values from the Waste Risk sheet, columns Product, Rank, Waste Risk Score and Weekly Ingredient Cost."</i></div>
+Keep it to ONE page. Plain business English, no jargon. Every number must come from the deck - if a slide is missing a value, use [PLACEHOLDER] rather than inventing. When done, list every slide-to-section mapping at the end of the chat so the GM can verify traceability before sending.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Closing line for the audience:</b> "Same source, three formats. Excel built the dashboard. PowerPoint turned it into 5 board slides. Word landed a 1-page memo off that same deck - so the numbers on paper match the numbers on the slides, exactly."</div>
+<div class="callout warn"><b>Why the deck (not the workbook):</b> Draft-from-file in Word summarises rather than reads every row, so pointing it at the raw Excel gives you paraphrased numbers. Pointing it at the 4.2 deck (which already has curated action titles, a scorecard table and one recommendation) keeps the memo grounded in figures the GM has already signed off. If a slide value looks off, follow up with: <i>"Re-check the Waste risk scatter on slide 4 and update the "cutting" bullets to match exactly."</i></div>
 </div>
 </div></section><div class="lab-nav-ihh"><button class="secondary" data-go="ex3">← Market Intelligence</button><button data-go="ex5">Next: Create a Visual Infographic →</button></div></div><div class="view-ihh" id="view-ex5"><section id="ex5">
 <div class="modulehead"><div class="num">5</div><h2>Exercise 5 · Create a Visual Infographic<small>Microsoft 365 Copilot Chat · Create (Designer)</small></h2></div>
