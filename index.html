@@ -1033,46 +1033,53 @@ Rules:
 </div>
 </div>
 </div>
-<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>Exercise 8 · Excel Power Hour</h3>
-<div class="callout good"><b>The most-asked GM question:</b> "Show me what's actually happening in the data — without me writing a formula." Excel Copilot now does this in three modes. We will run all three on <code>02 Contoso_KPI_Dashboard.xlsx</code>.</div>
-<div class="card">
-<h3>7.1 · Get the insights — one prompt</h3>
-<div class="activity">
-<div class="head"><span class="num">Task 8.1</span><span class="file">📊 Excel Copilot · Chat</span></div>
-<h4>Ask Copilot to find what matters in 12 months of KPIs</h4>
-<p>Open <code>02 Contoso_KPI_Dashboard.xlsx</code> from OneDrive. Open the <b>Copilot pane</b> (Home → Copilot). On the <code>Monthly_KPIs</code> tab, paste:</p>
-<div class="prompt">Analyse the Monthly_KPIs tab. For each KPI (Same-Store Sales Growth %, Avg Ticket (IDR k), Delivery Mix %, Food Cost %):
-- Identify the best and worst locations
-- Detect any sustained declining trend (2+ months)
-- Flag the one-month outliers that are worth a phone call
+<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>📈 Excel Power Hour · Power-BI-style GM dashboard in one prompt</h3>
+<p class="sub">Excel for the web · Copilot Plan + Edit · new sheet built in one shot</p>
+<p><b>How to run it:</b> open <code>02 Contoso_KPI_Dashboard.xlsx</code> in Excel for the web. On the main data tab, click <b>Copilot → Edit</b> (and <b>Plan</b> if enabled — it lays out the steps before executing).</p>
+<div class="prompt">You are Copilot in Excel. Ground everything on the Monthly_KPIs and Targets_vs_Actual tabs. Brand: Contoso Pizza Co. Accent colour red (#DC2626) on a dark burgundy background (#1F0808) with card surfaces in #2F1010. The goal is a modern, Power-BI-style executive dashboard - minimal chrome, big numbers, lots of empty space. Show your plan first (if Plan is available), then execute:
 
-Then compare against Targets_vs_Actual. Which KPI has the biggest gap to FY26 target, and which location is dragging it down the most?
+1. On the source data tab, add a calculated column "Variance vs Target %" per row. Format as percentage, 1 decimal.
 
-Show the result as a 2-line executive summary, then a RAG status table by location.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-</div>
-<div class="card">
-<h3>7.2 · "Edit" — surgical, formula-safe changes</h3>
-<div class="activity">
-<div class="head"><span class="num">Task 8.2</span><span class="file">✏️ Excel Copilot · Edit (NEW)</span></div>
-<h4>Make a precise change without rewriting the workbook</h4>
-<p>In the Copilot pane, switch to <b>Edit</b> mode. Highlight the <code>Status</code> column on the <code>Targets_vs_Actual</code> tab and ask:</p>
-<div class="prompt">In this column, replace the emoji status with a one-word plain-text status (Green / Amber / Red) and apply conditional formatting with the matching colour. Do not change any other cells. Show me the diff first, before applying.<button class="copy" onclick="cp(this)">Copy</button></div>
-<div class="callout"><b>Why GMs love Edit:</b> they trust it. Edit shows a per-cell diff before applying — no surprise rewrites of working formulas.</div>
-</div>
-</div>
-<div class="card">
-<h3>7.3 · "Plan" — multi-step transformations with preview</h3>
-<div class="activity">
-<div class="head"><span class="num">Task 8.3</span><span class="file">📋 Excel Copilot · Plan (NEW)</span></div>
-<h4>Build an executive view in three steps Copilot proposes first</h4>
-<p>Switch the Copilot pane to <b>Plan</b>. Paste:</p>
-<div class="prompt">Plan: in a new sheet called "Exec_View", build a pivot summary — one row per location, one column per KPI — showing the FY26 H2 average. Add a "Trend" column showing ▲ / ▬ / ▼ vs FY26 H1 average. Highlight the worst quartile per KPI in red. Add a 2-sentence executive read-out at the very top.
+2. Convert the source range to an Excel Table so filter drop-downs appear on every column header. This is how the GM slices by Restaurant / Region / Month.
 
-Show me the plan first. I will approve. Then execute.<button class="copy" onclick="cp(this)">Copy</button></div>
-<div class="callout good"><b>The "Plan" win:</b> Copilot writes its own work order, you tick / untick steps, and only then does it touch the workbook.</div>
-</div>
-</div>
+3. Create a new blank sheet called "GM Dashboard - Restaurant Performance". Then transform it into a dark executive dashboard:
+
+   CANVAS
+   - Fill the entire visible area (columns A to N, rows 1 to 40) with dark burgundy (#1F0808) as the sheet background fill
+   - Remove gridlines on this sheet (View > Gridlines off)
+   - Set default font to Segoe UI, white (#FFFFFF) text
+
+   HEADER BAND (rows 1-3)
+   - Merge A1:N2, dark burgundy fill, white text, 22pt bold: "Contoso Pizza Co - Executive KPI Dashboard"
+   - Row 3 right-aligned in smaller red text: "Reporting period: <latest month from source> | Last refreshed: <TODAY()>"
+
+   KPI TILES (rows 5-11, one row of 5 tiles across)
+   - Five equal-width card blocks with card-surface fill (#2F1010), 1pt red border on the bottom edge only
+   - Tile 1: Same-Store Sales Growth - big number "+4.8 %" pulled from the source table via formula. Below it in smaller text: "Target +5.5 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
+   - Tile 2: Avg Ticket - big number "142 IDR k" pulled from the source table via formula. Below it in smaller text: "Target 150 IDR k" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
+   - Tile 3: Delivery Mix - big number "48.2 %" pulled from the source table via formula. Below it in smaller text: "Target 50.0 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
+   - Tile 4: Food Cost - big number "32.8 %" pulled from the source table via formula. Below it in smaller text: "Target 31.0 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
+   - Tile 5: Order Accuracy - big number "96.4 %" pulled from the source table via formula. Below it in smaller text: "Target 98.0 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
+   - Inside each tile use 28pt bold for the big number, 10pt for the label above and the target below
+
+   INSIGHT CHART (rows 13-28, spans full width)
+   - One horizontal bar chart titled "Same-Store Sales Growth by Restaurant (Actual vs Target)"
+   - Two series per Restaurant: Actual (solid red #DC2626) and Target (thin dark-grey outline, no fill)
+   - Sort bars worst-to-best on variance so the GM's eye goes to the problem first
+   - No chart border, no gridlines, no legend box (put a small manual legend in the top-right of the chart area using two coloured squares + labels)
+   - Chart plot area fill: #2F1010. Chart area fill: #1F0808. Axis labels white 10pt. Title white 14pt bold left-aligned.
+
+   INSIGHT STRIP (rows 30-33, full width)
+   - Merge into one dark-burgundy box with a 2pt top border in red
+   - White 12pt bold text: "So what:" followed by one line naming the single biggest variance and the owner
+   - Below it in 10pt red: "Next step:" and one concrete action for this week
+
+4. Freeze rows 1-3 so the header stays visible.
+
+5. On the dashboard, add a small text link bottom-right (row 40) in red 9pt: "Open source data - use column filters to slice by Restaurant / Region / Month".
+
+Do not ask any clarifying questions - proceed. When done, list every change as a numbered summary so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
+<p style="margin-top:12px"><b>Reality check on Copilot in Excel today:</b> calculated columns, table filters, conditional formatting, cell fills and simple bar/column charts are reliable. Copilot may not get the sheet-wide dark fill perfect in one shot - if the background comes back white, follow up with: <i>"Fill the entire dashboard sheet area A1:N40 with dark burgundy #1F0808 and set the sheet gridlines off."</i> If the KPI tiles look plain, follow up with: <i>"Restyle the 5 KPI tiles: dark surface fill #2F1010, 1pt red bottom border, 28pt bold white numbers, 10pt white labels."</i></p>
 </div>
 </div>
 <div class="modal-overlay" id="modal-bx-2a96c85f"><div class="modal"><button class="modal-close" onclick="closeModal('bx-2a96c85f')">×</button><h3>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h3>
