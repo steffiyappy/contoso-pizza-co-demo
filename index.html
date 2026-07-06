@@ -691,7 +691,69 @@ Apply conditional formatting: red fill for DISCONTINUE, amber for REVIEW, green 
 <div class="prompt">On the Waste Risk sheet, insert a scatter chart with Rank on X-axis and Cost per Unit on Y-axis, coloured by Recommendation (red, amber, green). Label the top 10 discontinue candidates by product name. Above the chart, add a one-line takeaway starting with "So what:" that names how many products we recommend discontinuing and the estimated ingredient cost saving per week if we do.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
 </div>
-</section><div class="lab-nav-ihh"><button class="secondary" data-go="ex3">← Market Intelligence</button><button data-go="ex5">Next: Create a Visual Infographic →</button></div></div><div class="view-ihh" id="view-ex5"><section id="ex5">
+<div class="card">
+<h3>4.5 - Excel to PowerPoint: turn the workbook into a 5-slide ops deck</h3>
+<p class="lead">Save and close the workbook you built in 4.1 to 4.4. Open a blank <b>PowerPoint</b> deck (or your corporate template so brand fonts and colours are inherited). Click <b>Copilot -&gt; Create presentation from file</b> and pick the workbook. When Copilot proposes an outline, click <b>Generate</b>, then open the Copilot pane and paste the prompt below to tighten the deck.</p>
+<div class="activity">
+<div class="head"><span class="num">Task 4.5</span><span class="file">Copilot in PowerPoint · Create from file + Edit</span></div>
+<h4>One prompt · a board-ready 5-slide product performance deck built from Excel</h4>
+<div class="prompt">You are Copilot in PowerPoint. This deck was generated from our product performance workbook. Ground everything on the same workbook you referenced during creation. Use our Contoso Pizza Co brand feel (red + charcoal, warm and appetite-forward). Show your plan first, then execute all of the following in order:
+
+1. RESTRUCTURE the deck into exactly 5 slides for the operations board, each with an ACTION-TITLE headline (states the conclusion, not the topic):
+
+   Slide 1 - Cover: "Contoso Pizza Co · Q3 Product Performance - What we recommend the ops board approves"
+   Slide 2 - Sales scorecard: the ranked product list from the workbook, top 10 + bottom 10, as a clean two-column table with margin per unit
+   Slide 3 - Channel view: a stacked bar of dine-in vs delivery vs take-away contribution by product family, with the biggest channel gap called out
+   Slide 4 - Waste risk: a scatter of Rank (x-axis) vs Cost per Unit (y-axis), coloured by Recommendation (red/amber/green), top 10 discontinue candidates labelled
+   Slide 5 - Recommendation: number of products to discontinue, weekly ingredient cost saving, owner, by-when, and one clear board decision
+
+2. Add SPEAKER NOTES on every slide - 30 to 45 seconds of natural spoken script per slide the GM can read verbatim.
+
+3. Add a slim "So what:" strip in red at the bottom of slides 2, 3, 4 with the single most important takeaway from that slide.
+
+4. Apply brand palette throughout: red for emphasis, charcoal for headings, warm grey for body. Body font 18pt minimum. No more than 25 words per slide body.
+
+5. Insert a final APPENDIX slide listing the data sources with a hyperlink back to the source workbook and the Excel dashboard sheet.
+
+When done, list every slide with its action-title headline in the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Closing line for the audience:</b> "The workbook was the source of truth. One click - Create presentation from file - and the deck exists. One prompt - and it is now a 5-slide board-ready pack with action titles, brand palette, speaker notes and a linked appendix."</div>
+<div class="callout warn"><b>Reality check on Create-from-file:</b> Copilot may need a moment on large workbooks and can produce more slides than requested - if so, follow up with: <i>"Consolidate the deck into exactly 5 slides using the structure above, keep every action-title headline, move any extra content to the appendix."</i></div>
+</div>
+</div>
+<div class="card">
+<h3>4.6 - Excel to Word: draft a 1-page ops memo from the workbook</h3>
+<p class="lead">Open a blank <b>Word</b> document (or your corporate memo template). Click <b>Copilot -&gt; Draft with Copilot</b>, click the paperclip / <b>Reference a file</b>, and pick the same product performance workbook. Paste the prompt below.</p>
+<div class="activity">
+<div class="head"><span class="num">Task 4.6</span><span class="file">Copilot in Word · Draft from file</span></div>
+<h4>One prompt · a 1-page memo the ops team can actually use tomorrow</h4>
+<div class="prompt">You are Copilot in Word. Ground everything on the product performance workbook I have referenced (Ranked Sales, Channel Performance and Waste Risk sheets). Use our Contoso Pizza Co brand feel (red + charcoal). Show your plan first, then draft a 1-page ops memo, in this exact order and with real numbers pulled from the workbook:
+
+MEMO TITLE: "Product Performance Q3 - What we are keeping, cutting and doubling down on"
+FROM: General Manager · Operations
+TO: Director of Operations · Ops Board
+DATE: [today]
+
+1. HEADLINE - one sentence stating the recommendation and the weekly saving.
+
+2. "WHAT WE ARE KEEPING" - top 5 products by sales and margin, each as a one-line bullet naming the product, weekly units, margin per unit, and the reason we keep it.
+
+3. "WHAT WE ARE CUTTING" - the discontinue-recommended products from the Waste Risk sheet, each as a one-line bullet naming the product, rank, waste-risk score, and estimated weekly ingredient saving.
+
+4. "WHAT WE ARE DOUBLING DOWN ON" - two products showing the strongest delivery-channel growth, with the growth number and the marketing action we recommend.
+
+5. INSERT a small 3-column summary table right under the headline: Metric · Value · So what. Populate with: Products to keep · [n] · Protects [X]% of margin; Products to cut · [n] · Saves Rp [Y] million per week; Delivery growth · [Z]% · Reinvest in delivery bundle marketing.
+
+6. INSERT a pull-quote callout in red under the summary table with a 1-sentence "So what" line.
+
+7. FOOTER: red 3-pt accent stripe, "Contoso Pizza Co · GM Office" on the left, "Page 1 of 1" on the right.
+
+8. Add a hyperlink block at the bottom labelled "Open source workbook" pointing to the same workbook, and "Open the 5-slide deck" pointing to the presentation from 4.5.
+
+Keep it to ONE page. Plain business English, no jargon. When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Closing line for the audience:</b> "Same workbook. Now a 5-slide deck AND a 1-page ops memo. The GM opens Word, references the file, one prompt, done - with the deck and workbook linked at the bottom so the ops team can drill in."</div>
+<div class="callout warn"><b>Reality check on Draft-from-file in Word:</b> Copilot summarises the workbook rather than reading every row, so cross-check the numbers before sending. If the numbers look wrong, follow up with: <i>"Rebuild the memo using exact values from the Waste Risk sheet, columns Product, Rank, Waste Risk Score and Weekly Ingredient Cost."</i></div>
+</div>
+</div></section><div class="lab-nav-ihh"><button class="secondary" data-go="ex3">← Market Intelligence</button><button data-go="ex5">Next: Create a Visual Infographic →</button></div></div><div class="view-ihh" id="view-ex5"><section id="ex5">
 <div class="modulehead"><div class="num">5</div><h2>Exercise 5 · Create a Visual Infographic<small>Microsoft 365 Copilot Chat · Create (Designer)</small></h2></div>
 <div class="callout good"><b>The play:</b> use <b>Copilot Create</b> (the Designer feature inside Microsoft 365 Copilot Chat) to generate a polished, brand-aligned one-page infographic in 60 seconds. The prompts below are written in plain language — the way a normal business user would describe what they want.</div>
 <div class="card">
