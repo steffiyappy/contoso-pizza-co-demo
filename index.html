@@ -638,36 +638,44 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex2">← Prepare for Quarter Closing</button><button data-go="ex4">Next: Menu Rationalisation with Copilot… →</button></div></div><div class="view-ihh" id="view-ex4"><section id="ex4">
 <div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel · Plan + Edit · then Create presentation from file · Draft from file in Word</small></h2></div>
-<div class="callout good"><b>The operations question.</b> Which products should we stop selling so we cut food waste and free up prep time? Each ingredient only lasts two days. We answer it end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent, just formulas, tables and charts Copilot writes for you.</div>
+<div class="callout good"><b>The operations question.</b> The ops team wants to know which products to stop selling so they can cut food waste and free up prep time - each ingredient only lasts two days. Four sheets are already in the workbook: <b>sales</b> (weekly units per product, Jan 1 to Mar 31 2026), <b>sales mix</b> (channel split - takeaway, delivery, aggregator, plus hot-promo rows 10 to 116), <b>SRM</b> (ingredients per product with cost per ingredient), and <b>sub recipe</b> (total ingredients used Q1). We answer it end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent - and we do it without touching a single cell of the raw data.</div>
 <div class="card">
 <h3>4.1 - GM Menu Rationalisation Dashboard - one prompt</h3>
-<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Open the Copilot pane, switch to <b>Edit</b> (and <b>Plan</b> if enabled - it lays out the steps before executing). Paste the single prompt below. Copilot enriches the source data, converts it to an Excel Table with column filter drop-downs (so the GM can slice by category, channel and month in-place), then builds a full one-page management dashboard on a new sheet with KPI scorecards, four charts and next-step callouts.</p>
+<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Open the Copilot pane, switch to <b>Edit</b> (and <b>Plan</b> if enabled - it lays out the steps before executing). Paste the single prompt below. Copilot builds two new sheets - a formula-driven working analysis and a one-page GM dashboard with KPI scorecards, four charts and next-step callouts - all by referencing the four raw sheets. The raw workbook stays untouched.</p>
 <div class="activity">
 <div class="head"><span class="num">Task 4.1</span><span class="file">Edit with Copilot in Excel · one paste, full dashboard</span></div>
-<h4>One prompt · a full menu-rationalisation dashboard on a new sheet</h4>
-<div class="prompt">You are Copilot in Excel. You have this workbook open with sheets: sales (weekly units per product for Q1), sales mix (channel split - Takeaway, Delivery, Aggregator, plus hot-promo rows 10 to 116), SRM (ingredients per product with cost per ingredient), sub recipe (total ingredients used in Q1). Assume each ingredient has a two-day shelf life. Do not ask any clarifying questions - proceed. Show your plan first (if Plan is available), then execute all of the following in order:
+<h4>One prompt · a full menu-rationalisation dashboard on new sheets</h4>
+<div class="prompt">You are Copilot in Excel. You have this workbook open with sheets: sales (weekly units per product for Q1), sales mix (channel split - Takeaway, Delivery, Aggregator, plus hot-promo rows 10 to 116), SRM (ingredients per product with cost per ingredient), sub recipe (total ingredients used in Q1). Assume each ingredient has a two-day shelf life.
 
-1. On the sales sheet, add a column called "Total Units Q1" (Jan + Feb + Mar), a column called "Rank" (RANK on Total Units Q1, largest first), and a column called "Bottom 20 percent?" that returns YES for products in the bottom quintile, NO otherwise.
+IMPORTANT: Do NOT modify any existing sheet or any raw data. Everything you build must live on new sheets that pull from the existing sheets by formula (XLOOKUP / INDEX-MATCH / references). Treat sales, sales mix, SRM and sub recipe as read-only.
 
-2. Apply conditional formatting to Rank: red fill for the bottom 20 percent, green fill for the top 20 percent. Add traffic-light icons on the Bottom 20 percent? column.
+Do not ask any clarifying questions - proceed. Show your plan first (if Plan is available), then execute all of the following in order:
 
-3. Add a column "Trend (Jan-Mar)" with an inline sparkline per row.
+1. Create a new sheet named "GM Working - Menu Rationalisation". On this sheet, build a formula-driven analysis table that reads Product, Category and monthly units from the sales sheet (do not copy-paste values, use direct references). Then add these calculated columns on the new sheet:
+   - "Total Units Q1" (Jan + Feb + Mar)
+   - "Rank" (RANK on Total Units Q1, largest first)
+   - "Bottom 20 percent?" (YES for products in the bottom quintile, NO otherwise)
+   - "Trend (Jan-Mar)" (inline sparkline per row)
+   - "Cost per Unit" (XLOOKUP from a helper block on the same working sheet that sums each product's ingredient qty x ingredient cost from the SRM sheet)
+   - "Ingredient Overlap Score" (how many of the product's ingredients also appear in the sub recipe top-10 list, referenced from the sub recipe sheet)
+   - "Waste Risk Score" - HIGH if Rank is in bottom 20 percent AND Ingredient Overlap Score is low; MEDIUM if only one condition; LOW otherwise
+   - "Estimated Weekly Waste Cost (Rp)" - a simple formula: (7 - Weekly Units per product) x Cost per Unit, capped at zero
 
-4. On the SRM sheet, add a column "Cost per Unit" (sum of ingredient qty x ingredient cost per unit of product). On a helper column in the sales sheet, VLOOKUP or XLOOKUP Cost per Unit onto each product, then add a column "Waste Risk Score" that is HIGH if Rank is in bottom 20 percent AND the product's ingredients have low overlap with the top-10 products in the sub recipe sheet, MEDIUM if only one condition, LOW otherwise. Traffic-light icons on Waste Risk Score.
+2. Apply conditional formatting on the GM Working sheet only: red fill for the bottom-20-percent Rank, green fill for top-20-percent Rank; traffic-light icons on Bottom 20 percent? and Waste Risk Score columns.
 
-5. Convert the sales range to an Excel Table (Ctrl+T style). This gives us proper column filter drop-downs at the top of every column so the GM can filter by Category, Channel-lead and Month in-place, and the sparklines and conditional formatting stay in sync when new rows arrive.
+3. Convert the GM Working analysis range to an Excel Table (Ctrl+T style) so it has proper column filter drop-downs at the top of every column - the GM can filter by Category, Channel-lead and Month in-place, and the sparklines and conditional formatting stay in sync.
 
-6. Create a new sheet named "GM Dashboard - Menu Rationalisation" and build a one-page management dashboard on it that references the enriched sales table by formula (so it updates when the GM filters):
+4. Create a second new sheet named "GM Dashboard - Menu Rationalisation" and build a one-page management dashboard on it that references the GM Working table by formula (so it updates when the GM filters):
 
    HEADER
    - Red header band with the title "Contoso Pizza Co · Menu Rationalisation - GM Weekly Dashboard"
-   - Reporting period on the right, pulled from the sales sheet
+   - Reporting period on the right, pulled from the sales sheet by reference
    - Small "Last refreshed" note in dark grey
 
    KPI SCORECARDS (top row, 5 tiles across)
    - Total SKUs on menu, SKUs in Bottom 20 percent, Weekly Ingredient Cost (Rp), Estimated Weekly Waste Cost (Rp), Top-5 Margin Contribution (Rp)
    - Each tile shows: value · sparkline · RAG traffic light where relevant
-   - Each tile is a small cell block with a formula that reads from the enriched sales table and the SRM sheet
+   - Each tile is a small cell block with a formula that reads from the GM Working table and (by reference) the SRM sheet
 
    CHARTS
    - Variance waterfall: Baseline weekly gross margin -> drivers (delist candidates, hot-promo losses on rows 10 to 116, waste cost of bottom 20 percent) -> Potential post-delist margin, with red bars for negative steps and green bars for positive steps
@@ -680,12 +688,14 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
    - "Top 3 keep and double down" - green box, three bullets from the top of the Margin Contribution list, each with product name and the marketing action we recommend
    - One-line "So what:" summary above the callouts, naming the single biggest menu risk and the owner (GM Operations)
 
-7. Freeze the header row of the dashboard so it stays visible when the GM scrolls.
+5. Freeze the header row of the dashboard so it stays visible when the GM scrolls.
 
-8. On the dashboard sheet, add a text box in the bottom right with a link back to the source data table labelled "Open source data · use column filters to slice by Category, Channel-lead and Month".
+6. On the dashboard sheet, add a text box in the bottom right with a link to the GM Working sheet labelled "Open working analysis · use column filters to slice by Category, Channel-lead and Month", and a second link labelled "Open raw source data" that jumps to the sales sheet.
+
+Reminder: the sales, sales mix, SRM and sub recipe sheets must remain untouched - no new columns, no reformatting, no table conversion on them. All enrichment lives on GM Working; all visuals live on GM Dashboard.
 
 When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
-<div class="callout"><b>Closing line for the audience:</b> "One prompt. Copilot enriched every row, wired up an Excel Table with column filters, then built a dashboard sheet with 5 KPI scorecards, 4 charts, RAG bands, sparklines and next-step callouts - grounded on the same workbook. No formulas hand-written, no VBA, no add-ins."</div>
+<div class="callout"><b>Closing line for the audience:</b> "One prompt. Copilot built two new sheets - a formula-driven working table and a dashboard with 5 KPI scorecards, 4 charts, RAG bands, sparklines and next-step callouts. The raw workbook stayed untouched. No hand-written formulas, no VBA, no add-ins."</div>
 <div class="callout warn"><b>Reality check on Copilot in Excel:</b> formulas, conditional formatting, sparklines, table filters and chart types (column, line, waterfall, Pareto) are the reliable parts. Slicers wired across multiple charts are <b>not</b> something Copilot Edit produces end-to-end today - that is why this prompt uses a Table with column filter drop-downs instead, which the GM can actually use straight away. If a chart comes back as the wrong type, follow up with: <i>"Redo the variance chart on the dashboard as a proper waterfall - baseline margin -&gt; drivers -&gt; potential post-delist - with red for negative steps and green for positive steps."</i></div>
 </div>
 <div class="card">
