@@ -637,65 +637,51 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
 </div>
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex2">← Prepare for Quarter Closing</button><button data-go="ex4">Next: Menu Rationalisation with Copilot… →</button></div></div><div class="view-ihh" id="view-ex4"><section id="ex4">
-<div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel - Edit only</small></h2></div>
+<div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel · Edit · then Create presentation from file · Draft from file in Word</small></h2></div>
 <div class="callout good"><b>The operations question.</b> Which products should we stop selling so we cut food waste and free up prep time? Each ingredient only lasts two days. We answer it end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent, just formulas, tables and charts Copilot writes for you.</div>
 <div class="card">
-<h3>4.1 - Rank products by sales - one prompt</h3>
-<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Go to the <b>sales</b> sheet. Open the Copilot pane and switch to <b>Edit</b>.</p>
+<h3>4.1 - GM Menu Rationalisation Briefing Pack - one prompt</h3>
+<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Open the Copilot pane, switch to <b>Edit</b>, and paste the single prompt below. Copilot reads every sheet (sales, sales mix, SRM, sub recipe), writes menu-rationalisation insights, runs a delist what-if with the weekly rupiah impact, then builds a printable one-page briefing pack for the GM on a new sheet.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.1</span><span class="file">Edit with Copilot in Excel - sales sheet</span></div>
-<h4>Add a ranking column and highlight the bottom 20 percent</h4>
-<div class="prompt">On the sales sheet, do all of the following:
-1. Add a column called "Total Units Q1" that sums Jan, Feb and March unit sales per product.
-2. Add a column called "Rank" using RANK on Total Units Q1, largest first.
-3. Add a column called "Bottom 20 percent?" that returns YES for products in the bottom quintile, NO otherwise.
-4. Apply conditional formatting to the Rank column: red fill for the bottom 20 percent products.
-5. Sort the table by Total Units Q1 ascending so the weakest sellers sit at the top.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-</div>
-<div class="card">
-<h3>4.2 - Split channel performance - a new sheet</h3>
-<p class="lead">Switch to the <b>sales mix</b> sheet (lines 10 to 116 are hot promos - Copilot handles them separately).</p>
-<div class="activity">
-<div class="head"><span class="num">Task 4.2</span><span class="file">Edit with Copilot in Excel - sales mix sheet</span></div>
-<h4>Create a channel view on a new tab</h4>
-<div class="prompt">Create a new sheet called "Channel View". On it, build a pivot table from the sales mix sheet grouped by product, with columns for Takeaway, Delivery and Aggregator units. Add a total column and a "% Delivery" column. Apply a data bar to the total column. Sort ascending so weakest products come first. Add a note on row 1: "Rows 10 to 116 are hot promos - treated separately in Sheet Hot Promos".
+<div class="head"><span class="num">Task 4.1</span><span class="file">Edit with Copilot in Excel - one paste, three steps</span></div>
+<h4>One prompt · Insights + What-if + Printable one-page briefing pack</h4>
+<div class="prompt">You are Copilot in Excel. You have this workbook open with sheets: sales (weekly units per product for Q1), sales mix (channel split - takeaway, delivery, aggregator, plus hot-promo rows 10 to 116), SRM (ingredients per product with cost per ingredient), sub recipe (total ingredients used in Q1). Assume each ingredient has a two-day shelf life. Show your plan first, then do all three steps in order and stop for me to review.
 
-Then create another sheet called "Hot Promos" with the pivot restricted to rows 10 to 116 only, same layout.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-</div>
-<div class="card">
-<h3>4.3 - Cost per product and waste risk - another new sheet</h3>
-<p class="lead">Use the <b>SRM</b> sheet (ingredients per product, cost per ingredient) and the <b>sub recipe</b> sheet (total ingredients used Q1). Two-day shelf life assumption per ingredient.</p>
-<div class="activity">
-<div class="head"><span class="num">Task 4.3</span><span class="file">Edit with Copilot in Excel - new "Waste Risk" sheet</span></div>
-<h4>Build the recommendation view Copilot will fill for you</h4>
-<div class="prompt">Create a new sheet called "Waste Risk". Build a table with one row per product and the following columns:
-- Product
-- Total Units Q1 (from the sales sheet)
-- Rank (from the sales sheet)
-- Cost per Unit (calculated from SRM: sum of ingredient qty times ingredient cost per unit of product)
-- Ingredient Count (count of distinct ingredients per product from SRM)
-- Shared Ingredients Score (how many of this product’s ingredients are also used by top-selling products in the sub recipe sheet - higher means less waste if we drop it)
-- Waste Risk (HIGH if Rank in bottom 20 percent AND Shared Ingredients Score is low, MEDIUM if only one of the two, LOW otherwise)
-- Recommendation (DISCONTINUE, REVIEW, KEEP based on Waste Risk plus Cost per Unit above the median)
+STEP A - MENU RATIONALISATION INSIGHTS (write to a new sheet called "Menu Insights")
+Read across every sheet and return the 6 findings a GM needs before a menu-rationalisation decision:
+1. Bottom 20 percent sellers by Total Units Q1 - name every product, weekly units, rank, and estimated food cost per unit from SRM.
+2. Waste hotspots - products whose ingredients have the lowest overlap with top-sellers in the sub recipe sheet (highest waste risk if kept).
+3. Channel-dependent products - products where over 60 percent of units come from a single channel (Takeaway, Delivery or Aggregator) - flag as fragile.
+4. Hot-promo cannibalisation - for rows 10 to 116 in the sales mix sheet, list any hot promo whose base product also appears in the bottom 20 percent (we are promoting weak SKUs).
+5. Ingredient concentration - top 10 ingredients by total Q1 usage from the sub recipe sheet, and which products drive that usage.
+6. Margin protectors - top 10 products by (weekly units x margin per unit) that we must NOT touch.
 
-Apply conditional formatting: red fill for DISCONTINUE, amber for REVIEW, green for KEEP. Sort by Waste Risk descending then Rank ascending.<button class="copy" onclick="cp(this)">Copy</button></div>
+Format Menu Insights as: a "So what" line at the top in bold red, then 6 numbered sections each with a short heading, a one-line finding, and a small table with the supporting rows. Sort every table by impact descending.
+
+STEP B - DELIST WHAT-IF (write to a new sheet called "Delist Scenario")
+Model this scenario side-by-side with the current baseline: "If we delist the bottom 20 percent of products by Total Units Q1, redirect their ingredient budget to the top 10 margin protectors, and stop promoting any hot-promo tied to a delisted SKU."
+Build a two-column comparison table (Baseline vs After Delist) covering: number of active SKUs, weekly ingredient cost (Rp), estimated weekly waste cost (Rp, use 15 percent of ingredient cost of delisted SKUs as proxy), prep-time index (relative, baseline = 100), estimated weekly gross margin (Rp), on-menu complexity (count of distinct ingredients). Add a third column "Delta" with the change and whether it is favourable. Below the table, a 3-bullet risk callout (customer choice, channel exposure, promo pipeline). All Rp figures must be grounded on the workbook - do not invent numbers.
+
+STEP C - PRINTABLE ONE-PAGE BRIEFING PACK (write to a new sheet called "GM Briefing Pack")
+On a single sheet sized to fit ONE A3 landscape page when printed, build a clean, board-ready one-pager. Use a WHITE background across the whole sheet - no dark fills. Layout:
+- Header band across the top: white fill with a 3-pt Contoso Pizza red (#DC2626) bottom border. Title on the left: "Contoso Pizza Co · Menu Rationalisation - GM Weekly Briefing Pack". Right side: sheet date and "Prepared by Copilot in Excel".
+- Row of 4 KPI tiles below the header (light red tint #FEE2E2 fill, red text for the number, dark grey label): SKUs to Delist, Weekly Ingredient Saving (Rp), Weekly Waste Reduction (Rp), Prep-Time Index After.
+- Left column: a product heatmap - one row per product, columns for Rank, Waste Risk, Channel Concentration, Recommendation (DELIST / REVIEW / KEEP). Conditional format Recommendation red / amber / green. Sort by Recommendation then Rank ascending.
+- Right column top: a small delist scorecard reusing the Baseline vs After Delist table from Step B, only the 6 headline rows.
+- Right column bottom: "Top 5 Delist Actions" - the 5 products we should delist first, each with product name, weekly rupiah saving, and a one-line why.
+- Footer strip: "Source: Data Contoh.xlsx · sheets sales, sales mix, SRM, sub recipe. So what: cut the bottom 20 percent, protect margin, free two days of shelf-life across the kitchen."
+Use one clean sans-serif font throughout. Body 11pt, KPI numbers 22pt, headings 14pt bold. Set print area to this sheet and page orientation to landscape, fit to 1 page wide by 1 page tall.
+
+When done, list every sheet you created in the chat with a one-line summary each, so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
+<div class="callout"><b>Closing line for the audience:</b> "One paste. Copilot read every tab, wrote the menu-rationalisation insights, modelled the delist scenario in rupiah, then built a printable one-page briefing pack the GM can walk into the ops board with."</div>
+<div class="callout warn"><b>Reality check:</b> Copilot in Excel Edit can miss rows on very large sheets. If any figure looks off, follow up in the pane: <i>"Re-run Step A but validate every count against the raw sales sheet row-by-row and fix any mismatch in Menu Insights."</i></div>
 </div>
 <div class="card">
-<h3>4.4 - The final chart the GM will show the ops team</h3>
+<h3>4.2 - Excel to PowerPoint: turn the workbook into a 5-slide ops deck</h3>
+<p class="lead">Save and close the workbook you built in 4.1. Open a blank <b>PowerPoint</b> deck (or your corporate template so brand fonts and colours are inherited). Click <b>Copilot -&gt; Create presentation from file</b> and pick the workbook. When Copilot proposes an outline, click <b>Generate</b>, then open the Copilot pane and paste the prompt below to tighten the deck.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.4</span><span class="file">Edit with Copilot in Excel - Waste Risk sheet</span></div>
-<h4>One chart, one takeaway line</h4>
-<div class="prompt">On the Waste Risk sheet, insert a scatter chart with Rank on X-axis and Cost per Unit on Y-axis, coloured by Recommendation (red, amber, green). Label the top 10 discontinue candidates by product name. Above the chart, add a one-line takeaway starting with "So what:" that names how many products we recommend discontinuing and the estimated ingredient cost saving per week if we do.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-</div>
-<div class="card">
-<h3>4.5 - Excel to PowerPoint: turn the workbook into a 5-slide ops deck</h3>
-<p class="lead">Save and close the workbook you built in 4.1 to 4.4. Open a blank <b>PowerPoint</b> deck (or your corporate template so brand fonts and colours are inherited). Click <b>Copilot -&gt; Create presentation from file</b> and pick the workbook. When Copilot proposes an outline, click <b>Generate</b>, then open the Copilot pane and paste the prompt below to tighten the deck.</p>
-<div class="activity">
-<div class="head"><span class="num">Task 4.5</span><span class="file">Copilot in PowerPoint · Create from file + Edit</span></div>
+<div class="head"><span class="num">Task 4.2</span><span class="file">Copilot in PowerPoint · Create from file + Edit</span></div>
 <h4>One prompt · a board-ready 5-slide product performance deck built from Excel</h4>
 <div class="prompt">You are Copilot in PowerPoint. This deck was generated from our product performance workbook. Ground everything on the same workbook you referenced during creation. Use our Contoso Pizza Co brand feel (red + charcoal, warm and appetite-forward). Show your plan first, then execute all of the following in order:
 
@@ -721,10 +707,10 @@ When done, list every slide with its action-title headline in the chat so the GM
 </div>
 </div>
 <div class="card">
-<h3>4.6 - Excel to Word: draft a 1-page ops memo from the workbook</h3>
+<h3>4.3 - Excel to Word: draft a 1-page ops memo from the workbook</h3>
 <p class="lead">Open a blank <b>Word</b> document (or your corporate memo template). Click <b>Copilot -&gt; Draft with Copilot</b>, click the paperclip / <b>Reference a file</b>, and pick the same product performance workbook. Paste the prompt below.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.6</span><span class="file">Copilot in Word · Draft from file</span></div>
+<div class="head"><span class="num">Task 4.3</span><span class="file">Copilot in Word · Draft from file</span></div>
 <h4>One prompt · a 1-page memo the ops team can actually use tomorrow</h4>
 <div class="prompt">You are Copilot in Word. Ground everything on the product performance workbook I have referenced (Ranked Sales, Channel Performance and Waste Risk sheets). Use our Contoso Pizza Co brand feel (red + charcoal). Show your plan first, then draft a 1-page ops memo, in this exact order and with real numbers pulled from the workbook:
 
@@ -747,7 +733,7 @@ DATE: [today]
 
 7. FOOTER: red 3-pt accent stripe, "Contoso Pizza Co · GM Office" on the left, "Page 1 of 1" on the right.
 
-8. Add a hyperlink block at the bottom labelled "Open source workbook" pointing to the same workbook, and "Open the 5-slide deck" pointing to the presentation from 4.5.
+8. Add a hyperlink block at the bottom labelled "Open source workbook" pointing to the same workbook, and "Open the 5-slide deck" pointing to the presentation from 4.2.
 
 Keep it to ONE page. Plain business English, no jargon. When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
 <div class="callout"><b>Closing line for the audience:</b> "Same workbook. Now a 5-slide deck AND a 1-page ops memo. The GM opens Word, references the file, one prompt, done - with the deck and workbook linked at the bottom so the ops team can drill in."</div>
@@ -912,7 +898,7 @@ Once created, share the agent with the "HR Recruiters" and "Restaurant Operation
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex5">← Create a Visual Infographic</button><button data-go="extras">Next: Bonus →</button></div></div><div class="view-ihh" id="view-extras"><section id="extras">
 <div class="modulehead"><div class="num">B</div><h2>Bonus - Extra Exercises &amp; Prompt Tips<small>Everything else from the playbook, plus GM prompt tips - click any card</small></h2></div>
 <div class="callout good"><b>Use these when there is extra time</b>, or to tailor the session to a specific GM concern. Click a card to open the full walkthrough.</div>
-<div class="bonus-grid"><button class="bcard" onclick="openModal('bx-4321b14a')"><span class="ico">💡</span><h4>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style</h4><p>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style PowerPoint Copilot When to do this: Open a blank PowerPoint (powerpoint.com...</p></button><button class="bcard" onclick="openModal('bx-ee770ada')"><span class="ico">🧩</span><h4>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes</h4><p>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes Teams Copilot · Word Copilot The scenario: the GM just stepped out of a 60-minute &amp;q...</p></button><button class="bcard" onclick="openModal('bx-687f3b38')"><span class="ico">📊</span><h4>Exercise 8 · GM Weekly Briefing Pack in Excel (Insights + What-if + Printable A3)</h4><p>One paste. Copilot reads every tab, writes a McKinsey narrative, runs a Food-Cost -2pp what-if with IDR uplift per restaurant, then builds a printable one-page GM Weekly Briefing Pack on a single Excel sheet (dark burgundy, KPI tiles, heatmap, top-5 actions).</p></button><button class="bcard" onclick="openModal('bx-2a96c85f')"><span class="ico">📧</span><h4>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h4><p>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data Microsoft 365 Copilot · built-in Analyst agent Treat the workbook like a...</p></button><button class="bcard" onclick="openModal('bx-7e97271b')"><span class="ico">📄</span><h4>Exercise 10 · Personalised Mail Merge (Cowork)</h4><p>Exercise 10 · Personalised Mail Merge (Cowork) Microsoft 365 Copilot · Cowork · Outlook drafts The play: forget Word's Mailings ribbon. ...</p></button><button class="bcard" onclick="openModal('bx-65026605')"><span class="ico">🎨</span><h4>Exercise 11 · CV Screening from a SharePoint Folder</h4><p>Exercise 11 · CV Screening from a SharePoint Folder Microsoft 365 Copilot · Cowork · SharePoint grounding The scenario: the HR team is cappe...</p></button><button class="bcard" onclick="openModal('bx-1257371f')"><span class="ico">🧪</span><h4>Extra A · Outlook — catch up on a long thread (use your real inbox)</h4><p>Extra A · Outlook — catch up on a long thread (use your real inbox) Extra A 📧 Outlook Copilot "I just got back from a flight — what did...</p></button><button class="bcard" onclick="openModal('bx-59d804f3')"><span class="ico">📅</span><h4>Extra B · Outlook — draft an executive reply with the right tone</h4><p>Extra B · Outlook — draft an executive reply with the right tone Extra B 📧 Outlook Copilot Draft an executive reply — short, on-brand, signe...</p></button><button class="bcard" onclick="openModal('bx-22a873d3')"><span class="ico">🤝</span><h4>Extra C · Word — interrogate a long document</h4><p>Extra C · Word — interrogate a long document Extra C 📝 Word Copilot "Find me the risk in this 80-page board pack" Open 05 Contoso_...</p></button><button class="bcard" onclick="openModal('bx-9ea8fd40')"><span class="ico">📈</span><h4>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move</h4><p>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move Scenario: Marketing has 4 weeks until Lebaran. The GM wants...</p></button><button class="bcard" onclick="openModal('bx-6c105361')"><span class="ico">🗂️</span><h4>Prompt tips for every Copilot surface</h4><p>Prompt Tips — for every Copilot surface The GCSE prompt framework G oal — what I want at the end (brief, deck, dashboard) C ontext — for who...</p></button></div>
+<div class="bonus-grid"><button class="bcard" onclick="openModal('bx-4321b14a')"><span class="ico">💡</span><h4>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style</h4><p>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style PowerPoint Copilot When to do this: Open a blank PowerPoint (powerpoint.com...</p></button><button class="bcard" onclick="openModal('bx-ee770ada')"><span class="ico">🧩</span><h4>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes</h4><p>Exercise 7 · Teams Meeting Recap → Word Meeting Minutes Teams Copilot · Word Copilot The scenario: the GM just stepped out of a 60-minute &amp;q...</p></button><button class="bcard" onclick="openModal('bx-687f3b38')"><span class="ico">📊</span><h4>Exercise 8 · Excel Power Hour</h4><p>Exercise 8 · Excel Power Hour Copilot in Excel · Chat · Edit · Plan The most-asked GM question: "Show me what's actually happening ...</p></button><button class="bcard" onclick="openModal('bx-2a96c85f')"><span class="ico">📧</span><h4>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h4><p>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data Microsoft 365 Copilot · built-in Analyst agent Treat the workbook like a...</p></button><button class="bcard" onclick="openModal('bx-7e97271b')"><span class="ico">📄</span><h4>Exercise 10 · Personalised Mail Merge (Cowork)</h4><p>Exercise 10 · Personalised Mail Merge (Cowork) Microsoft 365 Copilot · Cowork · Outlook drafts The play: forget Word's Mailings ribbon. ...</p></button><button class="bcard" onclick="openModal('bx-65026605')"><span class="ico">🎨</span><h4>Exercise 11 · CV Screening from a SharePoint Folder</h4><p>Exercise 11 · CV Screening from a SharePoint Folder Microsoft 365 Copilot · Cowork · SharePoint grounding The scenario: the HR team is cappe...</p></button><button class="bcard" onclick="openModal('bx-1257371f')"><span class="ico">🧪</span><h4>Extra A · Outlook — catch up on a long thread (use your real inbox)</h4><p>Extra A · Outlook — catch up on a long thread (use your real inbox) Extra A 📧 Outlook Copilot "I just got back from a flight — what did...</p></button><button class="bcard" onclick="openModal('bx-59d804f3')"><span class="ico">📅</span><h4>Extra B · Outlook — draft an executive reply with the right tone</h4><p>Extra B · Outlook — draft an executive reply with the right tone Extra B 📧 Outlook Copilot Draft an executive reply — short, on-brand, signe...</p></button><button class="bcard" onclick="openModal('bx-22a873d3')"><span class="ico">🤝</span><h4>Extra C · Word — interrogate a long document</h4><p>Extra C · Word — interrogate a long document Extra C 📝 Word Copilot "Find me the risk in this 80-page board pack" Open 05 Contoso_...</p></button><button class="bcard" onclick="openModal('bx-9ea8fd40')"><span class="ico">📈</span><h4>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move</h4><p>Extra D · Lebaran 2026 Promo Launch Pack in 30 Minutes — the industry power move Scenario: Marketing has 4 weeks until Lebaran. The GM wants...</p></button><button class="bcard" onclick="openModal('bx-6c105361')"><span class="ico">🗂️</span><h4>Prompt tips for every Copilot surface</h4><p>Prompt Tips — for every Copilot surface The GCSE prompt framework G oal — what I want at the end (brief, deck, dashboard) C ontext — for who...</p></button></div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex6">← Build Your Own Agent</button><button data-go="intro">Back to start ↺</button></div></div></div><div class="modal-overlay" id="modal-bx-4321b14a"><div class="modal"><button class="modal-close" onclick="closeModal('bx-4321b14a')">×</button><h3>Exercise 5 · PowerPoint — Corporate Template, BCG/McKinsey Style</h3>
 <div class="callout good"><b>When to do this:</b> Open a blank <b>PowerPoint</b> (powerpoint.com or desktop). If you have a corporate template (.potx), open it first so Copilot inherits your brand. Make sure <code>05 Contoso_Strategic_Memo.docx</code> and <code>02 Contoso_KPI_Dashboard.xlsx</code> are in your OneDrive.</div>
 <div class="card">
@@ -1033,55 +1019,46 @@ Rules:
 </div>
 </div>
 </div>
-<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>📈 GM Weekly Briefing Pack in Excel · one prompt, one printable page</h3>
-<p class="sub">Excel for the web · Copilot Chat (analyse) → Copilot Edit + Plan (build) · McKinsey narrative + what-if scenario + printable A3 dashboard</p>
-<p><b>How to run it:</b> open <code>02 Contoso_KPI_Dashboard.xlsx</code> in Excel for the web. Open the <b>Copilot pane</b> (Home → Copilot). Paste the whole prompt below. Copilot will read every tab, write the narrative, run the what-if, and build the printable briefing pack - all on one Excel sheet.</p>
-<div class="prompt">You are Copilot in Excel. Ground everything on every tab of this workbook. Brand: Contoso Pizza Co. Accent colour red (#DC2626) on a dark burgundy background (#1F0808) with card surfaces in #2F1010. The goal is a printable one-page "GM Weekly Briefing Pack" - a single Excel sheet that fits on one A3 landscape page, with a McKinsey-style narrative, a what-if scenario, KPI tiles, a restaurant heatmap and a top-5 action list. Show your plan first, then execute in three steps.
+<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>Exercise 8 · Excel Power Hour</h3>
+<div class="callout good"><b>The most-asked GM question:</b> "Show me what's actually happening in the data — without me writing a formula." Excel Copilot now does this in three modes. We will run all three on <code>02 Contoso_KPI_Dashboard.xlsx</code>.</div>
+<div class="card">
+<h3>7.1 · Get the insights — one prompt</h3>
+<div class="activity">
+<div class="head"><span class="num">Task 8.1</span><span class="file">📊 Excel Copilot · Chat</span></div>
+<h4>Ask Copilot to find what matters in 12 months of KPIs</h4>
+<p>Open <code>02 Contoso_KPI_Dashboard.xlsx</code> from OneDrive. Open the <b>Copilot pane</b> (Home → Copilot). On the <code>Monthly_KPIs</code> tab, paste:</p>
+<div class="prompt">Analyse the Monthly_KPIs tab. For each KPI (Same-Store Sales Growth %, Avg Ticket (IDR k), Delivery Mix %, Food Cost %):
+- Identify the best and worst locations
+- Detect any sustained declining trend (2+ months)
+- Flag the one-month outliers that are worth a phone call
 
-STEP A - ANALYSE THE WHOLE WORKBOOK (Chat mode, no writes yet)
-Return a 6-line executive read-out and pause for confirmation:
-1. Biggest KPI gap to FY26 target - which KPI, how big in numbers, and which restaurant is dragging it down the most.
-2. Best restaurant this quarter - name it and the ONE KPI it is winning on.
-3. Worst restaurant this quarter - name it and the TWO KPIs it is losing on.
-4. Peer benchmark - worst restaurant versus the best on the biggest-gap KPI, quantify the gap in IDR or points.
-5. Period comparison - this month vs last month on the biggest-gap KPI, is the trend improving or worsening.
-6. One trend a human would miss (a Friday-vs-weekend pattern, a 3-month drift, a delivery-mix cliff, or a food-cost creep).
+Then compare against Targets_vs_Actual. Which KPI has the biggest gap to FY26 target, and which location is dragging it down the most?
 
-STEP B - RUN THE WHAT-IF SCENARIO (still in Chat, no writes yet)
-Model: "What happens if we cut Food Cost by 2 percentage points across the bottom-quartile restaurants only?" For each of those restaurants, compute:
-- Current monthly food cost value in IDR
-- Projected monthly saving in IDR
-- Projected EBITDA uplift in IDR
-- Payback period in weeks assuming a one-off IDR 15 million investment per restaurant in staff training and portion-control tools
-Return this as a compact table. Also flag: which restaurants would MOVE OUT of the bottom quartile if the scenario worked, and which would still stay stuck.
+Show the result as a 2-line executive summary, then a RAG status table by location.<button class="copy" onclick="cp(this)">Copy</button></div>
+</div>
+</div>
+<div class="card">
+<h3>7.2 · "Edit" — surgical, formula-safe changes</h3>
+<div class="activity">
+<div class="head"><span class="num">Task 8.2</span><span class="file">✏️ Excel Copilot · Edit (NEW)</span></div>
+<h4>Make a precise change without rewriting the workbook</h4>
+<p>In the Copilot pane, switch to <b>Edit</b> mode. Highlight the <code>Status</code> column on the <code>Targets_vs_Actual</code> tab and ask:</p>
+<div class="prompt">In this column, replace the emoji status with a one-word plain-text status (Green / Amber / Red) and apply conditional formatting with the matching colour. Do not change any other cells. Show me the diff first, before applying.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Why GMs love Edit:</b> they trust it. Edit shows a per-cell diff before applying — no surprise rewrites of working formulas.</div>
+</div>
+</div>
+<div class="card">
+<h3>7.3 · "Plan" — multi-step transformations with preview</h3>
+<div class="activity">
+<div class="head"><span class="num">Task 8.3</span><span class="file">📋 Excel Copilot · Plan (NEW)</span></div>
+<h4>Build an executive view in three steps Copilot proposes first</h4>
+<p>Switch the Copilot pane to <b>Plan</b>. Paste:</p>
+<div class="prompt">Plan: in a new sheet called "Exec_View", build a pivot summary — one row per location, one column per KPI — showing the FY26 H2 average. Add a "Trend" column showing ▲ / ▬ / ▼ vs FY26 H1 average. Highlight the worst quartile per KPI in red. Add a 2-sentence executive read-out at the very top.
 
-STEP C - BUILD THE PRINTABLE BRIEFING PACK ON ONE SHEET (Edit + Plan mode)
-
-C.1 On the source tab, add calculated column "Variance vs Target %" (percentage, 1 decimal). Convert the source range to an Excel Table so column filter drop-downs work.
-
-C.2 Create a new sheet called "GM Weekly Briefing Pack". Set page layout to A3 landscape, fit-to-1-page-wide-by-1-page-tall, narrow margins. Then build the pack top-to-bottom:
-
-   CANVAS - fill visible area (columns A to S, rows 1 to 60) with dark burgundy (#1F0808), gridlines off, default font Segoe UI, white text.
-
-   1. HEADER BAND (rows 1-3) - merge A1:S2, 22pt bold white: "Contoso Pizza Co - GM Weekly Briefing Pack". Row 3 right-aligned red 10pt: reporting period from latest month + "Last refreshed: <TODAY()>".
-
-   2. NARRATIVE MEMO (rows 4-11) - merge A4:S11, card surface #2F1010, 2pt red top border, white 11pt. Write a McKinsey-style 5-sentence exec memo grounded on STEP A findings. Structure: "So what:" sentence 1 (headline finding), sentence 2 (evidence in numbers), sentence 3 (peer benchmark from finding 4), sentence 4 (trend from finding 5 or 6), sentence 5 (the ask). Bold the numbers.
-
-   3. KPI TILES (rows 13-20) - one row of 5 cards, each card fill #2F1010 with 1pt red bottom border. Use the top-5 KPIs Copilot picked in STEP A (default: Same-Store Sales Growth, Avg Ticket, Delivery Mix, Food Cost, Order Accuracy). Each tile: 10pt white label at top, 32pt bold big number in the middle, 10pt "Target X" below, coloured variance chip (green better than target, red within 3%, dark red worse than 3%), and a 3-month sparkline drawn as a mini line chart inside the card.
-
-   4. RESTAURANT HEATMAP (rows 22-38) - a conditional-formatted grid: rows = restaurant names, columns = the 5 KPIs. Cell colour = performance vs target (deep red = far below, orange = slightly below, dark surface = on target, green = above). Include an average column at the far right. Sort rows worst to best on the biggest-gap KPI so the eye lands on the problem first. Above the heatmap, 12pt bold white title: "Restaurant Heatmap - who is on target, who is not".
-
-   5. WHAT-IF SCENARIO CARD (rows 40-49) - merge A40:S40, 14pt bold red title: "What if we cut Food Cost by 2pp in bottom-quartile restaurants?". Below, an embedded 6-column table from STEP B: Restaurant · Current Food Cost IDR · Projected Saving IDR · EBITDA Uplift IDR · Payback (weeks) · Moves out of bottom quartile Y/N. Format IDR values with thousands separators, right-aligned, bold the totals row. Below the table, a 10pt white "So what:" summary line.
-
-   6. TOP 5 ACTIONS FOR THE WEEK (rows 51-58) - card surface #2F1010, 2pt red top border, 12pt bold white title. Then 5 rows, each with columns: Action · Owner · By when · Expected impact. Pull the actions from STEP A findings and STEP B scenario. Actions must be concrete, specific to named restaurants, and tied to numbers.
-
-   7. FOOTER (row 60) - red 9pt right-aligned: "Open source data - use column filters to slice by Restaurant / Region / Month".
-
-C.3 Freeze rows 1-3. Set print area = A1:S60. Add a print header with the Contoso Pizza logo placeholder and page number.
-
-When done: (a) re-state the top three findings from STEP A, (b) re-state the top three what-if outcomes from STEP B, (c) list every change made in STEP C as a numbered summary so the GM can review before saving. Do not ask any other clarifying questions - proceed.<button class="copy" onclick="cp(this)">Copy</button></div>
-<p style="margin-top:12px"><b>Why this is the wow moment:</b> one paste, the GM gets the story (STEP A), the scenario (STEP B) and the printable one-page briefing pack (STEP C). The narrative is not a template - Copilot wrote it after reading every tab. The what-if actually maths the IDR uplift per restaurant. The heatmap makes 20 restaurants readable in one glance. The action list names names.</p>
-<p style="margin-top:12px"><b>Reality check on Copilot in Excel today:</b> calculated columns, table filters, conditional formatting, cell fills, sparklines and simple bar/column charts are reliable. Copilot may not get the sheet-wide dark fill perfect in one shot - if the background comes back white, follow up with: <i>"Fill the entire briefing pack sheet A1:S60 with dark burgundy #1F0808 and set the sheet gridlines off."</i> If the heatmap looks pale, follow up with: <i>"Restyle the restaurant heatmap with a 4-stop colour scale: deep red #7F1D1D for far below target, orange #F97316 for slightly below, dark surface #2F1010 for on target, green #16A34A for above target."</i></p>
+Show me the plan first. I will approve. Then execute.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout good"><b>The "Plan" win:</b> Copilot writes its own work order, you tick / untick steps, and only then does it touch the workbook.</div>
+</div>
+</div>
 </div>
 </div>
 <div class="modal-overlay" id="modal-bx-2a96c85f"><div class="modal"><button class="modal-close" onclick="closeModal('bx-2a96c85f')">×</button><h3>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h3>
