@@ -1033,19 +1033,31 @@ Rules:
 </div>
 </div>
 </div>
-<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>📈 Excel Power Hour · Power-BI-style GM dashboard in one prompt</h3>
-<p class="sub">Excel for the web · Copilot Plan + Edit · new sheet built in one shot</p>
-<p><b>How to run it:</b> open <code>02 Contoso_KPI_Dashboard.xlsx</code> in Excel for the web. On the main data tab, click <b>Copilot → Edit</b> (and <b>Plan</b> if enabled — it lays out the steps before executing).</p>
-<div class="prompt">You are Copilot in Excel. Ground everything on the Monthly_KPIs and Targets_vs_Actual tabs. Brand: Contoso Pizza Co. Accent colour red (#DC2626) on a dark burgundy background (#1F0808) with card surfaces in #2F1010. The goal is a modern, Power-BI-style executive dashboard - minimal chrome, big numbers, lots of empty space. Show your plan first (if Plan is available), then execute:
+<div class="modal-overlay" id="modal-bx-687f3b38"><div class="modal"><button class="modal-close" onclick="closeModal('bx-687f3b38')">×</button><h3>📈 Excel Power Hour · Analyse the whole workbook, then build a Power-BI-style GM dashboard</h3>
+<p class="sub">Excel for the web · Copilot Chat (Analyse) → Copilot Edit + Plan (Build)</p>
+<p><b>How to run it:</b> open <code>02 Contoso_KPI_Dashboard.xlsx</code> in Excel for the web. Open the <b>Copilot pane</b> (Home → Copilot). Paste the whole prompt below. Copilot will first read every tab and return the insights, then build the dashboard using those insights, not made-up numbers.</p>
+<div class="prompt">You are Copilot in Excel. Ground everything on every tab of this workbook (Monthly_KPIs, Targets_vs_Actual, Restaurant_Roster, Delivery_Ops, Food_Cost - whichever tabs exist). Brand: Contoso Pizza Co. Accent colour red (#DC2626) on a dark burgundy background (#1F0808) with card surfaces in #2F1010. Do the work in two clear steps and show your plan before executing.
+
+STEP A - ANALYSE THE ENTIRE WORKBOOK FIRST (Chat mode)
+Return a 6-line executive read-out. Do not touch the workbook yet.
+1. The single biggest KPI gap to FY26 target - which KPI, how big, and which restaurant is dragging it down the most
+2. The best-performing restaurant this quarter, with the one KPI it is winning on
+3. The worst-performing restaurant this quarter, with the two KPIs it is losing on
+4. One trend Copilot spotted that a human would miss (a 3-month drift, a Friday-versus-weekend pattern, a delivery-mix cliff, anything the eye would skip)
+5. One "phone call today" outlier - a single week or single store that is off enough to warrant an immediate call
+6. The three KPIs that matter most for the GM's next weekly review, ranked
+Pause here so I can confirm the findings before you build anything.
+
+STEP B - BUILD THE DASHBOARD USING THOSE FINDINGS (Edit + Plan mode)
 
 1. On the source data tab, add a calculated column "Variance vs Target %" per row. Format as percentage, 1 decimal.
 
-2. Convert the source range to an Excel Table so filter drop-downs appear on every column header. This is how the GM slices by Restaurant / Region / Month.
+2. Convert the source range to an Excel Table so filter drop-downs appear on every column header - the GM slices by Restaurant / Region / Month.
 
-3. Create a new blank sheet called "GM Dashboard - Restaurant Performance". Then transform it into a dark executive dashboard:
+3. Create a new blank sheet called "GM Dashboard - Restaurant Performance". Transform it into a dark executive dashboard:
 
    CANVAS
-   - Fill the entire visible area (columns A to N, rows 1 to 40) with dark burgundy (#1F0808) as the sheet background fill
+   - Fill the entire visible area (columns A to N, rows 1 to 42) with dark burgundy (#1F0808) as the sheet background fill
    - Remove gridlines on this sheet (View > Gridlines off)
    - Set default font to Segoe UI, white (#FFFFFF) text
 
@@ -1053,33 +1065,34 @@ Rules:
    - Merge A1:N2, dark burgundy fill, white text, 22pt bold: "Contoso Pizza Co - Executive KPI Dashboard"
    - Row 3 right-aligned in smaller red text: "Reporting period: <latest month from source> | Last refreshed: <TODAY()>"
 
-   KPI TILES (rows 5-11, one row of 5 tiles across)
-   - Five equal-width card blocks with card-surface fill (#2F1010), 1pt red border on the bottom edge only
-   - Tile 1: Same-Store Sales Growth - big number "+4.8 %" pulled from the source table via formula. Below it in smaller text: "Target +5.5 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
-   - Tile 2: Avg Ticket - big number "142 IDR k" pulled from the source table via formula. Below it in smaller text: "Target 150 IDR k" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
-   - Tile 3: Delivery Mix - big number "48.2 %" pulled from the source table via formula. Below it in smaller text: "Target 50.0 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
-   - Tile 4: Food Cost - big number "32.8 %" pulled from the source table via formula. Below it in smaller text: "Target 31.0 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
-   - Tile 5: Order Accuracy - big number "96.4 %" pulled from the source table via formula. Below it in smaller text: "Target 98.0 %" and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off).
-   - Inside each tile use 28pt bold for the big number, 10pt for the label above and the target below
+   INSIGHTS STRIP (rows 4-6) - grounded on STEP A
+   - Merge A4:N6, card-surface fill (#2F1010), 2pt red top border, white 11pt
+   - Line 1 bold white: "So what today:" then in one sentence, the biggest gap and the restaurant dragging it (from STEP A finding 1)
+   - Line 2 red text: "Watch out:" then in one sentence, the trend a human would miss (from STEP A finding 4)
+   - Line 3 white text: "Phone call today:" then the single outlier (from STEP A finding 5)
 
-   INSIGHT CHART (rows 13-28, spans full width)
-   - One horizontal bar chart titled "Same-Store Sales Growth by Restaurant (Actual vs Target)"
+   KPI TILES (rows 8-14, one row of 5 tiles across) - pick the FIVE KPIs based on STEP A (the three ranked most important, plus Same-Store Sales Growth and Food Cost by default)
+   - Five equal-width card blocks with card-surface fill (#2F1010), 1pt red border on the bottom edge only
+   - Each tile: 10pt white label at top (KPI name), 28pt bold white big number in the middle (actual value from formula), 10pt below (target from formula), and a coloured variance chip (green if better than target, red if within 3%, dark red if worse than 3% off)
+
+   INSIGHT CHART (rows 16-30, spans full width)
+   - One horizontal bar chart titled with the biggest gap KPI from STEP A - for example "Same-Store Sales Growth by Restaurant (Actual vs Target)"
    - Two series per Restaurant: Actual (solid red #DC2626) and Target (thin dark-grey outline, no fill)
-   - Sort bars worst-to-best on variance so the GM's eye goes to the problem first
-   - No chart border, no gridlines, no legend box (put a small manual legend in the top-right of the chart area using two coloured squares + labels)
+   - Sort bars worst-to-best on variance so the GM's eye goes to the problem restaurant first
+   - No chart border, no gridlines, no legend box (small manual legend in the top-right using two coloured squares + labels)
    - Chart plot area fill: #2F1010. Chart area fill: #1F0808. Axis labels white 10pt. Title white 14pt bold left-aligned.
 
-   INSIGHT STRIP (rows 30-33, full width)
-   - Merge into one dark-burgundy box with a 2pt top border in red
-   - White 12pt bold text: "So what:" followed by one line naming the single biggest variance and the owner
-   - Below it in 10pt red: "Next step:" and one concrete action for this week
+   ACTION STRIP (rows 32-36, full width)
+   - Merge A32:N36, card-surface fill (#2F1010), 2pt red top border
+   - White 12pt bold: "Next 7 days:" followed by three concrete actions Copilot recommends, each with an owner and a deadline, pulled from STEP A findings 1, 3 and 4
 
-4. Freeze rows 1-3 so the header stays visible.
+4. Freeze rows 1-6 so the header and insights strip stay visible.
 
-5. On the dashboard, add a small text link bottom-right (row 40) in red 9pt: "Open source data - use column filters to slice by Restaurant / Region / Month".
+5. On the dashboard, add a small text link bottom-right (row 42) in red 9pt: "Open source data - use column filters to slice by Restaurant / Region / Month".
 
-Do not ask any clarifying questions - proceed. When done, list every change as a numbered summary so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
-<p style="margin-top:12px"><b>Reality check on Copilot in Excel today:</b> calculated columns, table filters, conditional formatting, cell fills and simple bar/column charts are reliable. Copilot may not get the sheet-wide dark fill perfect in one shot - if the background comes back white, follow up with: <i>"Fill the entire dashboard sheet area A1:N40 with dark burgundy #1F0808 and set the sheet gridlines off."</i> If the KPI tiles look plain, follow up with: <i>"Restyle the 5 KPI tiles: dark surface fill #2F1010, 1pt red bottom border, 28pt bold white numbers, 10pt white labels."</i></p>
+When done, list every change as a numbered summary and re-state the top three findings from STEP A so the GM can review before saving. Do not ask any other clarifying questions.<button class="copy" onclick="cp(this)">Copy</button></div>
+<p style="margin-top:12px"><b>Why this feels different:</b> the numbers on the dashboard come from Copilot reading every tab first, not from a template. The So-What, Watch-Out and Phone-Call-Today lines are the human sentences the GM would actually say - Copilot is doing the analyst work, then styling it.</p>
+<p style="margin-top:12px"><b>Reality check on Copilot in Excel today:</b> calculated columns, table filters, conditional formatting, cell fills and simple bar/column charts are reliable. Copilot may not get the sheet-wide dark fill perfect in one shot - if the background comes back white, follow up with: <i>"Fill the entire dashboard sheet area A1:N42 with dark burgundy #1F0808 and set the sheet gridlines off."</i> If the KPI tiles look plain, follow up with: <i>"Restyle the 5 KPI tiles: dark surface fill #2F1010, 1pt red bottom border, 28pt bold white numbers, 10pt white labels."</i></p>
 </div>
 </div>
 <div class="modal-overlay" id="modal-bx-2a96c85f"><div class="modal"><button class="modal-close" onclick="closeModal('bx-2a96c85f')">×</button><h3>Exercise 9 · Analyst Agent — Multiple Perspectives on the Same Data</h3>
