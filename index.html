@@ -637,65 +637,62 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
 </div>
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex2">← Prepare for Quarter Closing</button><button data-go="ex4">Next: Menu Rationalisation with Copilot… →</button></div></div><div class="view-ihh" id="view-ex4"><section id="ex4">
-<div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel - Edit only</small></h2></div>
+<div class="modulehead"><div class="num">4</div><h2>Exercise 4 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel · Plan + Edit · then Create presentation from file · Draft from file in Word</small></h2></div>
 <div class="callout good"><b>The operations question.</b> Which products should we stop selling so we cut food waste and free up prep time? Each ingredient only lasts two days. We answer it end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent, just formulas, tables and charts Copilot writes for you.</div>
 <div class="card">
-<h3>4.1 - Rank products by sales - one prompt</h3>
-<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Go to the <b>sales</b> sheet. Open the Copilot pane and switch to <b>Edit</b>.</p>
+<h3>4.1 - GM Menu Rationalisation Dashboard - one prompt</h3>
+<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Open the Copilot pane, switch to <b>Edit</b> (and <b>Plan</b> if enabled - it lays out the steps before executing). Paste the single prompt below. Copilot enriches the source data, converts it to an Excel Table with column filter drop-downs (so the GM can slice by category, channel and month in-place), then builds a full one-page management dashboard on a new sheet with KPI scorecards, four charts and next-step callouts.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.1</span><span class="file">Edit with Copilot in Excel - sales sheet</span></div>
-<h4>Add a ranking column and highlight the bottom 20 percent</h4>
-<div class="prompt">On the sales sheet, do all of the following:
-1. Add a column called "Total Units Q1" that sums Jan, Feb and March unit sales per product.
-2. Add a column called "Rank" using RANK on Total Units Q1, largest first.
-3. Add a column called "Bottom 20 percent?" that returns YES for products in the bottom quintile, NO otherwise.
-4. Apply conditional formatting to the Rank column: red fill for the bottom 20 percent products.
-5. Sort the table by Total Units Q1 ascending so the weakest sellers sit at the top.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-</div>
-<div class="card">
-<h3>4.2 - Split channel performance - a new sheet</h3>
-<p class="lead">Switch to the <b>sales mix</b> sheet (lines 10 to 116 are hot promos - Copilot handles them separately).</p>
-<div class="activity">
-<div class="head"><span class="num">Task 4.2</span><span class="file">Edit with Copilot in Excel - sales mix sheet</span></div>
-<h4>Create a channel view on a new tab</h4>
-<div class="prompt">Create a new sheet called "Channel View". On it, build a pivot table from the sales mix sheet grouped by product, with columns for Takeaway, Delivery and Aggregator units. Add a total column and a "% Delivery" column. Apply a data bar to the total column. Sort ascending so weakest products come first. Add a note on row 1: "Rows 10 to 116 are hot promos - treated separately in Sheet Hot Promos".
+<div class="head"><span class="num">Task 4.1</span><span class="file">Edit with Copilot in Excel · one paste, full dashboard</span></div>
+<h4>One prompt · a full menu-rationalisation dashboard on a new sheet</h4>
+<div class="prompt">You are Copilot in Excel. You have this workbook open with sheets: sales (weekly units per product for Q1), sales mix (channel split - Takeaway, Delivery, Aggregator, plus hot-promo rows 10 to 116), SRM (ingredients per product with cost per ingredient), sub recipe (total ingredients used in Q1). Assume each ingredient has a two-day shelf life. Do not ask any clarifying questions - proceed. Show your plan first (if Plan is available), then execute all of the following in order:
 
-Then create another sheet called "Hot Promos" with the pivot restricted to rows 10 to 116 only, same layout.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-</div>
-<div class="card">
-<h3>4.3 - Cost per product and waste risk - another new sheet</h3>
-<p class="lead">Use the <b>SRM</b> sheet (ingredients per product, cost per ingredient) and the <b>sub recipe</b> sheet (total ingredients used Q1). Two-day shelf life assumption per ingredient.</p>
-<div class="activity">
-<div class="head"><span class="num">Task 4.3</span><span class="file">Edit with Copilot in Excel - new "Waste Risk" sheet</span></div>
-<h4>Build the recommendation view Copilot will fill for you</h4>
-<div class="prompt">Create a new sheet called "Waste Risk". Build a table with one row per product and the following columns:
-- Product
-- Total Units Q1 (from the sales sheet)
-- Rank (from the sales sheet)
-- Cost per Unit (calculated from SRM: sum of ingredient qty times ingredient cost per unit of product)
-- Ingredient Count (count of distinct ingredients per product from SRM)
-- Shared Ingredients Score (how many of this product’s ingredients are also used by top-selling products in the sub recipe sheet - higher means less waste if we drop it)
-- Waste Risk (HIGH if Rank in bottom 20 percent AND Shared Ingredients Score is low, MEDIUM if only one of the two, LOW otherwise)
-- Recommendation (DISCONTINUE, REVIEW, KEEP based on Waste Risk plus Cost per Unit above the median)
+1. On the sales sheet, add a column called "Total Units Q1" (Jan + Feb + Mar), a column called "Rank" (RANK on Total Units Q1, largest first), and a column called "Bottom 20 percent?" that returns YES for products in the bottom quintile, NO otherwise.
 
-Apply conditional formatting: red fill for DISCONTINUE, amber for REVIEW, green for KEEP. Sort by Waste Risk descending then Rank ascending.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
+2. Apply conditional formatting to Rank: red fill for the bottom 20 percent, green fill for the top 20 percent. Add traffic-light icons on the Bottom 20 percent? column.
+
+3. Add a column "Trend (Jan-Mar)" with an inline sparkline per row.
+
+4. On the SRM sheet, add a column "Cost per Unit" (sum of ingredient qty x ingredient cost per unit of product). On a helper column in the sales sheet, VLOOKUP or XLOOKUP Cost per Unit onto each product, then add a column "Waste Risk Score" that is HIGH if Rank is in bottom 20 percent AND the product's ingredients have low overlap with the top-10 products in the sub recipe sheet, MEDIUM if only one condition, LOW otherwise. Traffic-light icons on Waste Risk Score.
+
+5. Convert the sales range to an Excel Table (Ctrl+T style). This gives us proper column filter drop-downs at the top of every column so the GM can filter by Category, Channel-lead and Month in-place, and the sparklines and conditional formatting stay in sync when new rows arrive.
+
+6. Create a new sheet named "GM Dashboard - Menu Rationalisation" and build a one-page management dashboard on it that references the enriched sales table by formula (so it updates when the GM filters):
+
+   HEADER
+   - Red header band with the title "Contoso Pizza Co · Menu Rationalisation - GM Weekly Dashboard"
+   - Reporting period on the right, pulled from the sales sheet
+   - Small "Last refreshed" note in dark grey
+
+   KPI SCORECARDS (top row, 5 tiles across)
+   - Total SKUs on menu, SKUs in Bottom 20 percent, Weekly Ingredient Cost (Rp), Estimated Weekly Waste Cost (Rp), Top-5 Margin Contribution (Rp)
+   - Each tile shows: value · sparkline · RAG traffic light where relevant
+   - Each tile is a small cell block with a formula that reads from the enriched sales table and the SRM sheet
+
+   CHARTS
+   - Variance waterfall: Baseline weekly gross margin -> drivers (delist candidates, hot-promo losses on rows 10 to 116, waste cost of bottom 20 percent) -> Potential post-delist margin, with red bars for negative steps and green bars for positive steps
+   - Clustered column: Total Units Q1 by product, sorted worst to best, with data labels and colour-coded by Waste Risk Score
+   - Line chart: monthly trend for Total Units and Hot-Promo Units side-by-side over Jan/Feb/Mar
+   - Pareto (column + cumulative line): top 15 waste-risk products by estimated weekly ingredient waste in rupiah
+
+   CALLOUTS (bottom)
+   - "Top 3 delist candidates" - red box, three bullets pulled from the highest Waste Risk Score + lowest Rank rows, each with product name and estimated weekly saving in rupiah
+   - "Top 3 keep and double down" - green box, three bullets from the top of the Margin Contribution list, each with product name and the marketing action we recommend
+   - One-line "So what:" summary above the callouts, naming the single biggest menu risk and the owner (GM Operations)
+
+7. Freeze the header row of the dashboard so it stays visible when the GM scrolls.
+
+8. On the dashboard sheet, add a text box in the bottom right with a link back to the source data table labelled "Open source data · use column filters to slice by Category, Channel-lead and Month".
+
+When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Closing line for the audience:</b> "One prompt. Copilot enriched every row, wired up an Excel Table with column filters, then built a dashboard sheet with 5 KPI scorecards, 4 charts, RAG bands, sparklines and next-step callouts - grounded on the same workbook. No formulas hand-written, no VBA, no add-ins."</div>
+<div class="callout warn"><b>Reality check on Copilot in Excel:</b> formulas, conditional formatting, sparklines, table filters and chart types (column, line, waterfall, Pareto) are the reliable parts. Slicers wired across multiple charts are <b>not</b> something Copilot Edit produces end-to-end today - that is why this prompt uses a Table with column filter drop-downs instead, which the GM can actually use straight away. If a chart comes back as the wrong type, follow up with: <i>"Redo the variance chart on the dashboard as a proper waterfall - baseline margin -&gt; drivers -&gt; potential post-delist - with red for negative steps and green for positive steps."</i></div>
 </div>
 <div class="card">
-<h3>4.4 - The final chart the GM will show the ops team</h3>
-<div class="activity">
-<div class="head"><span class="num">Task 4.4</span><span class="file">Edit with Copilot in Excel - Waste Risk sheet</span></div>
-<h4>One chart, one takeaway line</h4>
-<div class="prompt">On the Waste Risk sheet, insert a scatter chart with Rank on X-axis and Cost per Unit on Y-axis, coloured by Recommendation (red, amber, green). Label the top 10 discontinue candidates by product name. Above the chart, add a one-line takeaway starting with "So what:" that names how many products we recommend discontinuing and the estimated ingredient cost saving per week if we do.<button class="copy" onclick="cp(this)">Copy</button></div>
-</div>
-</div>
-<div class="card">
-<h3>4.5 - Excel to PowerPoint: turn the workbook into a 5-slide ops deck</h3>
+<h3>4.2 - Excel to PowerPoint: turn the workbook into a 5-slide ops deck</h3>
 <p class="lead">Save and close the workbook you built in 4.1. Open a blank <b>PowerPoint</b> deck (or your corporate template so brand fonts and colours are inherited). Click <b>Copilot -&gt; Create presentation from file</b> and pick the workbook. When Copilot proposes an outline, click <b>Generate</b>, then open the Copilot pane and paste the prompt below to tighten the deck.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.5</span><span class="file">Copilot in PowerPoint · Create from file + Edit</span></div>
+<div class="head"><span class="num">Task 4.2</span><span class="file">Copilot in PowerPoint · Create from file + Edit</span></div>
 <h4>One prompt · a board-ready 5-slide product performance deck built from Excel</h4>
 <div class="prompt">You are Copilot in PowerPoint. This deck was generated from our product performance workbook. Ground everything on the same workbook you referenced during creation. Use our Contoso Pizza Co brand feel (red + charcoal, warm and appetite-forward). Show your plan first, then execute all of the following in order:
 
@@ -721,10 +718,10 @@ When done, list every slide with its action-title headline in the chat so the GM
 </div>
 </div>
 <div class="card">
-<h3>4.6 - Excel to Word: draft a 1-page ops memo from the workbook</h3>
+<h3>4.3 - Excel to Word: draft a 1-page ops memo from the workbook</h3>
 <p class="lead">Open a blank <b>Word</b> document (or your corporate memo template). Click <b>Copilot -&gt; Draft with Copilot</b>, click the paperclip / <b>Reference a file</b>, and pick the same product performance workbook. Paste the prompt below.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 4.6</span><span class="file">Copilot in Word · Draft from file</span></div>
+<div class="head"><span class="num">Task 4.3</span><span class="file">Copilot in Word · Draft from file</span></div>
 <h4>One prompt · a 1-page memo the ops team can actually use tomorrow</h4>
 <div class="prompt">You are Copilot in Word. Ground everything on the product performance workbook I have referenced (Ranked Sales, Channel Performance and Waste Risk sheets). Use our Contoso Pizza Co brand feel (red + charcoal). Show your plan first, then draft a 1-page ops memo, in this exact order and with real numbers pulled from the workbook:
 
@@ -747,7 +744,7 @@ DATE: [today]
 
 7. FOOTER: red 3-pt accent stripe, "Contoso Pizza Co · GM Office" on the left, "Page 1 of 1" on the right.
 
-8. Add a hyperlink block at the bottom labelled "Open source workbook" pointing to the same workbook, and "Open the 5-slide deck" pointing to the presentation from 4.5.
+8. Add a hyperlink block at the bottom labelled "Open source workbook" pointing to the same workbook, and "Open the 5-slide deck" pointing to the presentation from 4.2.
 
 Keep it to ONE page. Plain business English, no jargon. When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
 <div class="callout"><b>Closing line for the audience:</b> "Same workbook. Now a 5-slide deck AND a 1-page ops memo. The GM opens Word, references the file, one prompt, done - with the deck and workbook linked at the bottom so the ops team can drill in."</div>
