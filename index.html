@@ -857,47 +857,61 @@ Style: warm flat illustrations (pizza box, scooter, smiley, slice), bold friendl
 <div class="callout warn"><b>Why this matters:</b> Copilot Create runs inside Microsoft 365 with Enterprise Data Protection — your prompt and the resulting design stay in your tenant. The output is a polished, brand-aligned image you can drop straight into Outlook, Teams, or PowerPoint.</div>
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex4">← Menu Rationalisation with Copilot…</button><button data-go="ex6">Next: Build Your Own Agent →</button></div></div><div class="view-ihh" id="view-ex6"><section id="ex6">
-<div class="modulehead"><div class="num">6</div><h2>Exercise 6 - Build Your Own Agent<small>Microsoft 365 Copilot - Agent Builder (no code)</small></h2></div>
-<div class="callout good"><b>Ten minutes, one agent, whole team benefits.</b> You describe what you want, point it at a SharePoint folder, test it, and share. Every colleague with a Microsoft 365 Copilot licence can use it in the same Copilot pane.</div>
+<div class="modulehead"><div class="num">6</div><h2>Exercise 6 - Build Your Own Agent<small>Microsoft 365 Copilot - Agent Builder (no code) · grounded on the 12 CVs you already have</small></h2></div>
+<div class="callout good"><b>Ten minutes, one agent, whole HR team benefits.</b> You describe what you want, point it at the CVs folder, test it, and share. Every colleague with a Microsoft 365 Copilot licence can use it in the same Copilot pane - no more each recruiter uploading 5 CVs at a time.</div>
+
 <div class="card">
 <h3>6.1 - Describe the agent in plain English</h3>
 <p class="lead">Open <b>Microsoft 365 Copilot Chat</b> (m365.cloud.microsoft). Click <b>Create agent</b> in the right pane. In the description box, paste:</p>
 <div class="activity">
 <div class="head"><span class="num">Task 6.1</span><span class="file">Agent Builder - Describe</span></div>
 <h4>Let Copilot draft the agent from your description</h4>
-<div class="prompt">Create a "Store Manager Briefing Agent" for the General Manager - Operations team at Contoso Pizza Co.
+<div class="prompt">Create a "Contoso Pizza Co - Talent Screening Agent" for the HR and Restaurant Operations hiring team.
 
-Purpose: give any restaurant manager a 30-second answer on sales mix, waste and shift plans.
+Purpose: help any recruiter or hiring manager screen candidates in seconds. Answer questions like "who has 5+ years of relevant experience", "shortlist the top 3 for a Restaurant Manager role", or "compare candidates A and B side by side" - grounded only on the CVs uploaded to me.
 
-Tone: friendly, direct, one-paragraph answers with numbers when possible. Always end with the source document and page number.
+Tone: friendly, direct, structured. When you shortlist candidates, use a small table with columns: Name · Years experience · Key strengths · Fit score (1-5) · Source file.
 
-Ask a clarifying question if the user’s question is vague. Never invent data. If the answer is not in the knowledge sources, say so and suggest who to ask.<button class="copy" onclick="cp(this)">Copy</button></div>
+Rules:
+- Only answer from the CVs in the knowledge source. Never invent qualifications or years of experience.
+- If a candidate is not in the CVs, say so and suggest the recruiter add the CV.
+- Always cite the source file for every claim (e.g. "CV_04_Hesti_Wibowo.docx").
+- If the question is vague (no role, no seniority), ask one clarifying question first.
+- Never rank candidates by name, gender, age or nationality unless the recruiter explicitly asks for a diversity slice.<button class="copy" onclick="cp(this)">Copy</button></div>
 </div>
 </div>
+
 <div class="card">
-<h3>6.2 - Add a knowledge source (SharePoint folder)</h3>
-<p class="lead">Agent Builder asks you what the agent should know. Point it at the SharePoint site that holds your team’s reference documents.</p>
+<h3>6.2 - Add the CVs folder as the knowledge source</h3>
+<p class="lead">Agent Builder asks you what the agent should know. Point it at the SharePoint or OneDrive folder that already holds the 12 CVs (the same folder used in the CV Screening exercise).</p>
 <div class="activity">
 <div class="head"><span class="num">Task 6.2</span><span class="file">Agent Builder - Knowledge</span></div>
-<h4>Ground the agent so answers are traceable</h4>
-<div class="prompt">Add the following as knowledge sources:
-- The SharePoint folder "GM Briefings" (all PDF and Word files)
-- The Excel file /02 Contoso_KPI_Dashboard.xlsx
-- The Word file /05 Contoso_Strategic_Memo.docx
+<h4>Ground the agent so answers are traceable back to a CV</h4>
+<div class="prompt">Add the following as the knowledge source:
+- The SharePoint (or OneDrive) folder "CVs" that contains all 12 candidate CVs (CV_01_Dewi_Saputra.docx through CV_12_Galih_Setiawan.docx).
 
-Rule: only answer from these sources. When you quote a number, add the file name and sheet or page in brackets.<button class="copy" onclick="cp(this)">Copy</button></div>
+Rules for the agent:
+- Only answer from files in this folder.
+- Every claim must cite the CV file name.
+- If a candidate detail is not in the CV, say "not stated in CV" - do not infer from the name.
+- If a role brief is uploaded during a chat, treat it as the target profile and score every candidate against it.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Why this beats the 5-file upload limit:</b> in the CV Screening exercise, the recruiter can only attach 5 CVs per chat. When the agent is grounded on the folder, it reads all 12 (or 50, or 500) at once - and every colleague you share the agent with gets the same behaviour, no re-uploading.</div>
 </div>
 </div>
+
 <div class="card">
 <h3>6.3 - Test with three questions, then publish</h3>
 <div class="activity">
 <div class="head"><span class="num">Task 6.3</span><span class="file">Agent Builder - Test pane</span></div>
 <h4>Three quick tests before you share</h4>
-<div class="prompt">Test 1: "What is our worst KPI this month and by how much?"
-Test 2: "Give me three talking points for tomorrow’s ops call, one paragraph each."
-Test 3: "Draft a two-line WhatsApp update I can send to the leadership team right now."
+<div class="prompt">Test 1: "Who in this pool has the strongest multi-outlet restaurant management experience? Give me the top 3 with a one-line reason each."
 
-If any answer is wrong or missing a citation, edit the instructions and try again. Once all three pass, click Publish and share with the "General Manager - Operations team" security group.<button class="copy" onclick="cp(this)">Copy</button></div>
+Test 2: "I need to hire a Restaurant Manager for a flagship dine-in + delivery outlet doing 4,000+ orders a week. Shortlist the 3 best candidates and score each 1-5 on: multi-shift ops experience, delivery-channel management, food-safety track record, people leadership, English proficiency. Return a table with sources."
+
+Test 3: "Compare CV_02_Mega_Mahendra and CV_07_Budi_Anggara side by side for a Delivery Operations Lead role. Which one would you interview first and why?"
+
+If any answer is wrong, missing a citation, or invents facts, edit the agent instructions in 6.1 and try again. Once all three pass, click Publish and share with the "HR Recruiters" and "Restaurant Operations Hiring Managers" security groups.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout warn"><b>Reality check on Agent Builder:</b> the agent reads the folder on demand and may take a few extra seconds on the first question of the day. If a citation link does not resolve, check that the CV file has been synced to the SharePoint library the agent is pointed at, not only to a local OneDrive folder.</div>
 </div>
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex5">← Create a Visual Infographic</button><button data-go="extras">Next: Bonus →</button></div></div><div class="view-ihh" id="view-extras"><section id="extras">
