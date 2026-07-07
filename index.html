@@ -565,7 +565,7 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
 </div>
 </div>
 </section><div class="lab-nav-ihh"><button class="secondary" data-go="ex1">← Daily Briefing</button><button data-go="ex4">Next: Menu Rationalisation with Copilot… →</button></div></div><div class="view-ihh" id="view-ex4"><section id="ex4">
-<div class="modulehead"><div class="num">3</div><h2>Exercise 3 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel · Plan + Edit · then Create presentation from file · then Draft memo from the deck in Word · OR one-prompt Cowork alternative (Task 3.4)</small></h2></div>
+<div class="modulehead"><div class="num">3</div><h2>Exercise 3 - Menu Rationalisation with Copilot in Excel<small>Copilot in Excel · Plan + Edit · then Create presentation from file · then Draft memo from the workbook + deck in Word · OR one-prompt Cowork alternative (Task 3.4)</small></h2></div>
 <div class="callout good"><b>The operations story in one line.</b> "Today we throw away Rp X of ingredients every week because we prep more than we sell. If we (1) discontinue the products that waste the most and (2) buy only what we need for the next 2 days, we save Rp Y per week = Rp Z per year." Copilot answers this in three moves: <b>PROJECT</b> today's waste per product · <b>FORECAST</b> the right ingredient purchase for next week · <b>QUANTIFY</b> the money saved. All on new sheets, raw workbook untouched.<br><br><b>The four raw sheets</b> (all P098 - PHD Jatiwarna, 01/01/2026 to 31/03/2026):<br><b>Sales</b> - outlet KPIs (Bill, Cover, Food Gross Sales, Beverage Gross Sales) by channel Eat In / Dine In / Takeaway / Delivery / Aggregator. Header row 8, data row 9+. NOT per-product; used only for period label and channel totals.<br><b>Sales Mix</b> - the per-product sales sheet. Header row 8, sub-header row 9 (each channel = Quantity + Sales rupiah). <b>Exclude these bundle/promo rows from base sales:</b> rows 10-116 (Hot Promo bundles), row 117 (HOT PROMO subtotal), rows 456-481 (TikTok / QPON / Partnership promo bundles - none of these match SRM anyway because they are marketing campaigns, not menu items). Real per-product menu items are rows 118-455 and 482 onwards.<br><b>SRM</b> - the recipe Bill-of-Materials. Multi-row layout: each recipe has one header row (SKU, Product Name, Recipe Code, Recipe Price) followed by ingredient rows (Ingredient Code, Ingredient Name, Netweight, Usage qty, Unit, Price, Total Cost). Header row 9, data row 10+. Shared bases like <b>Dough Regular Alternative</b>, <b>Cornmeal Alternative</b>, <b>Mozzarella Cheese</b> and <b>Universal Sauce</b> appear across many product recipes.<br><b>Sub Recipe</b> - actual 3-month consumption per recipe base. Header row 8. Columns A-D: Recipe Code, Recipe Name, Usage (total qty Jan to Mar), Unit.<br><br>We answer all three questions end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent - without touching a single cell of the raw data.</div>
 <div class="card">
 <h3>3.1 - Menu Rationalisation: Project Waste + Forecast Purchase + Quantify Saving - one prompt</h3>
@@ -723,62 +723,71 @@ When done, list every change you made as a numbered summary at the end of the ch
 <p class="lead">Save and close the workbook you built in 3.1. Open a blank <b>PowerPoint</b> deck (or your corporate template so brand fonts and colours are inherited). Click <b>Copilot -&gt; Create presentation from file</b> and pick the workbook. When Copilot proposes an outline, click <b>Generate</b>, then open the Copilot pane and paste the prompt below to tighten the deck.</p>
 <div class="activity">
 <div class="head"><span class="num">Task 3.2</span><span class="file">Copilot in PowerPoint · Create from file + Edit</span></div>
-<h4>One prompt · a board-ready 5-slide product performance deck built from Excel</h4>
-<div class="prompt">You are Copilot in PowerPoint. This deck was generated from our product performance workbook. Ground everything on the same workbook you referenced during creation. Use our Contoso Pizza Co brand feel (red + charcoal, warm and appetite-forward). Show your plan first, then execute all of the following in order:
+<h4>One prompt · a board-ready 5-slide menu rationalisation deck built from the Excel workbook</h4>
+<div class="prompt">You are Copilot in PowerPoint. This deck was generated from the menu rationalisation workbook I built in 3.1 (sheets: GM Working - Waste + Forecast, GM Working - Ingredient Forecast, GM Glossary, GM Dashboard). Ground every number on that workbook. Use our Contoso Pizza Co brand feel (red + charcoal, warm and appetite-forward). Show your plan first, then execute all of the following in order:
 
 1. RESTRUCTURE the deck into exactly 5 slides for the operations board, each with an ACTION-TITLE headline (states the conclusion, not the topic):
 
-   Slide 1 - Cover: "Contoso Pizza Co · Q3 Product Performance - What we recommend the ops board approves"
-   Slide 2 - Sales scorecard: the ranked product list from the workbook, top 10 + bottom 10, as a clean two-column table with margin per unit
-   Slide 3 - Channel view: a stacked bar of dine-in vs delivery vs take-away contribution by product family, with the biggest channel gap called out
-   Slide 4 - Waste risk: a scatter of Rank (x-axis) vs Cost per Unit (y-axis), coloured by Recommendation (red/amber/green), top 10 discontinue candidates labelled
-   Slide 5 - Recommendation: number of products to discontinue, weekly ingredient cost saving, owner, by-when, and one clear board decision
+   Slide 1 - Cover: "Contoso Pizza Co · Menu Rationalisation - What we recommend the ops board approves"
+   Slide 2 - Executive summary: three headline numbers pulled from the GM Dashboard KPI scorecards - "[n] SKUs to cut", "Rp [X] weekly waste today", "Rp [Y] weekly saving if we adopt the plan". One-line "So what" underneath.
+   Slide 3 - The cut list: top 10 DISCONTINUE candidates from the GM Working sheet as a horizontal bar chart (product name on Y-axis, Weekly Waste Cost on X-axis, red bars, data labels on). Paste the chart image directly from the GM Dashboard sheet. Include the one-line "Why" from the workbook next to each bar.
+   Slide 4 - The right-size plan: top 10 shared bases from the GM Working - Ingredient Forecast sheet with columns Product Count · Avg Weekly Usage · Recommended Prep per Week (with 10% buffer). Paste the "Top 10 Shared Bases" chart image from the GM Dashboard. Highlight Dough Regular Alternative, Mozzarella Cheese, Universal Sauce if they are in the top 10.
+   Slide 5 - The ask: three explicit board decisions - (1) approve the DISCONTINUE list from slide 3, (2) adopt the forecast prep quantities from slide 4, (3) review results in 90 days. Add owner (GM Operations · Head Chef · Head of Purchasing) and by-when for each.
 
-2. Add SPEAKER NOTES on every slide - 30 to 45 seconds of natural spoken script per slide the GM can read verbatim.
+2. Add SPEAKER NOTES on every slide - 30 to 45 seconds of natural spoken script per slide the GM can read verbatim, referencing the exact numbers from the workbook (not paraphrases).
 
-3. Add a slim "So what:" strip in red at the bottom of slides 2, 3, 4 with the single most important takeaway from that slide.
+3. Add a slim "So what:" strip in red at the bottom of slides 2, 3, 4 with the single most important takeaway from that slide (e.g. slide 3: "Cutting these 10 SKUs saves Rp [X] per week - almost all of it from products already in the bottom quintile of sales").
 
 4. Apply brand palette throughout: red for emphasis, charcoal for headings, warm grey for body. Body font 18pt minimum. No more than 25 words per slide body.
 
-5. Insert a final APPENDIX slide listing the data sources with a hyperlink back to the source workbook and the Excel dashboard sheet.
+5. Insert a final APPENDIX slide with a hyperlink back to /Contoso_Pizza_Menu_Rationalisation.xlsx and specifically the GM Dashboard sheet, plus one line naming the assumptions (2-day shelf life · 3.5 prep cycles/week · 10 percent safety buffer · 5 percent residual waste · DISCONTINUE = Bottom 20 percent AND Waste-to-Sales HIGH).
 
-When done, list every slide with its action-title headline in the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
-<div class="callout"><b>Closing line for the audience:</b> "The workbook was the source of truth. One click - Create presentation from file - and the deck exists. One prompt - and it is now a 5-slide board-ready pack with action titles, brand palette, speaker notes and a linked appendix."</div>
-<div class="callout warn"><b>Reality check on Create-from-file:</b> Copilot may need a moment on large workbooks and can produce more slides than requested - if so, follow up with: <i>"Consolidate the deck into exactly 5 slides using the structure above, keep every action-title headline, move any extra content to the appendix."</i></div>
+When done, list every slide with its action-title headline and the workbook cell/chart it sources from in the chat so the GM can verify traceability before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Closing line for the audience:</b> "The workbook was the source of truth. One click - Create presentation from file - and the deck exists. One prompt - and it is now a 5-slide board-ready menu rationalisation pack with action titles, brand palette, speaker notes and a linked appendix. Same story as the Excel: project the waste, forecast the prep, quantify the saving."</div>
+<div class="callout warn"><b>Reality check on Create-from-file:</b> Copilot may need a moment on large workbooks and can produce more slides than requested - if so, follow up with: <i>"Consolidate the deck into exactly 5 slides using the structure above, keep every action-title headline, move any extra content to the appendix."</i> Copilot in PowerPoint is best at pasting chart IMAGES from the workbook rather than rebuilding charts natively - if a slide shows a rebuilt chart that looks off, follow up with: <i>"Replace the chart on slide 3 with the actual "Top 10 DISCONTINUE" chart image from the GM Dashboard sheet - do not rebuild it."</i></div>
 </div>
 </div>
 <div class="card">
-<h3>3.3 - PowerPoint to Word: draft a 1-page ops memo from the deck you just built</h3>
-<p class="lead">Save and close the 5-slide deck from 3.2 so Copilot can index it. Open a blank <b>Word</b> document (or your corporate memo template). Click <b>Copilot -&gt; Draft with Copilot</b>, click the paperclip / <b>Reference a file</b>, and pick the 5-slide ops deck you just created (not the Excel workbook). Paste the prompt below. Copilot summarises the deck (which is already curated - action titles, scorecard, channel view, waste risk, recommendation) and lands a one-page memo the GM can send.</p>
+<h3>3.3 - Excel + PowerPoint to Word: draft a 1-page ops memo grounded on the workbook and the deck</h3>
+<p class="lead">Save and close the 5-slide deck from 3.2 so Copilot can index it. Open a blank <b>Word</b> document (or your corporate memo template). Click <b>Copilot -&gt; Draft with Copilot</b>, click the paperclip / <b>Reference a file</b>, and add BOTH files as references: the menu rationalisation workbook from 3.1 (<code>Contoso_Pizza_Menu_Rationalisation.xlsx</code>) AND the 5-slide deck from 3.2. Paste the prompt below. Grounding on both means every number lands on the same figure the GM already saw on the dashboard and on the slides.</p>
 <div class="activity">
-<div class="head"><span class="num">Task 3.3</span><span class="file">Copilot in Word · Draft from the 3.2 deck</span></div>
-<h4>One prompt · a 1-page memo built off the deck, not the raw workbook</h4>
-<div class="prompt">You are Copilot in Word. Ground everything on the 5-slide ops deck I have referenced (the one built in exercise 3.2 - Sales scorecard, Channel view, Waste risk, Recommendation). Use our Contoso Pizza Co brand feel (red + charcoal). Show your plan first, then draft a 1-page ops memo, in this exact order, pulling every number from the slides (not from raw data):
+<div class="head"><span class="num">Task 3.3</span><span class="file">Copilot in Word · Draft from the 3.1 workbook + 3.2 deck</span></div>
+<h4>One prompt · a 1-page ops memo grounded on the Excel workbook (same source as Cowork Task 3.4)</h4>
+<div class="prompt">You are Copilot in Word. Ground everything on the two files I have referenced: the menu rationalisation workbook from 3.1 (sheets GM Working - Waste + Forecast, GM Working - Ingredient Forecast, GM Glossary, GM Dashboard) AND the 5-slide ops deck from 3.2. Every number must match the workbook exactly - the deck is only there to guide structure and confirm figures. Use our Contoso Pizza Co brand feel (red + charcoal). Show your plan first, then draft a 1-page ops memo in this exact order:
 
-MEMO TITLE: "Product Performance Q3 - What we are keeping, cutting and doubling down on"
+MEMO TITLE: "Contoso Pizza Co · Menu Rationalisation - What we recommend the ops board approves"
 FROM: General Manager · Operations
 TO: Director of Operations · Ops Board
 DATE: [today]
 
-1. HEADLINE - one sentence stating the recommendation and the weekly saving, taken verbatim from the Recommendation slide.
+1. HEADLINE - one sentence naming the single biggest weekly waste driver (from the "Top 10 DISCONTINUE" chart on the GM Dashboard) and the total weekly saving if the plan is adopted (from the "Weekly Saving" KPI scorecard on the GM Dashboard).
 
-2. "WHAT WE ARE KEEPING" - top 5 products from the Sales scorecard slide, each as a one-line bullet naming the product, weekly units, margin per unit, and the reason we keep it.
+2. SUMMARY TABLE (3 columns: Metric · Value · So what) placed right under the headline. Rows:
+   - "Total regular SKUs on menu" · [n] · "The base we are rationalising (excludes hot promos and partnership bundles)"
+   - "SKUs to DISCONTINUE" · [n] · "Cuts Rp [X] per week of waste"
+   - "Weekly saving after right-sizing prep" · Rp [Y] · "Free cash for reinvestment or margin recovery"
+   - "Match coverage" · [Z] percent · "Data-quality signal - anything below 90 percent means SKU alignment needs a fix"
 
-3. "WHAT WE ARE CUTTING" - the discontinue-recommended products from the Waste risk slide, each as a one-line bullet naming the product, rank, waste-risk score, and estimated weekly ingredient saving.
+3. "TOP 5 TO DISCONTINUE" - five one-line bullets, each: product name · weekly waste in rupiah · the one-line "Why" text from the GM Working sheet. Pull these directly from the DISCONTINUE-flagged rows sorted by Weekly Waste Cost descending.
 
-4. "WHAT WE ARE DOUBLING DOWN ON" - two products showing the strongest delivery-channel growth from the Channel view slide, with the growth number and the marketing action we recommend.
+4. "TOP 5 TO KEEP AND RIGHT-SIZE PREP" - five one-line bullets, each: product name · current prep batch size vs recommended prep per 2-day cycle · weekly saving in rupiah. Pull from the KEEP-flagged rows sorted by Weekly Saving vs Today descending.
 
-5. INSERT a small 3-column summary table right under the headline: Metric · Value · So what. Populate with: Products to keep · [n] · Protects [X]% of margin; Products to cut · [n] · Saves Rp [Y] million per week; Delivery growth · [Z]% · Reinvest in delivery bundle marketing.
+5. "90-DAY ACTION PLAN" - three actions, each with owner and by-when:
+   - Remove DISCONTINUE SKUs from menu boards, POS and delivery apps · Head Chef + Operations Manager · Week 2
+   - Right-size prep batches for the top 10 shared bases to the recommended weekly quantities · Head Chef + Head of Purchasing · Week 1
+   - Track actual weekly waste vs projected for 90 days and report back · GM Operations · Week 13
 
-6. INSERT a pull-quote callout in red under the summary table with the 1-sentence "So what" line from the Recommendation slide.
+6. "THE ASK" - one sentence: "Approve the DISCONTINUE list, adopt the forecast prep quantities, and hold the 90-day review meeting."
 
-7. FOOTER: red 3-pt accent stripe, "Contoso Pizza Co · GM Office" on the left, "Page 1 of 1" on the right.
+7. INSERT a pull-quote callout in red under the summary table with a one-sentence "So what" line stating total annualised saving (Weekly Saving x 52).
 
-8. Add a hyperlink block at the bottom labelled "Open the 5-slide deck" pointing to the presentation from 3.2, and a second link "Open source workbook" pointing to Data Contoh.xlsx.
+8. FOOTER: red 3-pt accent stripe, "Contoso Pizza Co · GM Office" on the left, "Page 1 of 1" on the right.
 
-Keep it to ONE page. Plain business English, no jargon. Every number must come from the deck - if a slide is missing a value, use [PLACEHOLDER] rather than inventing. When done, list every slide-to-section mapping at the end of the chat so the GM can verify traceability before sending.<button class="copy" onclick="cp(this)">Copy</button></div>
-<div class="callout"><b>Closing line for the audience:</b> "Same source, three formats. Excel built the dashboard. PowerPoint turned it into 5 board slides. Word landed a 1-page memo off that same deck - so the numbers on paper match the numbers on the slides, exactly."</div>
-<div class="callout warn"><b>Why the deck (not the workbook):</b> Draft-from-file in Word summarises rather than reads every row, so pointing it at the raw Excel gives you paraphrased numbers. Pointing it at the 3.2 deck (which already has curated action titles, a scorecard table and one recommendation) keeps the memo grounded in figures the GM has already signed off. If a slide value looks off, follow up with: <i>"Re-check the Waste risk scatter on slide 4 and update the "cutting" bullets to match exactly."</i></div>
+9. Add a hyperlink block at the bottom labelled "Open the 5-slide deck" pointing to the presentation from 3.2, and a second link "Open source workbook" pointing to Contoso_Pizza_Menu_Rationalisation.xlsx.
+
+Keep it to ONE page. Plain business English, no jargon. Every number must come from the workbook - if any figure is missing, use [PLACEHOLDER] rather than inventing. Use the same DISCONTINUE rule the workbook used (Bottom 20 percent AND Waste-to-Sales HIGH) - do not re-invent the thresholds. When done, list every bullet with the exact workbook cell or slide it sources from in the chat so the GM can verify traceability before sending.<button class="copy" onclick="cp(this)">Copy</button></div>
+<div class="callout"><b>Closing line for the audience:</b> "Same source, three formats. Excel built the dashboard. PowerPoint turned it into 5 board slides. Word landed a 1-page memo grounded on both - so the numbers on paper match the dashboard and the slides, exactly. Identical to what Cowork would produce in one shot."</div>
+<div class="callout warn"><b>Why reference BOTH files:</b> Draft-from-file in Word summarises rather than reads every row, so grounding on the workbook alone risks paraphrased numbers. Grounding on the deck alone loses the underlying figures Copilot needs for the "Why" bullets and the KPI table. Referencing both keeps Word anchored on the workbook (source of truth for every number) while using the deck to confirm structure and headlines. If any number drifts from the workbook, follow up with: <i>"Re-check the "Top 5 to DISCONTINUE" bullets against the DISCONTINUE-flagged rows on the GM Working - Waste + Forecast sheet, sorted by Weekly Waste Cost descending. Match names and rupiah figures exactly."</i></div>
 </div>
 <div class="activity">
 <div class="head"><span class="num">Task 3.4</span><span class="file">👥 Cowork · alternative one-prompt path · Excel + Word + PowerPoint + HTML + email + meeting</span></div>
