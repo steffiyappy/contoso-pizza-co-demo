@@ -652,6 +652,12 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
 - "SRM" - the recipe Bill-of-Materials. Multi-row layout: for each recipe, ONE product-row has columns A-F and N filled (SKU, Product Name, Recipe Code, Recipe Name, Recipe Usage, Recipe Unit, Recipe Price); the rows immediately BELOW (with columns A-F blank) list that recipe's ingredients in columns G-M (Ingredient Code, Ingredient Name, Netweight, Usage qty per porsi, Unit, Ingredient Price per unit, Total Ingredient Cost). Header row 9, data row 10 onwards.
 - "Sub Recipe" - actual 3-month ingredient consumption. Header row 8. Columns A-D: Recipe Code, Recipe Name, Usage (total qty consumed Jan to Mar), Unit.
 
+NAMING RECONCILIATION - the two sheets do NOT use identical product names. Sales Mix uses full names like "Original/Regular Beefy Mushroom", while SRM uses abbreviated names like "OR/R Beefy Mushroom" for the same product. Item Codes / SKUs also do not always line up exactly (Sales Mix Item Codes are 15 digits, SRM SKUs are similar but not always identical). To match products across the two sheets you must:
+  (a) Build a small helper block on the GM Working sheet titled "Name Map" with two columns: "Sales Mix Description" and "Normalised Key". Populate the Normalised Key by stripping the "Original/Regular " prefix from Sales Mix descriptions and replacing it with "OR/R " (and applying the reverse for common abbreviations: "Cheesy " -> "CH/", "Meat Lovers" stays, etc.).
+  (b) Build the equivalent Normalised Key on a second helper block reading from SRM Product Name.
+  (c) Join on the Normalised Key first; if no match, fall back to a fuzzy match on the last 8 digits of the SKU / Item Code.
+  (d) In a "Match Status" helper column, mark each product as MATCHED, MATCHED-BY-SKU, or UNMATCHED so the GM can see coverage. Flag any UNMATCHED product on the dashboard as a data-quality warning.
+
 Business rule to model: once the ingredients listed in SRM are prepped for a recipe, they last only 2 days. Anything not sold within 2 days is thrown out = waste. Assume 3.5 x 2-day prep cycles per week (a 2-day cycle 3 or 4 times a week = 3.5 average).
 
 IMPORTANT: Do NOT modify Sales, Sales Mix, SRM or Sub Recipe. No new columns, no reformatting, no table conversion on these four sheets. Everything you build must live on NEW sheets that pull from the raw sheets by formula (SUMIFS, XLOOKUP, INDEX-MATCH). Treat the four sheets as read-only.
@@ -670,9 +676,12 @@ Do not ask any clarifying questions - proceed. Show your plan first (if Plan is 
    - "Bottom 20 percent?" - YES for products in the bottom quintile of Rank.
    - "Trend (channel split)" - inline sparkline of the five channel Quantity values for that row.
 
-   RECIPE COST BLOCK - one Prep Batch Cost per product from SRM
-   - "Recipe Code" - XLOOKUP from Sales Mix Item Code into SRM column A to find the matching SKU, and return the recipe-header row's Recipe Code.
-   - "Prep Batch Cost (Rp per porsi)" - XLOOKUP the same Recipe Code into SRM to return the Recipe Price cell (the total-cost figure Copilot finds on the recipe-header row). If Recipe Price is blank, sum the Total Ingredient Cost cells for that recipe block on SRM.
+   RECIPE COST BLOCK - one Prep Batch Cost per product from SRM (matched via Name Map, not raw description)
+   - "Normalised Key" - the helper key built from the Sales Mix Description (see Naming Reconciliation above).
+   - "SRM Recipe Name" - XLOOKUP the Normalised Key into the SRM helper block to return the matching Recipe Name, so the GM can see what got matched.
+   - "Recipe Code" - XLOOKUP the Normalised Key into SRM to return the recipe-header row's Recipe Code.
+   - "Prep Batch Cost (Rp per porsi)" - XLOOKUP the same Recipe Code into SRM to return the Recipe Price cell (the total-cost figure on the recipe-header row). If Recipe Price is blank, sum the Total Ingredient Cost cells for that recipe block on SRM.
+   - "Match Status" - MATCHED / MATCHED-BY-SKU / UNMATCHED (from the Name Map fallback logic).
    - "Shared-Base Flag" - YES if any ingredient in this product's SRM block is one of: Dough Regular Alternative, Cornmeal Alternative, Mozzarella Cheese, Universal Sauce, Garlic Oil (that is, ingredients that also appear in other products' SRM blocks). Otherwise NO. Use COUNTIF across SRM column H (Ingredient Name) to detect ingredients that appear in more than one recipe block.
 
    2-DAY WASTE BLOCK - the shelf-life logic
@@ -710,6 +719,7 @@ Do not ask any clarifying questions - proceed. Show your plan first (if Plan is 
 
    KPI SCORECARDS (top row, 5 tiles across)
    - Total regular SKUs on menu (from Sales Mix row 118 onwards) · SKUs recommended DISCONTINUE · Weekly Waste Cost today (Rp) · Projected Weekly Waste after Forecast (Rp) · Weekly Saving if the GM adopts the plan (Rp)
+   - Add a 6th small tile: "Match coverage" - showing % of products MATCHED to SRM (data-quality signal). Amber if below 90%, red if below 75%.
    - Each tile shows: value · sparkline · RAG traffic light, all formulas referencing the GM Working tables
 
    CHARTS
@@ -727,11 +737,11 @@ Do not ask any clarifying questions - proceed. Show your plan first (if Plan is 
 
 7. On the dashboard sheet, add a text box in the bottom right with links: "Open working analysis - filter by Category, Discontinue Recommendation and Channel" (jumps to GM Working) and "Open raw sales mix - regulars start at row 118" (jumps to Sales Mix row 118).
 
-Reminders: Sales, Sales Mix, SRM and Sub Recipe must remain untouched. Hot-promo rows 10 to 116 in Sales Mix are excluded from base per-product sales. Shared ingredients like Dough Regular Alternative appear in multiple SRM recipe blocks and their waste is pro-rated on the Ingredient Forecast block, never double-counted in per-product Weekly Waste Cost.
+Reminders: Sales, Sales Mix, SRM and Sub Recipe must remain untouched. Hot-promo rows 10 to 116 in Sales Mix are excluded from base per-product sales. SRM uses abbreviated product names ("OR/R Beefy Mushroom") while Sales Mix uses full names ("Original/Regular Beefy Mushroom") - always match via the Name Map helper block on GM Working, not by raw description. Shared ingredients like Dough Regular Alternative appear in multiple SRM recipe blocks and their waste is pro-rated on the Ingredient Forecast block, never double-counted in per-product Weekly Waste Cost.
 
 When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
 <div class="callout"><b>Closing line for the audience:</b> "One prompt. Copilot answered both operations questions in one dashboard - which products to discontinue because they waste too much once ingredients are prepped, and how much of each ingredient to prep per week going forward. Hot promos excluded from the base sales, shared bases like dough and mozzarella pro-rated across parent products - no double-counting. Raw workbook untouched."</div>
-<div class="callout warn"><b>Reality check on Copilot in Excel:</b> SUMIFS with row-range exclusion (row 118 onwards), XLOOKUP into SRM's multi-row recipe blocks, COUNTIF for shared-ingredient detection, conditional formatting, sparklines, table filters and chart types (column, line, waterfall, Pareto) are the reliable parts. Slicers wired across multiple charts are <b>not</b> something Copilot Edit produces end-to-end today - that is why this prompt uses Tables with column filter drop-downs. If Copilot picks up hot-promo rows or gets shared-ingredient pro-ration wrong, follow up with: <i>"Rebuild the Total Units Q1 (base) column using SUMIFS on Sales Mix from row 118 downwards only - exclude rows 10 to 116 and the HOT PROMO subtotal on row 117. For any ingredient in SRM appearing in more than one recipe block (e.g. Dough Regular Alternative, Mozzarella Cheese, Universal Sauce), do not add the full ingredient cost to every parent product - pro-rate on the Ingredient Forecast block only."</i></div>
+<div class="callout warn"><b>Reality check on Copilot in Excel:</b> SUMIFS with row-range exclusion (row 118 onwards), XLOOKUP into SRM's multi-row recipe blocks, COUNTIF for shared-ingredient detection, conditional formatting, sparklines, table filters and chart types (column, line, waterfall, Pareto) are the reliable parts. The <b>naming reconciliation</b> between Sales Mix ("Original/Regular Beefy Mushroom") and SRM ("OR/R Beefy Mushroom") is the biggest failure mode - if Match coverage on the dashboard tile comes back below 90 percent, the waste and forecast numbers are unreliable. Slicers wired across multiple charts are <b>not</b> something Copilot Edit produces end-to-end today - that is why this prompt uses Tables with column filter drop-downs. If Copilot picks up hot-promo rows, gets the naming match wrong, or double-counts shared ingredients, follow up with: <i>"Rebuild the Total Units Q1 (base) column using SUMIFS on Sales Mix from row 118 downwards only - exclude rows 10 to 116 and the HOT PROMO subtotal on row 117. Re-check the Name Map: SRM uses OR/R as the prefix, Sales Mix uses Original/Regular - build the Normalised Key both ways and re-run the XLOOKUP. For any ingredient in SRM appearing in more than one recipe block (e.g. Dough Regular Alternative, Mozzarella Cheese, Universal Sauce), do not add the full ingredient cost to every parent product - pro-rate on the Ingredient Forecast block only."</i></div>
 </div>
 <div class="card">
 <h3>4.2 - Excel to PowerPoint: turn the workbook into a 5-slide ops deck</h3>
