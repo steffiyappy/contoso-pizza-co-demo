@@ -641,10 +641,10 @@ Tone: direct, board-ready, no jargon. Max 350 words. Use [PLACEHOLDER] for anyth
 <div class="callout good"><b>The operations question.</b> Ops wants to answer two things in one pass, without touching the raw data: (1) <b>which products generate the most ingredient waste and should be discontinued</b> - because once the ingredients listed in <b>SRM</b> are prepped, they only last <b>2 days</b>, so slow-selling products throw away Tomato, Mayo, Herbs, Beef Topping and the rest every 2 days - and (2) <b>how much of each ingredient should we prep going forward</b> (forecast). The workbook has four sheets, all report exports for outlet <b>P098 - PHD Jatiwarna</b>, period <b>01/01/2026 to 31/03/2026</b>: <br><br><b>Sales</b> - outlet KPIs (Bill, Cover, Food Gross Sales, Beverage Gross Sales) split by channel Eat In / Dine In / Takeaway / Delivery / Aggregator. Header row 8, data row 9+. This is NOT per-product; use it only for period, channel totals and cover counts.<br><b>Sales Mix</b> - the per-product sales sheet. Header row 8, sub-header row 9 (each channel has a Quantity column and a Sales rupiah column). Columns: Item Code, Description, Eat In (Qty, Sales), Dine In (Qty, Sales), Takeaway (Qty, Sales), Delivery (Qty, Sales), Aggregator (Qty, Sales), Total (Qty, Sales). <b>Rows 10 to 116 are Hot Promo bundles (row 117 is the HOT PROMO subtotal) and MUST be excluded from base per-product sales. Real regular-menu products start at row 118.</b><br><b>SRM</b> - the Bill-of-Materials per product recipe. Multi-row layout: the first row for a product has SKU, Product Name, Recipe Code, Recipe Name, Recipe Usage, Recipe Unit and Recipe Price filled in; the rows immediately below (with the first columns blank) list every ingredient for that recipe with Ingredient Code, Ingredient Name, Netweight, Usage qty, Ingredient Unit, Price and Total Price. Shared bases like <b>Dough Regular Alternative</b>, <b>Cornmeal Alternative</b>, <b>Mozzarella Cheese</b> and <b>Universal Sauce</b> appear across many product recipes.<br><b>Sub Recipe</b> - actual 3-month consumption. Header row 8. Columns: Recipe Code, Recipe Name, Usage (total qty consumed Jan to Mar), Unit.<br><br>We answer both questions end-to-end with <b>Edit with Copilot in Excel</b> - no Chat, no analyst agent - and we do it without touching a single cell of the raw data.</div>
 <div class="card">
 <h3>4.1 - GM Menu Rationalisation + 2-Day Waste + Forecast Dashboard - one prompt</h3>
-<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Open the Copilot pane, switch to <b>Edit</b> (and <b>Plan</b> if enabled - it lays out the steps before executing). Paste the single prompt below. Copilot builds two new sheets - a formula-driven working analysis (per-product 2-day waste + forecast prep per ingredient) and a one-page GM dashboard with KPI scorecards, charts and discontinue-vs-keep callouts - all by referencing the four raw sheets. The raw workbook stays untouched.</p>
+<p class="lead">Open <code>Data Contoh.xlsx</code> in <b>Excel</b> for the web. Open the Copilot pane, switch to <b>Edit</b> (and <b>Plan</b> if enabled - it lays out the steps before executing). Paste the single prompt below. Copilot builds three new sheets - a per-product waste analysis, a separate ingredient-forecast analysis (on its own sheet so it is easy to read), and a one-page GM dashboard with 6 KPI tiles, 5 focused charts and discontinue-vs-keep callouts - all by referencing the four raw sheets. The raw workbook stays untouched.</p>
 <div class="activity">
 <div class="head"><span class="num">Task 4.1</span><span class="file">Edit with Copilot in Excel · one paste, waste + forecast dashboard</span></div>
-<h4>One prompt · full waste-and-forecast dashboard on new sheets</h4>
+<h4>One prompt · three new sheets (per-product waste, ingredient forecast, dashboard)</h4>
 <div class="prompt">You are Copilot in Excel. This workbook is a Pizza Hut Indonesia outlet report (outlet P098 - PHD Jatiwarna, period 01/01/2026 to 31/03/2026, so 90 days = about 13 weeks = about 45 x 2-day prep cycles). It has four sheets, layout as follows:
 
 - "Sales" - outlet KPIs (Bill, Cover, Food Gross Sales, Beverage Gross Sales) by channel Eat In / Dine In / Takeaway / Delivery / Aggregator. Header row 8, data row 9 onwards. NOT per-product. Use only for reporting period label and channel-level totals.
@@ -672,11 +672,11 @@ Do not ask any clarifying questions - proceed. Show your plan first (if Plan is 
    - "Bottom 20 percent?" - YES for products in the bottom quintile of Rank.
    - "Trend (channel split)" - inline sparkline of the five channel Quantity values for that row.
 
-   RECIPE COST BLOCK - one Prep Batch Cost per product from SRM (matched via SKU first, name-normalisation fallback)
-   - "SRM SKU Match" - XLOOKUP the Sales Mix Item Code (column A) into SRM column A. If found, return the SRM Product Name so the GM can eyeball what was matched.
-   - "Recipe Code" - if SKU matched, XLOOKUP the same SKU into SRM to return the recipe-header row's Recipe Code. If not, use the Normalised Key fallback from the Product Match helper block.
+   RECIPE COST BLOCK - one Prep Batch Cost per product from SRM (matched via SKU only)
+   - "SRM Product Name" - XLOOKUP the Sales Mix Item Code (column A) into SRM column A. Return the SRM Product Name for display, so the GM can eyeball what was matched (names differ between the two sheets, that is expected).
+   - "Recipe Code" - XLOOKUP the same SKU into SRM to return the recipe-header row's Recipe Code.
    - "Prep Batch Cost (Rp per porsi)" - XLOOKUP the Recipe Code into SRM to return the Recipe Price cell (the total-cost figure on the recipe-header row). If Recipe Price is blank, sum the Total Ingredient Cost cells for that recipe block on SRM.
-   - "Match Status" - MATCHED-BY-SKU / MATCHED-BY-NAME / UNMATCHED (from the Product Match helper block).
+   - "Match Status" - MATCHED if the SKU resolved to an SRM row, otherwise UNMATCHED. No fuzzy-name fallback.
    - "Shared-Base Flag" - YES if any ingredient in this product's SRM block is one of: Dough Regular Alternative, Cornmeal Alternative, Mozzarella Cheese, Universal Sauce, Garlic Oil (that is, ingredients that also appear in other products' SRM blocks). Otherwise NO. Use COUNTIF across SRM column H (Ingredient Name) to detect ingredients that appear in more than one recipe block.
 
    2-DAY WASTE BLOCK - the shelf-life logic
@@ -694,34 +694,43 @@ Do not ask any clarifying questions - proceed. Show your plan first (if Plan is 
    - "Discontinue Recommendation" - DISCONTINUE if Bottom 20 percent? = YES AND Waste-to-Sales Ratio is HIGH; REVIEW if only one condition holds; KEEP otherwise.
    - "Why (one line)" - a text formula that reads e.g. "Sells only X units/week, wastes Rp Y - discontinue" or "Top seller (rank #Z) - keep and prep W units per 2-day cycle".
 
-2. Below the main table on GM Working, add a second block titled "Ingredient Forecast (from Sub Recipe)". One row per Recipe Code in the Sub Recipe sheet. Columns:
+2. Create a THIRD new sheet named "GM Working - Ingredient Forecast" (do NOT put it below the per-product table on GM Working - it belongs on its own sheet so the GM can read it without scrolling). One row per Recipe Code in the Sub Recipe sheet. Columns:
    - "Recipe Code", "Recipe Name", "Actual Usage Q1", "Unit" - direct references to Sub Recipe columns A-D.
    - "Avg Weekly Usage" - Actual Usage Q1 divided by 13.
    - "Recommended Prep per Week (with 10 percent buffer)" - Avg Weekly Usage x 1.10.
    - "Products that use this base" - a TEXTJOIN of every Product Name on SRM whose recipe block contains this Recipe Code as an ingredient (so the GM sees, for example, that Dough Regular Alternative feeds 12 different products).
-   - "Pro-rated waste today (Rp)" - for shared bases, allocate the total weekly waste rupiah proportional to each parent product's sales volume, so no double-counting.
+   - "Product Count" - COUNTIF of how many products use this ingredient.
+   - "Pro-rated Weekly Waste Today (Rp)" - for shared bases, allocate the total weekly waste rupiah proportional to each parent product's sales volume, so no double-counting.
+   - "Weekly Cost at Recommended Prep (Rp)" - Recommended Prep x unit cost from SRM.
+   - "Shared Base?" - YES if Product Count is greater than 3.
+   Convert this to an Excel Table too, so the GM can filter by "Shared Base?" and sort by pro-rated waste.
 
 3. Apply conditional formatting on the GM Working sheet only: red fill for DISCONTINUE, amber for REVIEW, green for KEEP; data bars on Weekly Waste Cost; traffic-light icons on Waste-to-Sales Ratio.
 
-4. Convert both blocks on GM Working to Excel Tables (Ctrl+T style) so the GM can filter by Category (from Sales Mix Description prefix), Discontinue Recommendation, Shared-Base Flag and Channel in-place, and the sparklines and conditional formatting stay in sync.
+4. Convert the GM Working table (per-product) to an Excel Table (Ctrl+T style) so the GM can filter by Discontinue Recommendation, Shared-Base Flag and Match Status in-place, and the sparklines and conditional formatting stay in sync.
 
-5. Create a second new sheet named "GM Dashboard - Waste + Forecast" and build a one-page management dashboard that references the GM Working tables by formula (so it updates when the GM filters):
+5. Create a fourth new sheet named "GM Dashboard - Waste + Forecast" and build a one-page management dashboard that references both GM Working tables by formula (so it updates when the GM filters):
 
    HEADER
    - Red header band with the title "Contoso Pizza Co · Menu Rationalisation - Waste + Forecast Dashboard"
    - Outlet name (P098 - PHD Jatiwarna) and reporting period, both pulled by reference from the Sales sheet
    - Small "Last refreshed" note in dark grey
 
-   KPI SCORECARDS (top row, 5 tiles across)
-   - Total regular SKUs on menu (from Sales Mix row 118 onwards) · SKUs recommended DISCONTINUE · Weekly Waste Cost today (Rp) · Projected Weekly Waste after Forecast (Rp) · Weekly Saving if the GM adopts the plan (Rp)
-   - Add a 6th small tile: "Match coverage" - showing % of products MATCHED to SRM (data-quality signal). Amber if below 90%, red if below 75%.
-   - Each tile shows: value · sparkline · RAG traffic light, all formulas referencing the GM Working tables
+   KPI SCORECARDS (top row, 6 tiles across, each small)
+   - Total regular SKUs on menu (from Sales Mix row 118 onwards)
+   - SKUs recommended DISCONTINUE (count)
+   - Weekly Waste Cost today (Rp) - with RAG traffic light
+   - Projected Weekly Waste after Forecast (Rp)
+   - Weekly Saving if the GM adopts the plan (Rp) - highlighted in green
+   - Match Coverage % - amber below 90%, red below 75% (data-quality signal)
 
-   CHARTS
-   - Pareto (column + cumulative line): top 15 products by Weekly Waste Cost - the 80/20 view of where waste is concentrated
-   - Clustered column: Total Units Q1 (base) by product, sorted worst to best, colour-coded by Discontinue Recommendation
-   - Waterfall: Weekly waste cost today -> savings from DISCONTINUE list -> savings from forecast right-sizing -> Projected waste after forecast. Red bars for negative steps, green for positive.
-   - Clustered column: top 10 shared-base ingredients (from the Ingredient Forecast block) by pro-rated waste today, so the GM sees which shared bases (Dough, Mozzarella, Universal Sauce) drive the most cross-product waste.
+   CHARTS - keep each chart telling ONE story, no huge unreadable bars
+   - Chart A (top-left, half-width) - Bar chart of the TOP 10 DISCONTINUE candidates by Weekly Waste Cost. Y-axis product name, X-axis Weekly Waste Cost in rupiah, data labels on. Red bars. This is the "cut list" the GM signs off on.
+   - Chart B (top-right, half-width) - Bar chart of the TOP 10 KEEP-AND-DOUBLE-DOWN products by weekly rupiah revenue. Y-axis product name, X-axis Weekly Revenue, data labels on. Green bars. This is the "protect list".
+   - Chart C (middle, full-width) - Waterfall: Weekly waste cost today -> minus savings from DISCONTINUE list -> minus savings from forecast right-sizing on shared bases -> Projected waste after forecast. Red bars for negative steps (waste), green bars for positive (savings), blue for start/end. This is the executive summary chart.
+   - Chart D (bottom-left, half-width) - Bar chart of the TOP 10 SHARED BASES by Pro-rated Weekly Waste (from the Ingredient Forecast sheet). Y-axis ingredient name, X-axis rupiah, data labels on. Amber bars. Shows the GM which shared bases (Dough, Mozzarella, Universal Sauce) drive the most cross-product waste.
+   - Chart E (bottom-right, half-width) - Donut chart: waste concentration. Slice 1 = waste from the top 10 DISCONTINUE candidates as a % of total; Slice 2 = rest of menu. Shows the 80/20 story in one glance.
+   Do NOT create a chart of "all products sorted worst-to-best" - too many bars to read on one page. Do NOT create a Pareto (column + cumulative line) - the top-10 discontinue bar and the donut together already tell the concentration story more clearly.
 
    CALLOUTS (bottom)
    - "Top 5 to DISCONTINUE" - red box, five bullets from the DISCONTINUE list, each with product name, weekly waste in rupiah and the "Why" one-liner
@@ -730,13 +739,13 @@ Do not ask any clarifying questions - proceed. Show your plan first (if Plan is 
 
 6. Freeze the header row of the dashboard so it stays visible when the GM scrolls.
 
-7. On the dashboard sheet, add a text box in the bottom right with links: "Open working analysis - filter by Category, Discontinue Recommendation and Channel" (jumps to GM Working) and "Open raw sales mix - regulars start at row 118" (jumps to Sales Mix row 118).
+7. On the dashboard sheet, add three small navigation links in the bottom right: "Open per-product working analysis" (jumps to GM Working - Waste + Forecast), "Open ingredient forecast" (jumps to GM Working - Ingredient Forecast), "Open raw sales mix - regulars start at row 118" (jumps to Sales Mix row 118).
 
-Reminders: Sales, Sales Mix, SRM and Sub Recipe must remain untouched. Hot-promo rows 10 to 116 in Sales Mix are excluded from base per-product sales. Match products across Sales Mix and SRM by SKU first (Sales Mix Item Code = SRM SKU), then fall back to name normalisation only if SKU does not resolve - because SRM uses "OR/R Beefy Mushroom" while Sales Mix uses "Original/Regular Beefy Mushroom". Shared ingredients like Dough Regular Alternative appear in multiple SRM recipe blocks and their waste is pro-rated on the Ingredient Forecast block, never double-counted in per-product Weekly Waste Cost.
+Reminders: Sales, Sales Mix, SRM and Sub Recipe must remain untouched. Hot-promo rows 10 to 116 in Sales Mix are excluded from base per-product sales. Match products across Sales Mix and SRM by SKU only (Sales Mix Item Code = SRM SKU) - names differ between sheets and do not matter for matching. Shared ingredients like Dough Regular Alternative appear in multiple SRM recipe blocks and their waste is pro-rated on the Ingredient Forecast block, never double-counted in per-product Weekly Waste Cost.
 
 When done, list every change you made as a numbered summary at the end of the chat so the GM can review before saving.<button class="copy" onclick="cp(this)">Copy</button></div>
 <div class="callout"><b>Closing line for the audience:</b> "One prompt. Copilot answered both operations questions in one dashboard - which products to discontinue because they waste too much once ingredients are prepped, and how much of each ingredient to prep per week going forward. Hot promos excluded from the base sales, shared bases like dough and mozzarella pro-rated across parent products - no double-counting. Raw workbook untouched."</div>
-<div class="callout warn"><b>Reality check on Copilot in Excel:</b> SUMIFS with row-range exclusion (row 118 onwards), XLOOKUP on SKU into SRM's multi-row recipe blocks, COUNTIF for shared-ingredient detection, conditional formatting, sparklines, table filters and chart types (column, line, waterfall, Pareto) are the reliable parts. The <b>product match</b> between Sales Mix and SRM is the biggest failure mode - Sales Mix uses "Original/Regular Beefy Mushroom", SRM uses "OR/R Beefy Mushroom", so name-only matching breaks. The prompt tells Copilot to match on SKU first (Sales Mix Item Code = SRM SKU) and fall back to a normalised name only when the SKU does not resolve. If Match coverage on the dashboard tile comes back below 90 percent, the waste and forecast numbers are unreliable. Slicers wired across multiple charts are <b>not</b> something Copilot Edit produces end-to-end today - that is why this prompt uses Tables with column filter drop-downs. If Copilot picks up hot-promo rows, gets the product match wrong, or double-counts shared ingredients, follow up with: <i>"Rebuild the Total Units Q1 (base) column using SUMIFS on Sales Mix from row 118 downwards only - exclude rows 10 to 116 and the HOT PROMO subtotal on row 117. Re-run the Product Match: XLOOKUP Sales Mix Item Code into SRM column A first; only if that returns blank, apply the OR/R -&gt; Original/Regular Normalised Key fallback. For any ingredient in SRM appearing in more than one recipe block (e.g. Dough Regular Alternative, Mozzarella Cheese, Universal Sauce), do not add the full ingredient cost to every parent product - pro-rate on the Ingredient Forecast block only."</i></div>
+<div class="callout warn"><b>Reality check on Copilot in Excel:</b> SUMIFS with row-range exclusion (row 118 onwards), XLOOKUP on SKU into SRM's multi-row recipe blocks, COUNTIF for shared-ingredient detection, conditional formatting, sparklines, table filters and chart types (column, line, waterfall, Pareto) are the reliable parts. Product matching is SKU-only - Sales Mix Item Code equals SRM SKU. Names differ between the two sheets ("Original/Regular Beefy Mushroom" vs "OR/R Beefy Mushroom") but that does not matter because SKU is unique. Names are displayed only so the GM can eyeball what was matched. If Match coverage on the dashboard tile comes back below 90 percent, the waste and forecast numbers are unreliable - fix the SKU alignment at source, do not fuzzy-match on name. Slicers wired across multiple charts are <b>not</b> something Copilot Edit produces end-to-end today - that is why this prompt uses Tables with column filter drop-downs. If Copilot picks up hot-promo rows or double-counts shared ingredients, follow up with: <i>"Rebuild the Total Units Q1 (base) column using SUMIFS on Sales Mix from row 118 downwards only - exclude rows 10 to 116 and the HOT PROMO subtotal on row 117. Re-run the XLOOKUP on SKU only (Sales Mix column A into SRM column A). For any ingredient in SRM appearing in more than one recipe block (e.g. Dough Regular Alternative, Mozzarella Cheese, Universal Sauce), do not add the full ingredient cost to every parent product - pro-rate on the Ingredient Forecast block only."</i></div>
 </div>
 <div class="card">
 <h3>4.2 - Excel to PowerPoint: turn the workbook into a 5-slide ops deck</h3>
