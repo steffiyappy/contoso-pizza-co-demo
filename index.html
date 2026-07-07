@@ -732,14 +732,32 @@ Do not ask any clarifying questions - proceed. Show your plan first (if Plan is 
    - Chart E (bottom-right, half-width) - Donut chart: waste concentration. Slice 1 = waste from the top 10 DISCONTINUE candidates as a % of total; Slice 2 = rest of menu. Shows the 80/20 story in one glance.
    Do NOT create a chart of "all products sorted worst-to-best" - too many bars to read on one page. Do NOT create a Pareto (column + cumulative line) - the top-10 discontinue bar and the donut together already tell the concentration story more clearly.
 
-   CALLOUTS (bottom)
-   - "Top 5 to DISCONTINUE" - red box, five bullets from the DISCONTINUE list, each with product name, weekly waste in rupiah and the "Why" one-liner
-   - "Top 5 to KEEP + right-size prep" - green box, five bullets with product name, current prep, recommended prep per 2-day cycle and weekly saving
-   - One-line "So what:" summary above the callouts, naming the single biggest waste driver, the total weekly saving if the GM adopts the plan, and the owner (GM Operations)
+   CALLOUTS + EXECUTIVE COMMENTARY (bottom of dashboard) - this is the "read me first" section for the GM. Do NOT rely on Excel hyperlinks (they do not work reliably in Excel for the web from text boxes). Instead, use bold coloured cell blocks with actual prose. Every number must be a live formula referencing the GM Working tables.
+
+   Block 1 - "Executive Summary" (full-width, dark grey banner with white text)
+   Write a 4 to 5 sentence narrative that reads like a GM memo, not bullets. Structure:
+     Sentence 1: state the total weekly waste today in rupiah and what percentage of the food cost line that represents.
+     Sentence 2: name the single biggest waste driver (the top-1 DISCONTINUE candidate) with its product name, weekly waste in rupiah, and units sold per week.
+     Sentence 3: state the shared-base insight (which one ingredient - Dough / Mozzarella / Universal Sauce - drives the most cross-product waste) and how many parent products it feeds.
+     Sentence 4: state the plan - "if we discontinue X products and right-size prep on Y shared bases, we save Rp Z per week, or Rp W per year".
+     Sentence 5: name the owner (GM Operations) and the review cadence (weekly).
+   Every number in this narrative is a formula, not a hardcoded value.
+
+   Block 2 - "Top 5 to DISCONTINUE" (red panel, left half)
+   Table (not bullets) with 5 rows and 4 columns: Product · Weekly Units · Weekly Waste (Rp) · Why (one-line reason). Formulas reading from the GM Working table, sorted by Weekly Waste descending. The "Why" column contains real prose (e.g. "Sells only 3 units per week but prep batch of 5 forces Rp 42,000 waste per cycle - keep tomato and mayo for higher-selling SKUs").
+
+   Block 3 - "Top 5 to KEEP + right-size prep" (green panel, right half)
+   Table with 5 rows and 5 columns: Product · Weekly Units · Current Prep · Recommended Prep · Weekly Saving (Rp). Formula-driven.
+
+   Block 4 - "Shared-Base Actions" (amber panel, full-width)
+   Table with the top 5 shared bases by pro-rated waste: Ingredient · Products it feeds (comma list) · Current Weekly Prep · Recommended Prep · Weekly Saving (Rp). Include a one-sentence action line above the table: "These bases feed multiple products - right-sizing them saves more than any single-product decision. Priority order below."
+
+   Block 5 - "How to read this dashboard" (light grey panel, full-width, small text)
+   3 to 4 sentences explaining: (a) waste is calculated assuming 3.5 prep cycles per week and 2-day shelf life; (b) hot promos rows 10 to 116 are excluded from base sales; (c) shared bases like Dough are pro-rated on the Ingredient Forecast sheet, not double-counted per product; (d) the GM should verify the top 3 DISCONTINUE candidates against operational context (staffing, brand strategy) before signing off.
 
 6. Freeze the header row of the dashboard so it stays visible when the GM scrolls.
 
-7. On the dashboard sheet, add three small navigation links in the bottom right: "Open per-product working analysis" (jumps to GM Working - Waste + Forecast), "Open ingredient forecast" (jumps to GM Working - Ingredient Forecast), "Open raw sales mix - regulars start at row 118" (jumps to Sales Mix row 118).
+7. Sheet order in the tab bar (left to right): the four raw sheets first (Sales, Sales Mix, SRM, Sub Recipe), then GM Working - Waste + Forecast, then GM Working - Ingredient Forecast, then GM Dashboard - Waste + Forecast at the far right so the GM opens the workbook and lands on the dashboard by default. Colour the dashboard tab red, the two working tabs amber, so the GM can tell them apart at a glance.
 
 Reminders: Sales, Sales Mix, SRM and Sub Recipe must remain untouched. Hot-promo rows 10 to 116 in Sales Mix are excluded from base per-product sales. Match products across Sales Mix and SRM by SKU only (Sales Mix Item Code = SRM SKU) - names differ between sheets and do not matter for matching. Shared ingredients like Dough Regular Alternative appear in multiple SRM recipe blocks and their waste is pro-rated on the Ingredient Forecast block, never double-counted in per-product Weekly Waste Cost.
 
